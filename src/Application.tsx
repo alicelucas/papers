@@ -19,9 +19,14 @@ const useStyles = makeStyles((theme) => ({
 export default function PaperGrid() {
     const classes = useStyles();
 
-    const cards = useSelector(selectAllCards)
+    const allCards = useSelector(selectAllCards)
+    console.log(allCards.cards)
 
-    const firstCardProps = {title: cards[0]?.title, authors: cards[0]?.authors, summary: cards[0]?.summary}
+    const firstCardProps = {
+        title: allCards.cards.cards[0].title,
+        authors: allCards.cards.cards[0]?.authors,
+        summary: allCards.cards.cards[0]?.summary
+    }
 
     function FormRow() {
         return (

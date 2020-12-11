@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import SimpleCard from "./SimpleCard";
+import {useSelector} from "react-redux";
+import {selectAllCards} from "./store/selectors/cardSelector";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PaperGrid() {
     const classes = useStyles();
+
+    const cards = useSelector(selectAllCards)
+    console.log(cards)
 
     function FormRow() {
         return (
@@ -35,17 +40,17 @@ export default function PaperGrid() {
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={1}>
-                <Grid container item xs={12} spacing={3}>
-                    <FormRow />
-                </Grid>
-                <Grid container item xs={12} spacing={3}>
-                    <FormRow />
-                </Grid>
-                <Grid container item xs={12} spacing={3}>
-                    <FormRow />
-                </Grid>
-            </Grid>
+            {/*<Grid container spacing={1}>*/}
+            {/*    <Grid container item xs={12} spacing={3}>*/}
+            {/*        <FormRow />*/}
+            {/*    </Grid>*/}
+            {/*    <Grid container item xs={12} spacing={3}>*/}
+            {/*        <FormRow />*/}
+            {/*    </Grid>*/}
+            {/*    <Grid container item xs={12} spacing={3}>*/}
+            {/*        <FormRow />*/}
+            {/*    </Grid>*/}
+            {/*</Grid>*/}
         </div>
     );
 }

@@ -8,6 +8,11 @@ const initialCards: Cards= {
             title: "My first title",
             authors: "My first authors",
             summary: "My first summmary"
+        },
+        {
+            title: "My second title",
+            authors: "My second authors",
+            summary: "My second summmary"
         }
     ]
 }
@@ -25,3 +30,7 @@ export const cardsSlice = createSlice( {
     }
 }
 )
+
+export const {
+    createCard
+} = cardsSlice.actions;

@@ -23,7 +23,13 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SimpleCard() {
+type simpleCardsProps = {
+    title: string,
+    authors: string,
+    summary: string
+}
+
+export default function SimpleCard({title, authors, summary}: simpleCardsProps) {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
 
@@ -31,18 +37,16 @@ export default function SimpleCard() {
         <Card className={classes.root}>
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    Word of the Day
+                    {title}
                 </Typography>
                 <Typography variant="h5" component="h2">
-                    be{bull}nev{bull}o{bull}lent
+                    {authors}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    adjective
+                    {authors}
                 </Typography>
                 <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                    {summary}
                 </Typography>
             </CardContent>
             <CardActions>

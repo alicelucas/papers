@@ -20,19 +20,20 @@ export default function PaperGrid() {
     const classes = useStyles();
 
     const cards = useSelector(selectAllCards)
-    console.log(cards)
+
+    const firstCardProps = {title: cards[0]?.title, authors: cards[0]?.authors, summary: cards[0]?.summary}
 
     function FormRow() {
         return (
             <React.Fragment>
                 <Grid item xs={4}>
-                    <SimpleCard/>
+                    <SimpleCard {...firstCardProps}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <SimpleCard />
+                    <SimpleCard {...firstCardProps}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <SimpleCard/>
+                    <SimpleCard {...firstCardProps}/>
                 </Grid>
             </React.Fragment>
         );
@@ -40,17 +41,17 @@ export default function PaperGrid() {
 
     return (
         <div className={classes.root}>
-            {/*<Grid container spacing={1}>*/}
-            {/*    <Grid container item xs={12} spacing={3}>*/}
-            {/*        <FormRow />*/}
-            {/*    </Grid>*/}
-            {/*    <Grid container item xs={12} spacing={3}>*/}
-            {/*        <FormRow />*/}
-            {/*    </Grid>*/}
-            {/*    <Grid container item xs={12} spacing={3}>*/}
-            {/*        <FormRow />*/}
-            {/*    </Grid>*/}
-            {/*</Grid>*/}
+            <Grid container spacing={1}>
+                <Grid container item xs={12} spacing={3}>
+                    <FormRow />
+                </Grid>
+                <Grid container item xs={12} spacing={3}>
+                    <FormRow />
+                </Grid>
+                <Grid container item xs={12} spacing={3}>
+                    <FormRow />
+                </Grid>
+            </Grid>
         </div>
     );
 }

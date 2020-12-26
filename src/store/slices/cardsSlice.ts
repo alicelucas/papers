@@ -1,5 +1,5 @@
 import { Card} from "../../types/Card";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {configureStore, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { Cards } from "../../types/Cards";
 
 const initialCards: Cards=  [
@@ -38,6 +38,10 @@ export const cardsSlice = createSlice( {
     }
 }
 )
+
+const store = configureStore({
+    reducer: cardsSlice.reducer
+})
 
 export const {
     createCard

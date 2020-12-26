@@ -2,8 +2,7 @@ import { Card} from "../../types/Card";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Cards } from "../../types/Cards";
 
-const initialCards: Cards= {
-    cards: [
+const initialCards: Cards=  [
         {
             title: "My first title",
             authors: "My first authors",
@@ -25,7 +24,6 @@ const initialCards: Cards= {
             summary: "My fourth summary"
         }
     ]
-}
 
 export const cardsSlice = createSlice( {
     name: "cards",
@@ -35,7 +33,7 @@ export const cardsSlice = createSlice( {
             state: Cards,
             action: PayloadAction< {card: Card}>
         ) {
-            state.cards.push(action.payload.card)
+            state.push(action.payload.card)
         }
     }
 }

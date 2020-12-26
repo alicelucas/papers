@@ -20,12 +20,17 @@ export default function PaperGrid() {
     const classes = useStyles();
 
     const allCards = useSelector(selectAllCards)
-    console.log(allCards.cards)
+
+    // const firstCardProps = {
+    //     title: allCards[0]?.title,
+    //     authors: allCards[0]?.authors,
+    //     summary: allCards[0]?.summary
+    // }
 
     const firstCardProps = {
-        title: allCards.cards.cards[0].title,
-        authors: allCards.cards.cards[0]?.authors,
-        summary: allCards.cards.cards[0]?.summary
+        title: "ttie",
+        authors: "authors",
+        summary: "summary"
     }
 
     function FormRow() {
@@ -44,6 +49,7 @@ export default function PaperGrid() {
         );
     }
 
+
     return (
         <div className={classes.root}>
             <Grid container spacing={1}>
@@ -58,5 +64,6 @@ export default function PaperGrid() {
                 </Grid>
             </Grid>
         </div>
-    );
+    )
+
 }

@@ -21,17 +21,13 @@ export default function PaperGrid() {
 
     const allCards = useSelector(selectAllCards)
 
+    console.log(allCards)
+
     const firstCardProps = {
         title: allCards[0]?.title,
         authors: allCards[0]?.authors,
         summary: allCards[0]?.summary
     }
-
-    // const firstCardProps = {
-    //     title: "ttie",
-    //     authors: "authors",
-    //     summary: "summary"
-    // }
 
     type firstCardsPropsType = {title: string, authors: string, summary: string}
 

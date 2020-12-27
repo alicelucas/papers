@@ -21,27 +21,21 @@ export default function PaperGrid() {
 
     const allCards = useSelector(selectAllCards)
 
-    console.log(allCards)
-
-    const firstCardProps = {
-        title: allCards[0]?.title,
-        authors: allCards[0]?.authors,
-        summary: allCards[0]?.summary
+    type RowProps = {
+        indices: number[]
     }
 
-    type firstCardsPropsType = {title: string, authors: string, summary: string}
-
-    const FormRow = (firstCardProps: firstCardsPropsType) => {
+    const FormRow = ({indices}: RowProps) => {
         return (
             <React.Fragment>
                 <Grid item xs={4}>
-                    <SimpleCard {...firstCardProps}/>
+                    <SimpleCard title={allCards[indices[0]].title} authors={allCards[indices[0]].authors} summary={allCards[indices[0]].summary}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <SimpleCard {...firstCardProps}/>
+                    <SimpleCard title={allCards[indices[1]].title} authors={allCards[indices[1]].authors} summary={allCards[indices[1]].summary}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <SimpleCard {...firstCardProps}/>
+                    <SimpleCard title={allCards[indices[2]].title} authors={allCards[indices[2]].authors} summary={allCards[indices[2]].summary}/>
                 </Grid>
             </React.Fragment>
         );
@@ -51,13 +45,13 @@ export default function PaperGrid() {
             <div className={classes.root}>
                 <Grid container spacing={1}>
                     <Grid container item xs={12} spacing={3}>
-                        <FormRow {...firstCardProps}/>
+                        <FormRow indices={[0,1,2]}/>
                     </Grid>
                     <Grid container item xs={12} spacing={3}>
-                        <FormRow {...firstCardProps}/>
+                        <FormRow indices={[0,0,0]}/>
                     </Grid>
                     <Grid container item xs={12} spacing={3}>
-                        <FormRow {...firstCardProps}/>
+                        <FormRow indices={[0,0,0]}/>
                     </Grid>
                 </Grid>
             </div>

@@ -6,22 +6,26 @@ const initialCards: Cards=  [
         {
             title: "My first title",
             authors: "My first authors",
-            summary: "My first summary"
+            summary: "My first summary",
+            id: "id1"
         },
         {
             title: "My second title",
             authors: "My second authors",
-            summary: "My second summary"
+            summary: "My second summary",
+            id: "id2"
         },
         {
             title: "My third title",
             authors: "My third authors",
-            summary: "My third summary"
+            summary: "My third summary",
+            id: "id3"
         },
         {
             title: "My fourth title",
             authors: "My fourth authors",
-            summary: "My fourth summary"
+            summary: "My fourth summary",
+            id: "id4"
         }
     ]
 

@@ -1,10 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import SimpleCard from "./SimpleCard";
 import {useSelector} from "react-redux";
 import {selectAllCards} from "./store/selectors/cardSelector";
-import {Card} from "./types/Card";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,53 +21,46 @@ export default function PaperGrid() {
 
     const allCards = useSelector(selectAllCards);
 
-    const cardsperrows = 3;
+    const cardsPerRow = 3; // number of cards you'd like to see in a row
 
-    const numrows = Math.ceil(allCards.length / cardsperrows)
-    const numextra = allCards.length % cardsperrows
+    const FormGrid = () => {
+        const numRows = Math.ceil(allCards.length / cardsPerRow)
+        const rowList: any = [];
 
-    const lengtharray = Array(allCards.length)
-
-
-    type RowProps = {
-        cardindices: number[],
-    }
-
-    type GridProps = {
-        numrows: number,
-        numextra?: number
-    }
-
-    const FormGrid = ({numrows, numextra}: GridProps) => {
         var rows = 0;
-        var idx = 0;
-        const rowlist: any = []
-        while (rows < numrows) {
-            const cardindices: number[] = []
-            for (idx; idx < cardsperrows * (rows + 1); idx++) {
-                if (idx < allCards.length) {
-                    cardindices.push(idx)
+        var cardIdx = 0;
+        
+        while (rows < numRows) {
+            const cardIndices: number[] = []
+            for (cardIdx; cardIdx < cardsPerRow * (rows + 1); cardIdx++) {
+                if (cardIdx < allCards.length) {
+                    cardIndices.push(cardIdx)
                 }
             }
-            rowlist.push(
-                        <Grid container item xs={12} spacing={3}>
-                            <FormRow cardindices={cardindices}/>
+            rowList.push(
+                        <Grid key={allCards[cardsPerRow * rows].id} container item xs={12} spacing={3}>
+                            <FormRow cardIndices={cardIndices}/>
                         </Grid>
             )
             rows++;
-            idx = cardsperrows * rows
+            cardIdx = cardsPerRow * rows
         }
-        return rowlist
+        return (
+            rowList
+            )
         }
 
+    type RowProps = {
+        cardIndices: number[],
+    }
 
-    const FormRow = ({cardindices}: RowProps) => {
+    const FormRow = ({cardIndices}: RowProps) => {
         return (
             <React.Fragment>
                 {
-                    cardindices.map( (cardindex: number) => {return (
-                        <Grid item xs={4}>
-                            <SimpleCard title={allCards[cardindex].title} authors={allCards[cardindex].authors} summary={allCards[cardindex].summary}/>
+                    cardIndices.map( (cardIndex: number) => {return (
+                        <Grid key={allCards[cardIndex].id} item xs={4}>
+                            <SimpleCard title={allCards[cardIndex].title} authors={allCards[cardIndex].authors} summary={allCards[cardIndex].summary}/>
                         </Grid>
                     )} )
                 }
@@ -79,7 +71,7 @@ export default function PaperGrid() {
     return (
             <div className={classes.root}>
                 <Grid container spacing={1}>
-                    <FormGrid numrows={numrows} />
+                    <FormGrid/>
                 </Grid>
             </div>
     )

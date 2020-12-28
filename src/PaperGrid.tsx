@@ -5,6 +5,7 @@ import SimpleCard from "./SimpleCard";
 import {useSelector} from "react-redux";
 import {selectAllCards} from "./store/selectors/cardSelector";
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,

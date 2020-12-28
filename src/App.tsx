@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {Container} from "@material-ui/core";
-import PaperGrid from "./Application";
+import PaperGrid from "./PaperGrid";
 import {createStore} from "redux";
 import {rootReducer} from "./store/reducer/reducer";
 import {Provider} from "react-redux";

@@ -25,7 +25,7 @@ export default function PaperGrid() {
 
     const FormGrid = () => {
         const numRows = Math.ceil(allCards.length / cardsPerRow)
-        const rowList: any = [];
+        const rowList: JSX.Element[] = [];
 
         var rows = 0;
         var cardIdx = 0;
@@ -45,9 +45,7 @@ export default function PaperGrid() {
             rows++;
             cardIdx = cardsPerRow * rows
         }
-        return (
-            rowList
-            )
+        return <>{rowList}</>
         }
 
     type RowProps = {

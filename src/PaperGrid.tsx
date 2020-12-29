@@ -36,7 +36,6 @@ export default function PaperGrid() {
             for (cardIdx; cardIdx < cardsPerRow * (rows + 1); cardIdx++) {
                 if (cardIdx < allCards.length) {
                     cardIndices.push(cardIdx)
-                    console.log(cardIndices)
                 }
             }
             rowList.push(

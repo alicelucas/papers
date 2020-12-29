@@ -1,12 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {Container} from "@material-ui/core";
 import PaperGrid from "./PaperGrid";
 import {createStore} from "redux";
 import {rootReducer} from "./store/reducer/reducer";
 import {Provider} from "react-redux";
-import Button from "@material-ui/core/Button";
+import NewCardButton from "./NewCardButton";
 
 function App() {
     const store = createStore(rootReducer)
@@ -14,7 +13,7 @@ function App() {
       <Provider store={store}>
           <Container maxWidth="lg">
               <PaperGrid/>
-              <Button variant="outlined"> Add card </Button>
+              <NewCardButton/>
           </Container>
       </Provider>
 

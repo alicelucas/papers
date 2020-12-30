@@ -1,15 +1,26 @@
 import React from "react";
-import SimpleCard from "./SimpleCard";
 import {CardContent} from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
+import useStyles from "./Card.css";
+import Typography from "@material-ui/core/Typography";
 
 const NewCardForm = () => {
+
+    const classes = useStyles();
+
     return (
-        <Card>
+        <Card className={classes.root}>
             <CardContent>
                 <form noValidate autoComplete="off">
-                    <TextField id="standard-basic" label="Standard" />
+                    <div>
+                        <TextField id="standard-basic" label="Title"
+                        />
+                    </div>
+                    <div>
+                        <TextField id="standard-basic" label="Authors" />
+                    </div>
+                    <TextField id="standard-basic" label="Summary" multiline rows={4} />
                 </form>
 
             </CardContent>

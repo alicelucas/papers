@@ -22,7 +22,7 @@ export default function PaperGrid() {
 
     const allCards = useSelector(selectAllCards);
 
-    const cardsPerRow = 4; // number of cards you'd like to see in a row
+    const cardsPerRow = 3; // number of cards you'd like to see in a row
 
     const FormGrid = () => {
         const numRows = Math.ceil(allCards.length / cardsPerRow)
@@ -58,7 +58,7 @@ export default function PaperGrid() {
             <React.Fragment>
                 {
                     cardIndices.map( (cardIndex: number) => {return (
-                        <Grid key={allCards[cardIndex].id} item xs={3}>
+                        <Grid key={allCards[cardIndex].id} item xs={4}>
                             <SimpleCard title={allCards[cardIndex].title} authors={allCards[cardIndex].authors} summary={allCards[cardIndex].summary}/>
                         </Grid>
                     )} )

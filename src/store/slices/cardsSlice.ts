@@ -44,6 +44,7 @@ export const cardsSlice = createSlice( {
             action: PayloadAction< {card: Card}>
         ) {
             state.push(action.payload.card)
+            console.log(state)
         }
     }
 }

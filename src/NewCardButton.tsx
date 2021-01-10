@@ -21,7 +21,7 @@ const NewCardButton = () => {
         <React.Fragment>
             <Button variant="outlined" onClick={onClick}> Add card </Button>
             <Dialog onClose={handleClose} open={open}>
-                <NewCardForm/>
+                <NewCardForm handleClose={handleClose}/>
             </Dialog>
         </React.Fragment>
 

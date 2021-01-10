@@ -10,19 +10,20 @@ import {cardsSlice} from "./store/slices/cardsSlice";
 import {Card as CardType} from "./types/Card";
 import {selectAllCards} from "./store/selectors/cardSelector";
 
-const NewCardForm = () => {
+type NewCardFormProps = {
+    handleClose: () => void;
+}
+
+const NewCardForm = ( {handleClose} : NewCardFormProps) => {
 
     const classes = useStyles();
 
     const dispatch = useDispatch();
 
-    const allCards = useSelector(selectAllCards);
-
     const [cardContent, setCardContent] = useState<{title: string, authors: string, summary: string}>({title: "", authors: "", summary: ""})
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCardContent({...cardContent, [event.target.name]: event.target.value})
-        console.log(cardContent)
     }
 
     const handleClick = () => {
@@ -34,6 +35,7 @@ const NewCardForm = () => {
             id: "new id"
         }
         dispatch(cardsSlice.actions.createCard({card: newCard}))
+        handleClose()
     }
 
     return (

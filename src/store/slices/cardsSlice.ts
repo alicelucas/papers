@@ -17,7 +17,7 @@ export const fetchCards = createAsyncThunk("cards/fetchCards", async () => {
     return response.cards
 })
 
-export const addNewCard = createAsyncThunk("cards/addNewCard", async (initialCard: Card) => {
+export const addNewCard = createAsyncThunk("cards/addNewCard", async (initialCard: any) => {
     const response = await client.post("/api/cards", {card: initialCard})
     return response.card
 })
@@ -27,10 +27,10 @@ export const cardsSlice = createSlice({
         initialState: initialState,
         reducers: {
             createCard(
-                state: any,
-                action: any
+                state,
+                action: PayloadAction<Card>
             ) {
-                state.cards.push(action.payload.card)
+                state.cards.push(action.payload)
             }
             },
         extraReducers: builder => {

@@ -49,8 +49,9 @@ const NewCardForm = ( {handleClose} : NewCardFormProps) => {
         }
         finally {
             setAddRequestStatus("idle")
+            handleClose()
         }
-        handleClose()
+
     }
 
     return (

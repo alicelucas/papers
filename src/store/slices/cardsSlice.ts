@@ -1,59 +1,61 @@
 import { Card} from "../../types/Card";
-import {configureStore, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {configureStore, createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { Cards } from "../../types/Cards";
+import {client} from "../../api/client";
 
-const initialCards: Cards=  [
-        {
-            title: "My first title",
-            authors: "My first authors",
-            summary: "My first summary",
-            id: "id1"
-        },
-        {
-            title: "My second title",
-            authors: "My second authors",
-            summary: "My second summary",
-            id: "id2"
-        },
-        {
-            title: "My third title",
-            authors: "My third authors",
-            summary: "My third summary",
-            id: "id3"
-        },
-        {
-            title: "My fourth title",
-            authors: "My fourth authors",
-            summary: "My fourth summary",
-            id: "id4"
-        },
-    {
-        title: "My fifth title",
-        authors: "My fifth authors",
-        summary: "My fifth summary",
-        id: "id5"
-    }
-    ]
+const initialCards: Cards=  []
 
-export const cardsSlice = createSlice( {
-    name: "cards",
-    initialState: initialCards,
-    reducers: {
-        createCard(
-            state: Cards,
-            action: PayloadAction< {card: Card}>
-        ) {
-            state.push(action.payload.card)
-            console.log(state)
+const initialState : {cards: Cards, status: string, error: any} = {
+    cards: initialCards,
+    status: 'idle',
+    error: null,
+}
+
+
+export const fetchCards = createAsyncThunk("cards/fetchCards", async () => {
+    const response = await client.get("/api/cards")
+    return response.cards
+})
+
+export const addNewCard = createAsyncThunk("cards/addNewCard", async (initialCard) => {
+    const response = await client.post("/api/cards", {card: initialCard})
+    return response.card
+})
+
+export const cardsSlice = createSlice({
+        name: "cards",
+        initialState: initialState,
+        reducers: {
+            createCard(
+                state: any,
+                action: any
+            ) {
+                state.cards.push(action.payload.card)
+            }
+            },
+        extraReducers: builder => {
+            builder.addCase(fetchCards.pending, (state, action) => {
+                state.status = "failed"
+            })
+            builder.addCase(fetchCards.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.cards = state.cards.concat(action.payload)
+            })
+            builder.addCase(fetchCards.rejected, (state, action) => {
+                state.status = "failed"
+                state.error = action.payload
+            })
         }
     }
-}
 )
-
-const store = configureStore({
-    reducer: cardsSlice.reducer
-})
 
 export const {
     createCard
 } = cardsSlice.actions;
+
+export default cardsSlice.reducer
+
+// const store = configureStore({
+//     reducer: cardsSlice.reducer
+// })
+

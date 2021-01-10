@@ -1,8 +1,10 @@
 import {Cards} from "../../types/Cards";
 import {Card} from "../../types/Card";
 
-export const selectAllCards = (cards: any): any =>
+export const selectAllCards = (state: any): any =>
 {
-    //console.log(cards)
-    return cards.cards
+    return state.cards.cards
 }
+
+export const selectPostById = (state: any, cardId: any) =>
+    state.cards.cards.find((card: any) => card.id === cardId)

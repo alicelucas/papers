@@ -17,7 +17,7 @@ export const fetchCards = createAsyncThunk("cards/fetchCards", async () => {
     return response.cards
 })
 
-export const addNewCard = createAsyncThunk("cards/addNewCard", async (initialCard) => {
+export const addNewCard = createAsyncThunk("cards/addNewCard", async (initialCard: Card) => {
     const response = await client.post("/api/cards", {card: initialCard})
     return response.card
 })
@@ -44,6 +44,9 @@ export const cardsSlice = createSlice({
             builder.addCase(fetchCards.rejected, (state, action) => {
                 state.status = "failed"
                 state.error = action.payload
+            })
+            builder.addCase(addNewCard.fulfilled, (state, action) => {
+                state.cards.push(action.payload)
             })
         }
     }

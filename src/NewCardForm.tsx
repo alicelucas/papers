@@ -8,7 +8,6 @@ import Box from "@material-ui/core/Box";
 import {useDispatch, useSelector} from "react-redux";
 import {addNewCard, cardsSlice} from "./store/slices/cardsSlice";
 import {Card as CardType} from "./types/Card";
-import {selectAllCards} from "./store/selectors/cardSelector";
 import {unwrapResult} from "@reduxjs/toolkit";
 import {AppDispatch, useAppDispatch} from "./store/store";
 

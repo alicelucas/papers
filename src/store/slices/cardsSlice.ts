@@ -17,7 +17,11 @@ export const fetchCards = createAsyncThunk("cards/fetchCards", async () => {
     return response.cards
 })
 
-export const addNewCard = createAsyncThunk("cards/addNewCard", async (initialCard: any) => {
+export const addNewCard = createAsyncThunk("cards/addNewCard", async (initialCard: Card) => {
+    // return async (dispatch: any) => {
+    //     const response = await client.post("/api/cards", {card: initialCard})
+    //     dispatch({type: 'cards/addNewCard', payload: response.card})
+    // }
     const response = await client.post("/api/cards", {card: initialCard})
     return response.card
 })

@@ -14,7 +14,6 @@ const NewCardButton = () => {
     const handleClose = () => {
         setOpen(false)
         //this might not be needed
-        console.log("Closing")
     }
 
     return (

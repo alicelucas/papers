@@ -48,6 +48,9 @@ export const cardsSlice = createSlice({
             builder.addCase(addNewCard.fulfilled, (state, action) => {
                 state.cards.push(action.payload)
             })
+            builder.addCase(addNewCard.rejected, (state, action) => {
+                state.status = "failed"
+            })
         }
     }
 )

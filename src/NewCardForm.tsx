@@ -44,7 +44,7 @@ const NewCardForm = ( {handleClose} : NewCardFormProps) => {
             unwrapResult(resultAction)
         }
         catch (err) {
-            console.log("Failed to add the card: ", err)
+            console.info("Failed to add the card: ", err)
         }
         finally {
             setAddRequestStatus("idle")

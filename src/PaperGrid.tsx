@@ -28,8 +28,8 @@ export default function PaperGrid() {
         const numRows = Math.ceil(allCards.length / cardsPerRow)
         const rowList: JSX.Element[] = [];
 
-        var rows = 0;
-        var cardIdx = 0;
+        let rows = 0;
+        let cardIdx = 0;
         
         while (rows < numRows) {
             const cardIndices: number[] = []
@@ -59,7 +59,7 @@ export default function PaperGrid() {
                 {
                     cardIndices.map( (cardIndex: number) => {return (
                         <Grid key={allCards[cardIndex].id} item xs={4}>
-                            <SimpleCard title={allCards[cardIndex].title} authors={allCards[cardIndex].authors} summary={allCards[cardIndex].summary}/>
+                            <SimpleCard title={allCards[cardIndex].card.title} authors={allCards[cardIndex].card.authors} summary={allCards[cardIndex].card.summary}/>
                         </Grid>
                     )} )
                 }

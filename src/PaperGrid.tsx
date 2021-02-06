@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import SimpleCard from "./SimpleCard";
-import {useSelector} from "react-redux";
+import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {selectAllCards} from "./store/selectors/cardSelector";
+import {addNewCard, fetchCards} from "./store/slices/cardsSlice";
+import {Cards} from "./types/Cards";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +22,17 @@ const useStyles = makeStyles((theme) => ({
 export default function PaperGrid() {
     const classes = useStyles();
 
+    const dispatch = useDispatch()
+
     const allCards = useSelector(selectAllCards);
+    const cardStatus = useSelector( (state: {cards: Cards, status: string, error: any}) => state.status)
+
+    useEffect( () => {
+        const foo = async () => {
+            const resultAction = await dispatch(fetchCards)
+        }
+        foo();
+    }, [cardStatus, dispatch] )
 
     const cardsPerRow = 3; // number of cards you'd like to see in a row
 

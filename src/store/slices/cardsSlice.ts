@@ -3,7 +3,8 @@ import {configureStore, createAsyncThunk, createSlice, PayloadAction} from "@red
 import { Cards } from "../../types/Cards";
 import {client} from "../../api/client";
 
-const initialCards: Cards=  []
+const initialCards: Cards = require("../../cards/foo.json").cards
+console.log(initialCards)
 
 const initialState : {cards: Cards, status: string, error: any} = {
     cards: initialCards,

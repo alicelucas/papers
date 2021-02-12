@@ -1,0 +1,16 @@
+{
+  "cards": [
+    {
+      "title": "A first title",
+      "authors": "A first author",
+      "summary": "A first summary",
+      "id": "id0"
+    },
+    {
+      "title": "A second title",
+      "authors": "A second author",
+      "summary": "A second summary",
+      "id": "id1"
+    }
+  ]
+}

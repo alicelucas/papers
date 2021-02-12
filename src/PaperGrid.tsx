@@ -69,9 +69,10 @@ export default function PaperGrid() {
         return (
             <React.Fragment>
                 {
-                    cardIndices.map( (cardIndex: number) => {return (
+                    cardIndices.map( (cardIndex: number) => {
+                        return (
                         <Grid key={allCards[cardIndex].id} item xs={4}>
-                            <SimpleCard title={allCards[cardIndex].card.title} authors={allCards[cardIndex].card.authors} summary={allCards[cardIndex].card.summary}/>
+                            <SimpleCard title={allCards[cardIndex].title} authors={allCards[cardIndex].authors} summary={allCards[cardIndex].summary}/>
                         </Grid>
                     )} )
                 }

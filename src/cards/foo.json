@@ -11,6 +11,35 @@
       "authors": "A second author",
       "summary": "A second summary",
       "id": "id1"
+    },
+    {
+      "title": "A third title",
+      "authors": "A third author",
+      "summary": "A third summary",
+      "id": "id2"
+    },
+    {
+      "title": "A fourth title",
+      "authors": "A fourth author",
+      "summary": "A fourth summary",
+      "id": "id3"
+    },    {
+      "title": "A fifth title",
+      "authors": "A fifth author",
+      "summary": "A fifth summary",
+      "id": "id4"
+    },
+    {
+      "title": "A sixth title",
+      "authors": "A sixth author",
+      "summary": "A sixth summary",
+      "id": "id5"
+    },
+    {
+      "title": "A seventh title",
+      "authors": "A seventh author",
+      "summary": "A seventh summary",
+      "id": "id6"
     }
   ]
 }

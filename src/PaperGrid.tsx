@@ -6,6 +6,7 @@ import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {selectAllCards} from "./store/selectors/cardSelector";
 import {addNewCard, fetchCards} from "./store/slices/cardsSlice";
 import {Cards} from "./types/Cards";
+import * as _ from "lodash"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +20,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function PaperGrid() {
+
     const classes = useStyles();
 
     const dispatch = useDispatch()
@@ -37,47 +40,19 @@ export default function PaperGrid() {
     const cardsPerRow = 3; // number of cards you'd like to see in a row
 
     const FormGrid = () => {
-        const numRows = Math.ceil(allCards.length / cardsPerRow)
-        const rowList: JSX.Element[] = [];
+        const cardIndices: Array<Array<number>> = _.chunk([...Array(allCards.length).keys()], cardsPerRow);
 
-        let rows = 0;
-        let cardIdx = 0;
-        
-        while (rows < numRows) {
-            const cardIndices: number[] = []
-            for (cardIdx; cardIdx < cardsPerRow * (rows + 1); cardIdx++) {
-                if (cardIdx < allCards.length) {
-                    cardIndices.push(cardIdx)
-                }
-            }
-            rowList.push(
-                        <Grid key={allCards[cardsPerRow * rows].id} container item xs={12} spacing={3}>
-                            <FormRow cardIndices={cardIndices}/>
-                        </Grid>
-            )
-            rows++;
-            cardIdx = cardsPerRow * rows
-        }
-        return <>{rowList}</>
-        }
+        const rows = cardIndices.map( (cardIdxs) =>
+             <Grid key={allCards[0].id} container item xs={12} spacing={3}>
+                    { cardIdxs.map( (cardIndex: number) => <SimpleCard title={allCards[cardIndex].title}
+                                                                          authors={allCards[cardIndex].authors}
+                                                                          summary={allCards[cardIndex].summary}
+                                                                          id={allCards[cardIndex].id}/>)}
+                </Grid>
 
-    type RowProps = {
-        cardIndices: number[],
-    }
+        )
 
-    const FormRow = ({cardIndices}: RowProps) => {
-        return (
-            <React.Fragment>
-                {
-                    cardIndices.map( (cardIndex: number) => {
-                        return (
-                        <Grid key={allCards[cardIndex].id} item xs={4}>
-                            <SimpleCard title={allCards[cardIndex].title} authors={allCards[cardIndex].authors} summary={allCards[cardIndex].summary}/>
-                        </Grid>
-                    )} )
-                }
-            </React.Fragment>
-        );
+        return <>{rows}</>
     }
 
     return (

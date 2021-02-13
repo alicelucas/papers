@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
-import {cardsSlice} from "../slices/cardsSlice";
-import {configureStore} from "@reduxjs/toolkit";
+import cardsSlice from "../slices/cardsSlice";
 
 const reducers = {
-    cards: cardsSlice.reducer
+    cards: cardsSlice
 };
 
 

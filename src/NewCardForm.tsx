@@ -6,10 +6,9 @@ import useStyles from "./Card.css";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {useDispatch, useSelector} from "react-redux";
-import {addNewCard, cardsSlice} from "./store/slices/cardsSlice";
+import {addNewCard} from "./store/slices/cardsSlice";
 import {Card as CardType} from "./types/Card";
-import {unwrapResult} from "@reduxjs/toolkit";
-import {AppDispatch, useAppDispatch} from "./store/store";
+import * as uuid from "uuid";
 
 type NewCardFormProps = {
     handleClose: () => void;
@@ -19,11 +18,9 @@ const NewCardForm = ( {handleClose} : NewCardFormProps) => {
 
     const classes = useStyles();
 
-    const dispatch: AppDispatch = useAppDispatch();
+    const dispatch = useDispatch()
 
     const [cardContent, setCardContent] = useState<{title: string, authors: string, summary: string}>({title: "", authors: "", summary: ""})
-
-    const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCardContent({...cardContent, [event.target.name]: event.target.value})
@@ -35,22 +32,10 @@ const NewCardForm = ( {handleClose} : NewCardFormProps) => {
             title: cardContent.title,
             authors: cardContent.authors,
             summary: cardContent.summary,
-            id: cardContent.title
+            id: uuid.v4()
         }
-        //dispatch(cardsSlice.actions.createCard({card: newCard}))
-        try {
-            setAddRequestStatus("pending")
-            const resultAction = await dispatch(addNewCard(newCard))
-            unwrapResult(resultAction)
-        }
-        catch (err) {
-            console.info("Failed to add the card: ", err)
-        }
-        finally {
-            setAddRequestStatus("idle")
-            handleClose()
-        }
-
+        dispatch(addNewCard(newCard));
+        handleClose();
     }
 
     return (

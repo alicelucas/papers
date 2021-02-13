@@ -1,6 +1,3 @@
-import {Cards} from "../../types/Cards";
-import {Card} from "../../types/Card";
-
 export const selectAllCards = (state: any): any =>
 {
     return state.cards.cards

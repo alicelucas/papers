@@ -35,7 +35,29 @@ const NewCardForm = ( {handleClose} : NewCardFormProps) => {
             id: uuid.v4()
         }
         dispatch(addNewCard(newCard));
+
+        // fs.readFileSync('./cards/foo.json', 'utf8', (err: any, jsonString: string) => {
+        //     if (err) {
+        //         console.log("File read failed:", err)
+        //         return
+        //     }
+        //     try {
+        //         const cards = JSON.parse(jsonString)
+        //         debugger;
+        //     }
+        //     catch(err) {
+        //         console.log('Error parsing JSON string:', err)
+        //     }
+        // })
+        // const f = JSON.parse("../../cards/foo.json")
+        // debugger;
+
         handleClose();
+
+        // const json = JSON.stringify(newCard);
+        // fs.appendFileSync("./cards/foo.json", json, (err: any) => {
+        //     if (err) throw err;
+        //     console.info("complete")});
     }
 
     return (

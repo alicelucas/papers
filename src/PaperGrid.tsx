@@ -30,8 +30,8 @@ export default function PaperGrid() {
     const FormGrid = () => {
         const cardIndices: Array<Array<number>> = _.chunk([...Array(allCards.length).keys()], cardsPerRow);
 
-        const rows = cardIndices.map( (cardIdxs) =>
-             <Grid key={allCards[0].id} container item xs={12} spacing={3}>
+        const rows = cardIndices.map( (cardIdxs, idx) =>
+             <Grid key={idx} container item xs={12} spacing={3}>
                     { cardIdxs.map( (cardIndex: number) => <SimpleCard title={allCards[cardIndex].title}
                                                                           authors={allCards[cardIndex].authors}
                                                                           summary={allCards[cardIndex].summary}

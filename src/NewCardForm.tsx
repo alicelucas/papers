@@ -9,6 +9,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {addNewCard} from "./store/slices/cardsSlice";
 import {Card as CardType} from "./types/Card";
 import * as uuid from "uuid";
+import axios from "axios";
+
 
 type NewCardFormProps = {
     handleClose: () => void;
@@ -36,28 +38,17 @@ const NewCardForm = ( {handleClose} : NewCardFormProps) => {
         }
         dispatch(addNewCard(newCard));
 
-        // fs.readFileSync('./cards/foo.json', 'utf8', (err: any, jsonString: string) => {
-        //     if (err) {
-        //         console.log("File read failed:", err)
-        //         return
-        //     }
-        //     try {
-        //         const cards = JSON.parse(jsonString)
-        //         debugger;
-        //     }
-        //     catch(err) {
-        //         console.log('Error parsing JSON string:', err)
-        //     }
-        // })
-        // const f = JSON.parse("../../cards/foo.json")
-        // debugger;
+        // axios.get("foo.json").then( res => {
+        //     console.info(res)
+        // }
+        // ).catch( (err) => console.info(err))
+        //
+        // axios.post("foo.json", {newCard} ).then( (res) => {
+        //     console.info(res.data)
+        // }).catch( (err) => console.info(err))
 
         handleClose();
 
-        // const json = JSON.stringify(newCard);
-        // fs.appendFileSync("./cards/foo.json", json, (err: any) => {
-        //     if (err) throw err;
-        //     console.info("complete")});
     }
 
     return (

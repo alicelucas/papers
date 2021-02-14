@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MirageServer from './api/server';
-
-MirageServer();
 
 ReactDOM.render(
     <App />,

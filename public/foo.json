@@ -1,5 +1,4 @@
-{
-  "cards": [
+[
     {
       "title": "A first title",
       "authors": "A first author",
@@ -42,4 +41,3 @@
       "id": "c3e5aa28-117c-42a1-a28d-1235a1e3f7e7\n\n"
     }
   ]
-}

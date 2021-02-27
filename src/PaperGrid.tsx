@@ -2,10 +2,8 @@ import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import SimpleCard from "./SimpleCard";
-import {useSelector} from "react-redux";
-import {selectAllCards} from "./store/selectors/cardSelector";
 import * as _ from "lodash"
-
+import {Card} from "./types/Card";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,24 +16,26 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+type PaperGridProps = {
+    cards: Array<Card>
+}
 
-export default function PaperGrid() {
+const PaperGrid = ( {cards} : PaperGridProps) => {
 
     const classes = useStyles();
-
-    const allCards = useSelector(selectAllCards);
 
     const cardsPerRow = 3; // number of cards you'd like to see in a row
 
     const FormGrid = () => {
-        const cardIndices: Array<Array<number>> = _.chunk([...Array(allCards.length).keys()], cardsPerRow);
+        const cardIndices: Array<Array<number>> = _.chunk([...Array(cards.length).keys()], cardsPerRow);
 
         const rows = cardIndices.map( (cardIdxs, idx) =>
              <Grid key={idx} container item xs={12} spacing={3}>
-                    { cardIdxs.map( (cardIndex: number) => <SimpleCard title={allCards[cardIndex].title}
-                                                                          authors={allCards[cardIndex].authors}
-                                                                          summary={allCards[cardIndex].summary}
-                                                                          id={allCards[cardIndex].id}/>)}
+                    { cardIdxs.map( (cardIndex: number) => <SimpleCard title={cards[cardIndex].title}
+                                                                       key = {cards[cardIndex].id}
+                                                                          authors={cards[cardIndex].authors}
+                                                                          summary={cards[cardIndex].summary}
+                                                                          id={cards[cardIndex].id}/>)}
                 </Grid>
 
         )
@@ -52,3 +52,5 @@ export default function PaperGrid() {
     )
 
 }
+
+export default PaperGrid;

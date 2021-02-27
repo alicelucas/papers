@@ -2,7 +2,6 @@ import { Card} from "../../types/Card";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialCards: Card[] = require("../../cards/foo.json").cards
-console.log(initialCards)
 
 const initialState : {cards: Card[], status: string, error: any} = {
     cards: initialCards,

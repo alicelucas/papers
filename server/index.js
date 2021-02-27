@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -16,8 +17,9 @@ db.once('open', function() {
 
 const cardSchema = new mongoose.Schema({ title: String, authors: String, id: String, summary: String},
     { collection : 'cards' });   // collection name
-const Cards = mongoose.model('Kitten', cardSchema);
+const Cards = mongoose.model('Cards', cardSchema);
 
+app.use(cors());
 
 app.get('/', (req, res) => {
   Cards.find( (err, cards) => {

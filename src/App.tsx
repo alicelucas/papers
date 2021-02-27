@@ -16,6 +16,10 @@ function App() {
 
     const [cards, setCards] = useState<Array<Card>>([]);
 
+    const addCard = (newCard: Card) => {
+        setCards([...cards, newCard])
+    }
+
     useEffect( () => {
         axios.get("http://127.0.0.1:8000").then( (response: AxiosResponse) => {
             setCards(response.data);
@@ -30,7 +34,7 @@ function App() {
       <Provider store={store}>
           <Container maxWidth="lg">
               <PaperGrid cards={cards}/>
-              <NewCardButton/>
+              <NewCardButton addCard={addCard}/>
           </Container>
       </Provider>
 

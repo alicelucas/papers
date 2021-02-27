@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const dotenv = require('dotenv');
@@ -20,6 +21,7 @@ const cardSchema = new mongoose.Schema({ title: String, authors: String, id: Str
 const Cards = mongoose.model('Cards', cardSchema);
 
 app.use(cors());
+app.use(bodyParser.json()); // support json encoded bodies
 
 app.get('/', (req, res) => {
   Cards.find( (err, cards) => {
@@ -27,6 +29,14 @@ app.get('/', (req, res) => {
     return res.json(cards)
   })
 });
+
+app.post("/addCard", (req, res) => {
+  Cards.create(req.body).then(() => {
+    return res.sendStatus(200);
+  }).catch((e) => {
+    return res.sendStatus(400)
+  })
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)

@@ -13,14 +13,15 @@ import axios from "axios";
 
 
 type NewCardFormProps = {
+    addCard: (card: CardType) => void;
     handleClose: () => void;
 }
 
-const NewCardForm = ( {handleClose} : NewCardFormProps) => {
+const NewCardForm = ( {addCard, handleClose} : NewCardFormProps) => {
 
     const classes = useStyles();
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     const [cardContent, setCardContent] = useState<{title: string, authors: string, summary: string}>({title: "", authors: "", summary: ""})
 
@@ -36,17 +37,10 @@ const NewCardForm = ( {handleClose} : NewCardFormProps) => {
             summary: cardContent.summary,
             id: uuid.v4()
         }
-        dispatch(addNewCard(newCard));
 
-        // axios.get("foo.json").then( res => {
-        //     console.info(res)
-        // }
-        // ).catch( (err) => console.info(err))
-        //
-        // axios.post("foo.json", {newCard} ).then( (res) => {
-        //     console.info(res.data)
-        // }).catch( (err) => console.info(err))
-
+        axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
+            addCard(newCard);
+        }).catch( (error) => console.info(error));
         handleClose();
 
     }

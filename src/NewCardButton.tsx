@@ -2,8 +2,13 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import {Dialog} from "@material-ui/core";
 import NewCardForm from "./NewCardForm";
+import {Card} from "./types/Card";
 
-const NewCardButton = () => {
+type NewCardButtonProps = {
+    addCard: (card: Card) => void;
+}
+
+const NewCardButton = ( {addCard}: NewCardButtonProps) => {
 
     const [open, setOpen] = React.useState<boolean>(false)
 
@@ -20,7 +25,7 @@ const NewCardButton = () => {
         <React.Fragment>
             <Button variant="outlined" onClick={onClick}> Add card </Button>
             <Dialog onClose={handleClose} open={open}>
-                <NewCardForm handleClose={handleClose}/>
+                <NewCardForm addCard={addCard} handleClose={handleClose}/>
             </Dialog>
         </React.Fragment>
 

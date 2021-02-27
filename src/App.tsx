@@ -2,17 +2,13 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
 import PaperGrid from "./PaperGrid";
-import {createStore, applyMiddleware} from "redux";
-import {rootReducer} from "./store/reducer/reducer";
 import {Provider} from "react-redux";
 import NewCardButton from "./NewCardButton";
-import thunk from 'redux-thunk';
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
 
 
 function App() {
-    const store = createStore(rootReducer, applyMiddleware(thunk));
 
     const [cards, setCards] = useState<Array<Card>>([]);
 
@@ -29,15 +25,11 @@ function App() {
 
     }, [])
 
-
     return (
-      <Provider store={store}>
-          <Container maxWidth="lg">
-              <PaperGrid cards={cards}/>
-              <NewCardButton addCard={addCard}/>
-          </Container>
-      </Provider>
-
+      <Container maxWidth="lg">
+          <PaperGrid cards={cards}/>
+          <NewCardButton addCard={addCard}/>
+      </Container>
   );
 }
 

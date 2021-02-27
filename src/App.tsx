@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
 import PaperGrid from "./PaperGrid";
-import {Provider} from "react-redux";
 import NewCardButton from "./NewCardButton";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
@@ -21,8 +20,6 @@ function App() {
             setCards(response.data);
         })
             .catch( (error: AxiosError) => {console.log(error)});
-
-
     }, [])
 
     return (

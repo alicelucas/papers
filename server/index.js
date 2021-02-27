@@ -24,7 +24,7 @@ app.use(cors());
 app.get('/', (req, res) => {
   Cards.find( (err, cards) => {
     if (err) res.error();
-    res.json(cards)
+    return res.json(cards)
   })
 });
 

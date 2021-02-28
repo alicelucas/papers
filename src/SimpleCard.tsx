@@ -38,6 +38,7 @@ export default function SimpleCard({title, authors, summary, id}: simpleCardsPro
                 </CardContent>
                 <CardActions>
                     <Button size="small">Learn More</Button>
+                    <Button size="small">Remove card</Button>
                 </CardActions>
             </Card>
         </Grid>

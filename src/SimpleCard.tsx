@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -17,7 +16,6 @@ type simpleCardsProps = {
 
 export default function SimpleCard({title, authors, summary, id}: simpleCardsProps) {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
 
     return (
         <Grid key={id} item xs={4}>

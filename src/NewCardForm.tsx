@@ -6,7 +6,6 @@ import useStyles from "./Card.css";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {Card as CardType} from "./types/Card";
-import * as uuid from "uuid";
 import axios from "axios";
 
 

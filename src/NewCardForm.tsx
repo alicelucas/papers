@@ -19,8 +19,6 @@ const NewCardForm = ( {addCard, handleClose} : NewCardFormProps) => {
 
     const classes = useStyles();
 
-    // const dispatch = useDispatch()
-
     const [cardContent, setCardContent] = useState<{title: string, authors: string, summary: string}>({title: "", authors: "", summary: ""})
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,8 +30,7 @@ const NewCardForm = ( {addCard, handleClose} : NewCardFormProps) => {
         const newCard: CardType = {
             title: cardContent.title,
             authors: cardContent.authors,
-            summary: cardContent.summary,
-            id: uuid.v4()
+            summary: cardContent.summary
         }
 
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {

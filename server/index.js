@@ -16,7 +16,7 @@ db.once('open', function() {
   console.log("Here?")
 });
 
-const cardSchema = new mongoose.Schema({ title: String, authors: String, id: String, summary: String},
+const cardSchema = new mongoose.Schema({ title: String, authors: String, summary: String},
     { collection : 'cards' });   // collection name
 const Cards = mongoose.model('Cards', cardSchema);
 
@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
 
 app.post("/addCard", (req, res) => {
   Cards.create(req.body).then(() => {
+    console.info(req.body)
     return res.sendStatus(200);
   }).catch((e) => {
     return res.sendStatus(400)

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import SimpleCard from "./SimpleCard";
 import * as _ from "lodash"
 import {Card} from "./types/Card";
+import * as uuid from "uuid";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,11 +32,14 @@ const PaperGrid = ( {cards} : PaperGridProps) => {
 
         const rows = cardIndices.map( (cardIdxs, idx) =>
              <Grid key={idx} container item xs={12} spacing={3}>
-                    { cardIdxs.map( (cardIndex: number) => <SimpleCard title={cards[cardIndex].title}
-                                                                       key = {cards[cardIndex].id}
+                    { cardIdxs.map( (cardIndex: number) => {
+                        const cardIdx = cards[cardIndex]._id ? cards[cardIndex]._id : uuid.v4();
+                        if (!cardIdx) return <React.Fragment/>;
+                        return (<SimpleCard title={cards[cardIndex].title}
+                                                                       key = {cardIdx}
                                                                           authors={cards[cardIndex].authors}
                                                                           summary={cards[cardIndex].summary}
-                                                                          id={cards[cardIndex].id}/>)}
+                                                                          id={ cardIdx} />) })}
                 </Grid>
 
         )

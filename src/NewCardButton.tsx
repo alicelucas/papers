@@ -2,7 +2,6 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import {Dialog} from "@material-ui/core";
 import NewCardForm from "./NewCardForm";
-import {Card} from "./types/Card";
 
 type NewCardButtonProps = {
     refreshCards: () => void;

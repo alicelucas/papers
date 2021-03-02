@@ -6,8 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useStyles from "./Card.css";
 import Grid from "@material-ui/core/Grid";
-import axios, {AxiosResponse} from "axios";
-import {Card as CardType} from "./types/Card";
+import axios from "axios";
 
 type simpleCardsProps = {
     title: string,
@@ -27,7 +26,6 @@ export default function SimpleCard({title, authors, summary, id, refreshCards}: 
                 refreshCards();
             }
         )
-
     }
 
     return (

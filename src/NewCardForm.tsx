@@ -6,7 +6,7 @@ import useStyles from "./Card.css";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {Card as CardType} from "./types/Card";
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 
 
 type NewCardFormProps = {

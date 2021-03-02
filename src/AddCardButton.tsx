@@ -7,7 +7,7 @@ type NewCardButtonProps = {
     refreshCards: () => void;
 }
 
-const NewCardButton = ( {refreshCards}: NewCardButtonProps) => {
+const AddCardButton = ({refreshCards}: NewCardButtonProps) => {
 
     const [open, setOpen] = React.useState<boolean>(false)
 
@@ -31,4 +31,4 @@ const NewCardButton = ( {refreshCards}: NewCardButtonProps) => {
     )
 }
 
-export default NewCardButton
+export default AddCardButton

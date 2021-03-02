@@ -2,13 +2,11 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
 import PaperGrid from "./PaperGrid";
-import NewCardButton from "./NewCardButton";
+import AddCardButton from "./AddCardButton";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
 
-
 function App() {
-
     const [cards, setCards] = useState<Array<Card>>([]);
 
     const fetchAndUpdateCards = () => {
@@ -25,7 +23,7 @@ function App() {
     return (
       <Container maxWidth="lg">
           <PaperGrid refreshCards={fetchAndUpdateCards} cards={cards}/>
-          <NewCardButton refreshCards={fetchAndUpdateCards}/>
+          <AddCardButton refreshCards={fetchAndUpdateCards}/>
       </Container>
   );
 }

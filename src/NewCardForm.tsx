@@ -8,14 +8,12 @@ import Box from "@material-ui/core/Box";
 import {Card as CardType} from "./types/Card";
 import axios from "axios";
 
-
 type NewCardFormProps = {
     refreshCards: () => void;
     handleClose: () => void;
 }
 
 const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
-
     const classes = useStyles();
 
     const [cardContent, setCardContent] = useState<{title: string, authors: string, summary: string}>({title: "", authors: "", summary: ""})

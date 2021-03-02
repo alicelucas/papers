@@ -7,6 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import useStyles from "./Card.css";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import {Dialog} from "@material-ui/core";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
+import {RemoveCardButton} from "./RemoveCardButton";
 
 type simpleCardsProps = {
     title: string,
@@ -47,7 +53,7 @@ export default function SimpleCard({title, authors, summary, id, refreshCards}: 
                 </CardContent>
                 <CardActions>
                     <Button size="small">Learn More</Button>
-                    <Button onClick={handleRemoveCard} size="small">Remove card</Button>
+                    <RemoveCardButton handleRemoveCard={handleRemoveCard}/>
                 </CardActions>
             </Card>
         </Grid>

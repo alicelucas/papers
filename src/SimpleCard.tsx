@@ -6,16 +6,18 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useStyles from "./Card.css";
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
+import {Card as CardType} from "./types/Card";
 
 type simpleCardsProps = {
     title: string,
     authors: string,
     summary: string
     id: string,
+    refreshCards: () => void
 }
 
-export default function SimpleCard({title, authors, summary, id}: simpleCardsProps) {
+export default function SimpleCard({title, authors, summary, id, refreshCards}: simpleCardsProps) {
     const classes = useStyles();
 
     const handleRemoveCard = () => {

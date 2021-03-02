@@ -18,10 +18,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type PaperGridProps = {
-    cards: Array<Card>
+    cards: Array<Card>,
+    refreshCards: () => void
 }
 
-const PaperGrid = ( {cards} : PaperGridProps) => {
+const PaperGrid = ( {cards, refreshCards} : PaperGridProps) => {
 
     const classes = useStyles();
 
@@ -39,7 +40,8 @@ const PaperGrid = ( {cards} : PaperGridProps) => {
                                                                        key = {cardIdx}
                                                                           authors={cards[cardIndex].authors}
                                                                           summary={cards[cardIndex].summary}
-                                                                          id={ cardIdx} />) })}
+                                                                          id={ cardIdx}
+                                            refreshCards={refreshCards}/>) })}
                 </Grid>
 
         )

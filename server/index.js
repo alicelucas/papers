@@ -25,7 +25,7 @@ app.use(bodyParser.json()); // support json encoded bodies
 
 app.get('/', (req, res) => {
   Cards.find( (err, cards) => {
-    if (err) res.error();
+    if (err) console.info(err);
     return res.json(cards)
   })
 });
@@ -40,12 +40,11 @@ app.post("/addCard", (req, res) => {
 
 app.delete("/removeCard/:id", (req, res) => {
   Cards.findByIdAndDelete(req.params.id, (err, card) => {
-    if (err) res.errors();
+    if (err) console.info(err);
     else {
       console.info("Deleted: ", card)
     }
   } )
-  return res.send(req.body.id);
 })
 
 app.listen(port, () => {

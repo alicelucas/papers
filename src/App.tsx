@@ -11,21 +11,21 @@ function App() {
 
     const [cards, setCards] = useState<Array<Card>>([]);
 
-    const updateCards = (newCard: Card) => {
-        setCards([...cards, newCard])
+    const fetchAndUpdateCards = () => {
+        axios.get("http://127.0.0.1:8000").then( (response: AxiosResponse) => {
+            setCards(response.data)
+        })
+            .catch( (error: AxiosError) => {console.log(error)})
     }
 
     useEffect( () => {
-        axios.get("http://127.0.0.1:8000").then( (response: AxiosResponse) => {
-            setCards(response.data);
-        })
-            .catch( (error: AxiosError) => {console.log(error)});
+        fetchAndUpdateCards()
     }, [])
 
     return (
       <Container maxWidth="lg">
-          <PaperGrid cards={cards}/>
-          <NewCardButton updateCards={updateCards}/>
+          <PaperGrid refreshCards={fetchAndUpdateCards} cards={cards}/>
+          <NewCardButton refreshCards={fetchAndUpdateCards}/>
       </Container>
   );
 }

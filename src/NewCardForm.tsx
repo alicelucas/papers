@@ -6,15 +6,15 @@ import useStyles from "./Card.css";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {Card as CardType} from "./types/Card";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 
 type NewCardFormProps = {
-    updateCards: (card: CardType) => void;
+    refreshCards: () => void;
     handleClose: () => void;
 }
 
-const NewCardForm = ( {updateCards, handleClose} : NewCardFormProps) => {
+const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
 
     const classes = useStyles();
 
@@ -33,8 +33,8 @@ const NewCardForm = ( {updateCards, handleClose} : NewCardFormProps) => {
         }
 
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
-            updateCards(newCard);
         }).catch( (error) => console.info(error));
+        refreshCards();
         handleClose();
 
     }

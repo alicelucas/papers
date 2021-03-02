@@ -10,11 +10,11 @@ import axios from "axios";
 
 
 type NewCardFormProps = {
-    addCard: (card: CardType) => void;
+    handleAddCard: (card: CardType) => void;
     handleClose: () => void;
 }
 
-const NewCardForm = ( {addCard, handleClose} : NewCardFormProps) => {
+const NewCardForm = ( {handleAddCard, handleClose} : NewCardFormProps) => {
 
     const classes = useStyles();
 
@@ -33,7 +33,7 @@ const NewCardForm = ( {addCard, handleClose} : NewCardFormProps) => {
         }
 
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
-            addCard(newCard);
+            handleAddCard(newCard);
         }).catch( (error) => console.info(error));
         handleClose();
 

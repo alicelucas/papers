@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button";
 import React from "react";
 import {Dialog} from "@material-ui/core";
-import NewCardForm from "./NewCardForm";
+import CardForm from "./CardForm";
 
 type NewCardButtonProps = {
     refreshCards: () => void;
@@ -24,7 +24,7 @@ const AddCardButton = ({refreshCards}: NewCardButtonProps) => {
         <React.Fragment>
             <Button variant="outlined" onClick={onClick}> Add card </Button>
             <Dialog onClose={handleClose} open={open}>
-                <NewCardForm refreshCards={refreshCards} handleClose={handleClose}/>
+                <CardForm refreshCards={refreshCards} handleClose={handleClose}/>
             </Dialog>
         </React.Fragment>
 

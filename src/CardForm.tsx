@@ -13,7 +13,7 @@ type NewCardFormProps = {
     handleClose: () => void;
 }
 
-const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
+const CardForm = ({refreshCards, handleClose} : NewCardFormProps) => {
     const classes = useStyles();
 
     const [cardContent, setCardContent] = useState<{title: string, authors: string, date: string, journal: string}>({title: "", authors: "", date: "", journal: ""})
@@ -63,4 +63,4 @@ const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
     )
 }
 
-export default NewCardForm;
+export default CardForm;

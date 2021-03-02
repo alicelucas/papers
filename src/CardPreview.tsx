@@ -10,14 +10,15 @@ import axios from "axios";
 import {RemoveCardButton} from "./RemoveCardButton";
 
 type CardPreviewsProps = {
+    date: string,
     title: string,
     authors: string,
-    summary: string
+    journal: string
     id: string,
     refreshCards: () => void
 }
 
-export default function CardPreview({title, authors, summary, id, refreshCards}: CardPreviewsProps) {
+export default function CardPreview({authors, date, journal, id, refreshCards, title}: CardPreviewsProps) {
     const classes = useStyles();
 
     const handleRemoveCard = () => {
@@ -34,10 +35,10 @@ export default function CardPreview({title, authors, summary, id, refreshCards}:
             <Card className={classes.root}>
                 <CardContent>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {title}
+                        {journal + ", " + date}
                     </Typography>
                     <Typography variant="h5" component="h2">
-                        {authors}
+                        {title}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
                         {authors}

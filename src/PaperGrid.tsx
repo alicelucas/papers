@@ -39,7 +39,8 @@ const PaperGrid = ( {cards, refreshCards} : PaperGridProps) => {
                         return (<CardPreview title={cards[cardIndex].title}
                                                                        key = {cardIdx}
                                                                           authors={cards[cardIndex].authors}
-                                                                          summary={cards[cardIndex].summary}
+                                             date={cards[cardIndex].date}
+                                                                          journal={cards[cardIndex].journal}
                                                                           id={ cardIdx}
                                             refreshCards={refreshCards}/>) })}
                 </Grid>

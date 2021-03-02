@@ -16,7 +16,7 @@ type NewCardFormProps = {
 const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
     const classes = useStyles();
 
-    const [cardContent, setCardContent] = useState<{title: string, authors: string, summary: string}>({title: "", authors: "", summary: ""})
+    const [cardContent, setCardContent] = useState<{title: string, authors: string, date: string, journal: string}>({title: "", authors: "", date: "", journal: ""})
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCardContent({...cardContent, [event.target.name]: event.target.value})
@@ -25,9 +25,10 @@ const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
     const handleAddCard = async () => {
         //create new card object
         const newCard: CardPreview = {
-            title: cardContent.title,
             authors: cardContent.authors,
-            summary: cardContent.summary
+            date: cardContent.date,
+            journal: cardContent.journal,
+            title: cardContent.title
         }
 
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
@@ -41,13 +42,16 @@ const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
             <CardContent>
                 <form noValidate autoComplete="off">
                     <div>
+                        <TextField id="standard-basic" label="Journal" name="journal" onChange={handleTextChange}/>
+                    </div>
+                    <div>
+                        <TextField id="standard-basic" label="Date" name="date" onChange={handleTextChange}/>
+                    </div>
+                    <div>
                         <TextField id="standard-basic" label="Title" name="title" onChange={handleTextChange}/>
                     </div>
                     <div>
-                        <TextField id="standard-basic" label="Authors" name="authors" onChange={handleTextChange}/>
-                    </div>
-                    <div>
-                        <TextField id="standard-basic" label="Summary" onChange={handleTextChange}  name="summary" multiline rows={4}/>
+                        <TextField id="standard-basic" label="Authors" onChange={handleTextChange}  name="authors" multiline rows={4}/>
                     </div>
                 </form>
                 <Box paddingTop={1}>

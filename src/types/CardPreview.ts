@@ -1,6 +1,7 @@
 export type CardPreview = {
-    title: string,
-    authors: string,
-    summary: string,
     _id?: string
+    authors: string,
+    date: string,
+    journal: string,
+    title: string,
 };

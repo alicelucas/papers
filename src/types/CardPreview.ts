@@ -1,4 +1,4 @@
-export type Card = {
+export type CardPreview = {
     title: string,
     authors: string,
     summary: string,

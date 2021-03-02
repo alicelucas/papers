@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CardPreview from "./CardPreview";
 import * as _ from "lodash"
-import {Card} from "./types/Card";
+import {CardPreview as CardPreviewType} from "./types/CardPreview";
 import * as uuid from "uuid";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type PaperGridProps = {
-    cards: Array<Card>,
+    cards: Array<CardPreviewType>,
     refreshCards: () => void
 }
 

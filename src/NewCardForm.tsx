@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import useStyles from "./Card.css";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import {Card as CardType} from "./types/Card";
+import {CardPreview} from "./types/CardPreview";
 import axios from "axios";
 
 type NewCardFormProps = {
@@ -24,7 +24,7 @@ const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
 
     const handleAddCard = async () => {
         //create new card object
-        const newCard: CardType = {
+        const newCard: CardPreview = {
             title: cardContent.title,
             authors: cardContent.authors,
             summary: cardContent.summary

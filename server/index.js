@@ -16,7 +16,7 @@ db.once('open', function() {
   console.log("Here?")
 });
 
-const cardSchema = new mongoose.Schema({ title: String, authors: String, summary: String},
+const cardSchema = new mongoose.Schema({ title: String, authors: String, journal: String, date: String},
     { collection : 'cards' });   // collection name
 const Cards = mongoose.model('Cards', cardSchema);
 

@@ -26,16 +26,17 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.get('/', (req, res) => {
   Cards.find( (err, cards) => {
     if (err) console.info(err);
-    return res.json(cards)
+    return res.json(cards);
   })
 });
 
 app.post("/addCard", (req, res) => {
   Cards.create(req.body).then(() => {
     return res.sendStatus(200);
-  }).catch((e) => {
-    return res.sendStatus(400)
-  })
+  }).catch((err) => {
+    console.info(err);
+    return res.sendStatus(400);
+  });
 })
 
 app.delete("/removeCard/:id", (req, res) => {
@@ -44,7 +45,12 @@ app.delete("/removeCard/:id", (req, res) => {
     else {
       console.info("Deleted: ", card)
     }
-  } )
+  } ).then( () => {
+    return res.sendStatus(200);
+  }).catch((err) => {
+        console.info(err);
+        return res.sendStatus(400);
+      });
 })
 
 app.listen(port, () => {

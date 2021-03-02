@@ -33,10 +33,9 @@ const NewCardForm = ( {refreshCards, handleClose} : NewCardFormProps) => {
         }
 
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
+            refreshCards();
         }).catch( (error) => console.info(error));
-        refreshCards();
         handleClose();
-
     }
 
     return (

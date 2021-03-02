@@ -24,7 +24,7 @@ export default function SimpleCard({title, authors, summary, id, refreshCards}: 
         const url = "http://127.0.0.1:8000/removeCard/".concat(id)
         axios.delete(url).then(
             (response) => {
-                console.info(response)
+                refreshCards();
             }
         )
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import SimpleCard from "./SimpleCard";
+import CardPreview from "./CardPreview";
 import * as _ from "lodash"
 import {Card} from "./types/Card";
 import * as uuid from "uuid";
@@ -36,7 +36,7 @@ const PaperGrid = ( {cards, refreshCards} : PaperGridProps) => {
                     { cardIdxs.map( (cardIndex: number) => {
                         const cardIdx = cards[cardIndex]._id ? cards[cardIndex]._id : uuid.v4();
                         if (!cardIdx) return <React.Fragment/>;
-                        return (<SimpleCard title={cards[cardIndex].title}
+                        return (<CardPreview title={cards[cardIndex].title}
                                                                        key = {cardIdx}
                                                                           authors={cards[cardIndex].authors}
                                                                           summary={cards[cardIndex].summary}

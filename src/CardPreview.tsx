@@ -7,14 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import useStyles from "./Card.css";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-import {Dialog} from "@material-ui/core";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
 import {RemoveCardButton} from "./RemoveCardButton";
 
-type simpleCardsProps = {
+type CardPreviewsProps = {
     title: string,
     authors: string,
     summary: string
@@ -22,7 +17,7 @@ type simpleCardsProps = {
     refreshCards: () => void
 }
 
-export default function SimpleCard({title, authors, summary, id, refreshCards}: simpleCardsProps) {
+export default function CardPreview({title, authors, summary, id, refreshCards}: CardPreviewsProps) {
     const classes = useStyles();
 
     const handleRemoveCard = () => {
@@ -47,12 +42,12 @@ export default function SimpleCard({title, authors, summary, id, refreshCards}: 
                     <Typography className={classes.pos} color="textSecondary">
                         {authors}
                     </Typography>
-                    <Typography variant="body2" component="p">
-                        {summary}
-                    </Typography>
                 </CardContent>
                 <CardActions>
                     <Button size="small">Learn More</Button>
+                    <Button>
+                        Edit card
+                    </Button>
                     <RemoveCardButton handleRemoveCard={handleRemoveCard}/>
                 </CardActions>
             </Card>

@@ -10,11 +10,11 @@ import axios from "axios";
 
 
 type NewCardFormProps = {
-    handleAddCard: (card: CardType) => void;
+    updateCards: (card: CardType) => void;
     handleClose: () => void;
 }
 
-const NewCardForm = ( {handleAddCard, handleClose} : NewCardFormProps) => {
+const NewCardForm = ( {updateCards, handleClose} : NewCardFormProps) => {
 
     const classes = useStyles();
 
@@ -24,7 +24,7 @@ const NewCardForm = ( {handleAddCard, handleClose} : NewCardFormProps) => {
         setCardContent({...cardContent, [event.target.name]: event.target.value})
     }
 
-    const handleClick = async () => {
+    const handleAddCard = async () => {
         //create new card object
         const newCard: CardType = {
             title: cardContent.title,
@@ -33,7 +33,7 @@ const NewCardForm = ( {handleAddCard, handleClose} : NewCardFormProps) => {
         }
 
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
-            handleAddCard(newCard);
+            updateCards(newCard);
         }).catch( (error) => console.info(error));
         handleClose();
 
@@ -54,7 +54,7 @@ const NewCardForm = ( {handleAddCard, handleClose} : NewCardFormProps) => {
                     </div>
                 </form>
                 <Box paddingTop={1}>
-                    <Button variant="outlined" onClick={handleClick}>Add card</Button>
+                    <Button variant="outlined" onClick={handleAddCard}>Add card</Button>
                 </Box>
 
             </CardContent>

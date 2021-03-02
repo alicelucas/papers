@@ -25,6 +25,7 @@ export default function SimpleCard({title, authors, summary, id}: simpleCardsPro
                 console.info(response)
             }
         )
+
     }
 
     return (

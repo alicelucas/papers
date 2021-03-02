@@ -5,10 +5,10 @@ import NewCardForm from "./NewCardForm";
 import {Card} from "./types/Card";
 
 type NewCardButtonProps = {
-    handleAddCard: (card: Card) => void;
+    updateCards: (card: Card) => void;
 }
 
-const NewCardButton = ( {handleAddCard}: NewCardButtonProps) => {
+const NewCardButton = ( {updateCards}: NewCardButtonProps) => {
 
     const [open, setOpen] = React.useState<boolean>(false)
 
@@ -25,7 +25,7 @@ const NewCardButton = ( {handleAddCard}: NewCardButtonProps) => {
         <React.Fragment>
             <Button variant="outlined" onClick={onClick}> Add card </Button>
             <Dialog onClose={handleClose} open={open}>
-                <NewCardForm handleAddCard={handleAddCard} handleClose={handleClose}/>
+                <NewCardForm updateCards={updateCards} handleClose={handleClose}/>
             </Dialog>
         </React.Fragment>
 

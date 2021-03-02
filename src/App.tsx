@@ -11,7 +11,7 @@ function App() {
 
     const [cards, setCards] = useState<Array<Card>>([]);
 
-    const handleAddCard = (newCard: Card) => {
+    const updateCards = (newCard: Card) => {
         setCards([...cards, newCard])
     }
 
@@ -25,7 +25,7 @@ function App() {
     return (
       <Container maxWidth="lg">
           <PaperGrid cards={cards}/>
-          <NewCardButton handleAddCard={handleAddCard}/>
+          <NewCardButton updateCards={updateCards}/>
       </Container>
   );
 }

@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import useStyles from "./Card.css";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 
 type simpleCardsProps = {
     title: string,
@@ -16,6 +17,15 @@ type simpleCardsProps = {
 
 export default function SimpleCard({title, authors, summary, id}: simpleCardsProps) {
     const classes = useStyles();
+
+    const handleRemoveCard = () => {
+        const url = "http://127.0.0.1:8000/removeCard/".concat(id)
+        axios.delete(url).then(
+            (response) => {
+                console.info(response)
+            }
+        )
+    }
 
     return (
         <Grid key={id} item xs={4}>
@@ -36,7 +46,7 @@ export default function SimpleCard({title, authors, summary, id}: simpleCardsPro
                 </CardContent>
                 <CardActions>
                     <Button size="small">Learn More</Button>
-                    <Button size="small">Remove card</Button>
+                    <Button onClick={handleRemoveCard} size="small">Remove card</Button>
                 </CardActions>
             </Card>
         </Grid>

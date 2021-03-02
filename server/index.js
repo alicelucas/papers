@@ -32,11 +32,20 @@ app.get('/', (req, res) => {
 
 app.post("/addCard", (req, res) => {
   Cards.create(req.body).then(() => {
-    console.info(req.body)
     return res.sendStatus(200);
   }).catch((e) => {
     return res.sendStatus(400)
   })
+})
+
+app.delete("/removeCard/:id", (req, res) => {
+  Cards.findByIdAndDelete(req.params.id, (err, card) => {
+    if (err) res.errors();
+    else {
+      console.info("Deleted: ", card)
+    }
+  } )
+  return res.send(req.body.id);
 })
 
 app.listen(port, () => {

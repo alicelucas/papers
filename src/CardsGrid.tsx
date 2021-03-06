@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 type PaperGridProps = {
     cards: Array<CardPreviewType>,
-    refreshCards: () => void
+    refreshCards: () => void,
 }
 
 const CardsGrid = ({cards, refreshCards} : PaperGridProps) => {
@@ -43,7 +43,7 @@ const CardsGrid = ({cards, refreshCards} : PaperGridProps) => {
                                              date={cards[cardIndex].date}
                                                                           journal={cards[cardIndex].journal}
                                                                           id={ cardIdx}
-                                            refreshCards={refreshCards}/>) })}
+                                            refreshCards={refreshCards} sections={cards[cardIndex].sections}/>) })}
                 </Grid>
 
         )

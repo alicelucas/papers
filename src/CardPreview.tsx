@@ -17,9 +17,15 @@ type CardPreviewsProps = {
     journal: string
     id: string,
     refreshCards: () => void
+    sections?: {
+        why: string,
+        what?: string,
+        how?: string,
+        results?: string,
+    }
 }
 
-export default function CardPreview({authors, date, journal, id, refreshCards, title}: CardPreviewsProps) {
+export default function CardPreview({authors, date, journal, id, refreshCards, title, sections}: CardPreviewsProps) {
     const classes = useStyles();
 
     const handleRemoveCard = () => {
@@ -58,7 +64,7 @@ export default function CardPreview({authors, date, journal, id, refreshCards, t
                 </CardContent>
                 <CardActions>
                     <Button onClick={onClick} size="small">Learn More</Button>
-                    <CardAccordionDialog handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog}/>
+                    <CardAccordionDialog handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog} sections={sections}/>
                     <RemoveCardButton handleRemoveCard={handleRemoveCard}/>
                 </CardActions>
             </Card>

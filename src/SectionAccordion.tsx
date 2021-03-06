@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type SectionAccordionPropsType = {
     title: string,
-    content: string
+    content?: string
 }
 
 export const SectionAccordion = ( {title, content}: SectionAccordionPropsType) => {

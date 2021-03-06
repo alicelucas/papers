@@ -4,4 +4,10 @@ export type CardPreview = {
     date: string,
     journal: string,
     title: string,
+    sections?: {
+        why: string,
+        what?: string,
+        how?: string,
+        results?: string,
+    }
 };

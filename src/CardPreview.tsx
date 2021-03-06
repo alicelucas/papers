@@ -8,6 +8,7 @@ import useStyles from "./Card.css";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import {RemoveCardButton} from "./RemoveCardButton";
+import {CardAccordionDialog} from "./CardAccordionDialog";
 
 type CardPreviewsProps = {
     date: string,
@@ -30,6 +31,12 @@ export default function CardPreview({authors, date, journal, id, refreshCards, t
         )
     }
 
+    const [openCardAccordionDialog, setOpenCardAccordionDialog] = React.useState<boolean>(false)
+
+    const onClick = () => {
+        setOpenCardAccordionDialog(true)
+    }
+
     return (
         <Grid key={id} item xs={4}>
             <Card className={classes.root}>
@@ -45,10 +52,8 @@ export default function CardPreview({authors, date, journal, id, refreshCards, t
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button onClick={() => {}} size="small">Learn More</Button>
-                    <Button>
-                        Edit card
-                    </Button>
+                    <Button onClick={onClick} size="small">Learn More</Button>
+                    <CardAccordionDialog open={openCardAccordionDialog}/>
                     <RemoveCardButton handleRemoveCard={handleRemoveCard}/>
                 </CardActions>
             </Card>

@@ -11,13 +11,14 @@ const useStyles = makeStyles({
 });
 
 type CardAccordionDialogProps = {
+    handleClose: () => void;
     open: boolean;
 }
-export const CardAccordionDialog = ( { open } : CardAccordionDialogProps) => {
+export const CardAccordionDialog = ( { handleClose, open } : CardAccordionDialogProps) => {
     const classes = useStyles();
 
     return (
-        <Dialog classes={{paper: classes.dialog}} fullWidth={true} maxWidth="lg" open={open}>
+        <Dialog classes={{paper: classes.dialog}} fullWidth={true} maxWidth="lg" onClose={handleClose} open={open}>
             <CardAccordion/>
         </Dialog>
     )

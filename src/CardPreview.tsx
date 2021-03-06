@@ -37,6 +37,11 @@ export default function CardPreview({authors, date, journal, id, refreshCards, t
         setOpenCardAccordionDialog(true)
     }
 
+    const handleCardAccordionDialogClose = () => {
+        setOpenCardAccordionDialog(false)
+    }
+
+
     return (
         <Grid key={id} item xs={4}>
             <Card className={classes.root}>
@@ -53,7 +58,7 @@ export default function CardPreview({authors, date, journal, id, refreshCards, t
                 </CardContent>
                 <CardActions>
                     <Button onClick={onClick} size="small">Learn More</Button>
-                    <CardAccordionDialog open={openCardAccordionDialog}/>
+                    <CardAccordionDialog handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog}/>
                     <RemoveCardButton handleRemoveCard={handleRemoveCard}/>
                 </CardActions>
             </Card>

@@ -18,7 +18,6 @@ const AddCardButton = ({refreshCards}: NewCardButtonProps) => {
 
     const handleClose = () => {
         setOpen(false)
-        //this might not be needed
     }
 
     return (

@@ -42,16 +42,16 @@ const CardForm = ({refreshCards, handleClose} : NewCardFormProps) => {
             <CardContent>
                 <form noValidate autoComplete="off">
                     <div>
-                        <TextField id="standard-basic" label="Journal" name="journal" onChange={handleTextChange}/>
+                        <TextField fullWidth id="standard-basic" label="Journal" name="journal" onChange={handleTextChange}/>
                     </div>
                     <div>
-                        <TextField id="standard-basic" label="Date" name="date" onChange={handleTextChange}/>
+                        <TextField fullWidth id="standard-basic" label="Date" name="date" onChange={handleTextChange}/>
                     </div>
                     <div>
-                        <TextField id="standard-basic" label="Title" name="title" onChange={handleTextChange}/>
+                        <TextField fullWidth id="standard-basic" label="Title" name="title" onChange={handleTextChange}/>
                     </div>
                     <div>
-                        <TextField id="standard-basic" label="Authors" onChange={handleTextChange}  name="authors" multiline rows={4}/>
+                        <TextField fullWidth id="standard-basic" label="Authors" onChange={handleTextChange}  name="authors" multiline rows={4}/>
                     </div>
                 </form>
                 <Box paddingTop={1}>

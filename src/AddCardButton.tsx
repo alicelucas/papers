@@ -25,8 +25,7 @@ const AddCardButton = ({refreshCards}: NewCardButtonProps) => {
         <React.Fragment>
             <Button variant="outlined" onClick={onClick}> Add card </Button>
             <Dialog fullWidth={true} maxWidth="lg" onClose={handleClose} open={open}>
-                {/*<CardForm refreshCards={refreshCards} handleClose={handleClose}/>*/}
-                <CardAccordion />
+                <CardForm refreshCards={refreshCards} handleClose={handleClose}/>
             </Dialog>
         </React.Fragment>
 

@@ -45,7 +45,7 @@ export default function CardPreview({authors, date, journal, id, refreshCards, t
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Learn More</Button>
+                    <Button onClick={() => {}} size="small">Learn More</Button>
                     <Button>
                         Edit card
                     </Button>

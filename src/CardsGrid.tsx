@@ -22,7 +22,7 @@ type PaperGridProps = {
     refreshCards: () => void
 }
 
-const PaperGrid = ( {cards, refreshCards} : PaperGridProps) => {
+const CardsGrid = ({cards, refreshCards} : PaperGridProps) => {
 
     const classes = useStyles();
 
@@ -31,6 +31,7 @@ const PaperGrid = ( {cards, refreshCards} : PaperGridProps) => {
     const FormGrid = () => {
         const cardIndices: Array<Array<number>> = _.chunk([...Array(cards.length).keys()], cardsPerRow);
 
+        //FIXME: Material UI must be able to do this for you
         const rows = cardIndices.map( (cardIdxs, idx) =>
              <Grid key={idx} container item xs={12} spacing={3}>
                     { cardIdxs.map( (cardIndex: number) => {
@@ -60,4 +61,4 @@ const PaperGrid = ( {cards, refreshCards} : PaperGridProps) => {
 
 }
 
-export default PaperGrid;
+export default CardsGrid;

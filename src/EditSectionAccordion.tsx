@@ -1,9 +1,8 @@
 import React from "react";
 import {TextField} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import CheckIcon from '@material-ui/icons/Check';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -28,7 +27,7 @@ export const EditSectionAccordion = ( { content, switchMode } : EditSectionAccor
         <React.Fragment>
             <TextField InputProps={ {className: classes.input}} fullWidth defaultValue={content} id="filled-basic" multiline={true} variant="filled" />
             <IconButton onClick={switchMode}>
-                <EditIcon />
+                <CheckIcon/>
             </IconButton>
         </React.Fragment> )
 }

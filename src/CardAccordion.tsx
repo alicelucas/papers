@@ -13,20 +13,25 @@ const useStyles = makeStyles((theme: Theme) =>
         heading: {
             fontSize: theme.typography.pxToRem(15),
             fontWeight: theme.typography.fontWeightRegular,
+            whiteSpace: 'pre-line'
         },
     }),
 );
 
 type CardAccordionPropsType = {
+    authors: string,
+    date: string,
+    journal: string,
     sections?: {
         why: string,
         what?: string,
         how?: string,
         results?: string,
     }
+    title: string
 }
 
-export default function CardAccordion( {sections} : CardAccordionPropsType) {
+export default function CardAccordion( {authors, date, journal, sections, title} : CardAccordionPropsType) {
     const classes = useStyles();
 
     return (
@@ -36,7 +41,7 @@ export default function CardAccordion( {sections} : CardAccordionPropsType) {
                     aria-controls="panel2a-content"
                     id="panel2a-header"
                 >
-                    <Typography className={classes.heading}>Title, authors, journal conference, date</Typography>
+                    <Typography className={classes.heading}>{[ [title, authors].join("\n"), "\n", [journal, date].join(", ") ].join("")}</Typography>
                 </AccordionSummary>
             </Accordion>
             <SectionAccordion content={sections?.why} title={"Why is this work important?"}/>

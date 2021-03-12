@@ -64,7 +64,7 @@ export default function CardPreview({authors, date, journal, id, refreshCards, t
                 </CardContent>
                 <CardActions>
                     <Button onClick={onClick} size="small">Learn More</Button>
-                    <CardAccordionDialog handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog} sections={sections}/>
+                    <CardAccordionDialog authors={authors} date={date} journal={journal} handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog} sections={sections} title={title}/>
                     <RemoveCardButton handleRemoveCard={handleRemoveCard}/>
                 </CardActions>
             </Card>

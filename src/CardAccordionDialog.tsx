@@ -11,6 +11,9 @@ const useStyles = makeStyles({
 });
 
 type CardAccordionDialogProps = {
+    authors: string,
+    date: string,
+    journal: string,
     handleClose: () => void;
     open: boolean;
     sections?: {
@@ -19,13 +22,14 @@ type CardAccordionDialogProps = {
         how?: string,
         results?: string,
     }
+    title: string
 }
-export const CardAccordionDialog = ( { handleClose, open, sections } : CardAccordionDialogProps) => {
+export const CardAccordionDialog = ( { authors, date, journal, handleClose, open, sections, title } : CardAccordionDialogProps) => {
     const classes = useStyles();
 
     return (
         <Dialog classes={{paper: classes.dialog}} fullWidth={true} maxWidth="lg" onClose={handleClose} open={open}>
-            <CardAccordion sections={sections}/>
+            <CardAccordion authors={authors} date={date} journal={journal} sections={sections} title={title}/>
         </Dialog>
     )
 }

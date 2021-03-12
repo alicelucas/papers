@@ -31,10 +31,11 @@ const CardForm = ({handleClose} : NewCardFormProps) => {
             authors: cardContent.authors,
             date: cardContent.date,
             journal: cardContent.journal,
-            title: cardContent.title
+            title: cardContent.title,
+            _id: "" // will be overwritten by POST request
         }
-        //
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
+            console.info("id, ", response.data.id)
             dispatch(cardsSlice.actions.addCard({card: newCard}))
         }).catch( (error) => console.info(error));
         handleClose();

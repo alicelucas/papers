@@ -32,10 +32,11 @@ app.get('/', (req, res) => {
 });
 
 app.post("/addCard", (req, res) => {
-  Cards.create(req.body).then(() => {
-    return res.sendStatus(200);
+  const id = mongoose.Types.ObjectId();
+  const newCard = {...req.body, _id: id};
+  Cards.create(newCard).then(() => {
+    return res.json({id: id})
   }).catch((err) => {
-    console.info(err);
     return res.sendStatus(400);
   });
 })

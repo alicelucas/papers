@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {counterSlice} from "./slice";
+import {titleSlice} from "./slice";
 // ...
 
 const store = configureStore({
     reducer: {
-        one: counterSlice.reducer
+        state: titleSlice.reducer
     }
 })
 

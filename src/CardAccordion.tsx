@@ -29,10 +29,6 @@ type CardAccordionPropsType = {
 export default function CardAccordion( {sections} : CardAccordionPropsType) {
     const classes = useStyles();
 
-    const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet bla" +
-        "ndit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus exsi" +
-        "t amet blandit leo lobortis eget."
-
     return (
         <div className={classes.root}>
             <Accordion disabled>
@@ -44,9 +40,9 @@ export default function CardAccordion( {sections} : CardAccordionPropsType) {
                 </AccordionSummary>
             </Accordion>
             <SectionAccordion content={sections?.why} title={"Why is this work important?"}/>
-            <SectionAccordion content={text} title={"What do they propose?"}/>
-            <SectionAccordion content={text} title={"How does it work?"}/>
-            <SectionAccordion content={text} title={"What are the results?"}/>
+            <SectionAccordion content={sections?.what} title={"What do they propose?"}/>
+            <SectionAccordion content={sections?.how} title={"How does it work?"}/>
+            <SectionAccordion content={sections?.results} title={"What are the results?"}/>
         </div>
     );
 }

@@ -12,7 +12,6 @@ function App() {
     const fetchAndUpdateCards = () => {
         axios.get("http://127.0.0.1:8000").then( (response: AxiosResponse) => {
             setCards(response.data)
-            console.info(cards[0])
         })
             .catch( (error: AxiosError) => {console.log(error)})
     }

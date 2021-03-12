@@ -9,27 +9,18 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import {RemoveCardButton} from "./RemoveCardButton";
 import {CardAccordionDialog} from "./CardAccordionDialog";
+import {CardPreview as CardPreviewType} from "./types/CardPreview";
 
 type CardPreviewsProps = {
-    date: string,
-    title: string,
-    authors: string,
-    journal: string
-    id: string,
+    card: CardPreviewType,
     refreshCards: () => void
-    sections?: {
-        why: string,
-        what?: string,
-        how?: string,
-        results?: string,
-    }
 }
 
-export default function CardPreview({authors, date, journal, id, refreshCards, title, sections}: CardPreviewsProps) {
+export default function CardPreview({card, refreshCards}: CardPreviewsProps) {
     const classes = useStyles();
 
     const handleRemoveCard = () => {
-        const url = "http://127.0.0.1:8000/removeCard/".concat(id)
+        const url = "http://127.0.0.1:8000/removeCard/".concat(card._id)
         axios.delete(url).then(
             (response) => {
                 refreshCards();
@@ -49,22 +40,22 @@ export default function CardPreview({authors, date, journal, id, refreshCards, t
 
 
     return (
-        <Grid key={id} item xs={4}>
+        <Grid key={card._id} item xs={4}>
             <Card className={classes.root}>
                 <CardContent>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {journal + ", " + date}
+                        {[card.journal, card.date].join(", ")}
                     </Typography>
                     <Typography variant="h5" component="h2">
-                        {title}
+                        {card.title}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                        {authors}
+                        {card.authors}
                     </Typography>
                 </CardContent>
                 <CardActions>
                     <Button onClick={onClick} size="small">Learn More</Button>
-                    <CardAccordionDialog authors={authors} date={date} journal={journal} handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog} sections={sections} title={title}/>
+                    <CardAccordionDialog card={card} handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog}/>
                     <RemoveCardButton handleRemoveCard={handleRemoveCard}/>
                 </CardActions>
             </Card>

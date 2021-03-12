@@ -23,18 +23,18 @@ const CardForm = ({refreshCards, handleClose} : NewCardFormProps) => {
     }
 
     const handleAddCard = async () => {
-        //create new card object
-        const newCard: CardPreview = {
-            authors: cardContent.authors,
-            date: cardContent.date,
-            journal: cardContent.journal,
-            title: cardContent.title
-        }
-
-        axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
-            refreshCards();
-        }).catch( (error) => console.info(error));
-        handleClose();
+        // //create new card object
+        // const newCard: CardPreview = {
+        //     authors: cardContent.authors,
+        //     date: cardContent.date,
+        //     journal: cardContent.journal,
+        //     title: cardContent.title
+        // }
+        //
+        // axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
+        //     refreshCards();
+        // }).catch( (error) => console.info(error));
+        // handleClose();
     }
 
     return (

@@ -8,6 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import React, {useState} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import {CardPreview} from "./types/CardPreview";
+import axios from "axios";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

@@ -37,13 +37,7 @@ const CardsGrid = ({cards, refreshCards} : PaperGridProps) => {
                     { cardIdxs.map( (cardIndex: number) => {
                         const cardIdx = cards[cardIndex]._id ? cards[cardIndex]._id : uuid.v4();
                         if (!cardIdx) return <React.Fragment/>;
-                        return (<CardPreview title={cards[cardIndex].title}
-                                                                       key = {cardIdx}
-                                                                          authors={cards[cardIndex].authors}
-                                             date={cards[cardIndex].date}
-                                                                          journal={cards[cardIndex].journal}
-                                                                          id={ cardIdx}
-                                            refreshCards={refreshCards} sections={cards[cardIndex].sections}/>) })}
+                        return (<CardPreview card={cards[cardIndex]} key = {cardIdx} refreshCards={refreshCards}/>) })}
                 </Grid>
 
         )

@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {titleSlice} from "./slice";
+import {cardsSlice} from "./slice";
 // ...
 
 export const store = configureStore({
     reducer: {
-        state: titleSlice.reducer
+        state: cardsSlice.reducer
     }
 })
 

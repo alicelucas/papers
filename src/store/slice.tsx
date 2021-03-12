@@ -1,41 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from "./store"
+import {CardPreview} from "../types/CardPreview";
 
 // Define a type for the slice state
-interface CardState {
-    title: string
+interface CardsState {
+    cards: Array<CardPreview>
 }
 
 // Define the initial state using that type
-const initialState: CardState = {
-    title: "Empty string"
+const initialState: CardsState = {
+    cards: []
 }
 
-export const titleSlice = createSlice({
-    name: 'title',
+export const cardsSlice = createSlice({
+    name: 'cards',
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
-        update: (state, action: PayloadAction<{title: string}>) => {
-            state.title = action.payload.title
+        addCard: (state, action: PayloadAction<{card: CardPreview}>) => {
+            state.cards.push(action.payload.card);
+        },
+        editCard: (state, action: PayloadAction<{card: CardPreview}>) => {
+
+        },
+        removeCard: (state, action: PayloadAction<{id: string}>) => {
+            // state.title = action.payload.title
         }
-        // }
-        // increment: state => {
-        //     state.value += 1
-        // },
-        // decrement: state => {
-        //     state.value -= 1
-        // },
-        // // Use the PayloadAction type to declare the contents of `action.payload`
-        // incrementByAmount: (state, action: PayloadAction<number>) => {
-        //     state.value += action.payload
-        // }
     }
 })
 
-export const { update } = titleSlice.actions
+export const { addCard, editCard, removeCard } = cardsSlice.actions
 
 // // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value
 
-export default titleSlice.reducer
+export default cardsSlice.reducer

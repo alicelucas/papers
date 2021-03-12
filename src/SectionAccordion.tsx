@@ -10,6 +10,7 @@ import React, {useState} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {CardPreview} from "./types/CardPreview";
 import axios from "axios";
+import {EditSectionAccordion} from "./EditSectionAccordion";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -36,6 +37,9 @@ export const SectionAccordion = ( {title, content}: SectionAccordionPropsType) =
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
+    const switchMode = () => {setIsEdit(!isEdit)}
+
+
     return (
         <Accordion>
             <AccordionSummary
@@ -47,13 +51,17 @@ export const SectionAccordion = ( {title, content}: SectionAccordionPropsType) =
             </AccordionSummary>
 
             <AccordionDetails>
-                {!isEdit && (<Typography className={classes.text}>
-                    {content}
-                </Typography>)}
-                {isEdit && (  <TextField InputProps={ {className: classes.input}} fullWidth defaultValue={content} id="filled-basic" multiline={true} variant="filled" />)}
-                <IconButton onClick={() => {setIsEdit(!isEdit)}}>
-                    <EditIcon />
-                </IconButton>
+                {!isEdit &&
+                (<React.Fragment>
+                    <Typography className={classes.text}>
+                        {content}
+                    </Typography>
+                    <IconButton onClick={switchMode}>
+                        <EditIcon />
+                    </IconButton>
+                </React.Fragment>
+                  )}
+                {isEdit && <EditSectionAccordion content={content} switchMode={switchMode}/> }
             </AccordionDetails>
         </Accordion>
     )

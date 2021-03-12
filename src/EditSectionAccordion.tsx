@@ -23,10 +23,17 @@ type EditSectionAccordionProps = {
 export const EditSectionAccordion = ( { content, switchMode } : EditSectionAccordionProps) => {
     const classes = useStyles();
 
+    const handleSaveClick = () => {
+        // const updatedCard = {
+        //
+        // }
+        switchMode();
+    }
+
     return (
         <React.Fragment>
             <TextField InputProps={ {className: classes.input}} fullWidth defaultValue={content} id="filled-basic" multiline={true} variant="filled" />
-            <IconButton onClick={switchMode}>
+            <IconButton onClick={handleSaveClick}>
                 <CheckIcon/>
             </IconButton>
         </React.Fragment> )

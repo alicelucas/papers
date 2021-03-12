@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
             fontSize: theme.typography.pxToRem(15),
             fontWeight: theme.typography.fontWeightRegular,
         },
+        text: {
+            whiteSpace: 'pre-line'
+        }
     }),
 );
 
@@ -42,7 +45,7 @@ export const SectionAccordion = ( {title, content}: SectionAccordionPropsType) =
             </AccordionSummary>
 
             <AccordionDetails>
-                {!isEdit && (<Typography>
+                {!isEdit && (<Typography className={classes.text}>
                     {content}
                 </Typography>)}
                 {isEdit && (  <TextField InputProps={ {className: classes.input}} fullWidth defaultValue={content} id="filled-basic" multiline={true} variant="filled" />)}

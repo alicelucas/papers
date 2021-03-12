@@ -10,20 +10,25 @@ import axios from "axios";
 import {RemoveCardButton} from "./RemoveCardButton";
 import {CardAccordionDialog} from "./CardAccordionDialog";
 import {CardPreview as CardPreviewType} from "./types/CardPreview";
+import {useDispatch} from "react-redux";
+import {cardsSlice} from "./store/slice";
 
 type CardPreviewsProps = {
-    card: CardPreviewType,
-    refreshCards: () => void
+    card: CardPreviewType
 }
 
-export default function CardPreview({card, refreshCards}: CardPreviewsProps) {
+export default function CardPreview({card}: CardPreviewsProps) {
     const classes = useStyles();
+
+    const dispatch = useDispatch();
 
     const handleRemoveCard = () => {
         const url = "http://127.0.0.1:8000/removeCard/".concat(card._id)
         axios.delete(url).then(
             (response) => {
-                refreshCards();
+
+                dispatch(cardsSlice.actions.removeCard({id: card._id} ))
+                //refreshCards();
             }
         )
     }

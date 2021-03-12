@@ -18,11 +18,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type PaperGridProps = {
-    cards: Array<CardPreviewType>,
-    refreshCards: () => void,
+    cards: Array<CardPreviewType>
 }
 
-const CardsGrid = ({cards, refreshCards} : PaperGridProps) => {
+const CardsGrid = ({cards} : PaperGridProps) => {
 
     const classes = useStyles();
 
@@ -37,7 +36,7 @@ const CardsGrid = ({cards, refreshCards} : PaperGridProps) => {
                     { cardIdxs.map( (cardIndex: number) => {
                         const cardIdx = cards[cardIndex]._id ? cards[cardIndex]._id : uuid.v4();
                         if (!cardIdx) return <React.Fragment/>;
-                        return (<CardPreview card={cards[cardIndex]} key = {cardIdx} refreshCards={refreshCards}/>) })}
+                        return (<CardPreview card={cards[cardIndex]} key = {cardIdx}/>) })}
                 </Grid>
 
         )

@@ -9,11 +9,10 @@ import {CardPreview} from "./types/CardPreview";
 import axios from "axios";
 
 type NewCardFormProps = {
-    refreshCards: () => void;
     handleClose: () => void;
 }
 
-const CardForm = ({refreshCards, handleClose} : NewCardFormProps) => {
+const CardForm = ({handleClose} : NewCardFormProps) => {
     const classes = useStyles();
 
     const [cardContent, setCardContent] = useState<{title: string, authors: string, date: string, journal: string}>({title: "", authors: "", date: "", journal: ""})

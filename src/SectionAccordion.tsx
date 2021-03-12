@@ -3,13 +3,10 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-import {TextField} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import React, {useState} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {CardPreview} from "./types/CardPreview";
-import axios from "axios";
 import {EditSectionAccordion} from "./EditSectionAccordion";
 
 const useStyles = makeStyles((theme: Theme) =>

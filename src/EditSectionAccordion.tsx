@@ -3,8 +3,6 @@ import {TextField} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
-import {useDispatch} from "react-redux";
-import {cardsSlice} from "./store/slice";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

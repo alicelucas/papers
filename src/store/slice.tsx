@@ -16,8 +16,8 @@ export const titleSlice = createSlice({
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
-        update: (state, action: PayloadAction<string>) => {
-            state.title = action.payload
+        update: (state, action: PayloadAction<{title: string}>) => {
+            state.title = action.payload.title
         }
         // }
         // increment: state => {

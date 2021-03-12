@@ -3,6 +3,8 @@ import {TextField} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
+import {useDispatch} from "react-redux";
+import {titleSlice} from "./store/slice";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -22,6 +24,9 @@ type EditSectionAccordionProps = {
 
 export const EditSectionAccordion = ( { content, switchMode } : EditSectionAccordionProps) => {
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+    dispatch(titleSlice.actions.update( ({title: "An updated tittle"})))
 
     const handleSaveClick = () => {
         // const updatedCard = {

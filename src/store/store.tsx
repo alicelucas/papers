@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import {titleSlice} from "./slice";
 // ...
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
         state: titleSlice.reducer
     }

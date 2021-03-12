@@ -23,12 +23,14 @@ export default function CardPreview({card}: CardPreviewsProps) {
     const dispatch = useDispatch();
 
     const handleRemoveCard = () => {
+        if (!card._id) return;
+
         const url = "http://127.0.0.1:8000/removeCard/".concat(card._id)
         axios.delete(url).then(
             (response) => {
+                if (!card._id) return;
 
                 dispatch(cardsSlice.actions.removeCard({id: card._id} ))
-                //refreshCards();
             }
         )
     }

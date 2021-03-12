@@ -1,5 +1,5 @@
 export type CardPreview = {
-    _id: string
+    _id?: string
     authors: string,
     date: string,
     journal: string,

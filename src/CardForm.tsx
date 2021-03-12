@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {CardPreview} from "./types/CardPreview";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {cardsSlice} from "./store/slice";
 
 type NewCardFormProps = {
     handleClose: () => void;
@@ -17,23 +19,25 @@ const CardForm = ({handleClose} : NewCardFormProps) => {
 
     const [cardContent, setCardContent] = useState<{title: string, authors: string, date: string, journal: string}>({title: "", authors: "", date: "", journal: ""})
 
+    const dispatch = useDispatch();
+
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCardContent({...cardContent, [event.target.name]: event.target.value})
     }
 
     const handleAddCard = async () => {
-        // //create new card object
-        // const newCard: CardPreview = {
-        //     authors: cardContent.authors,
-        //     date: cardContent.date,
-        //     journal: cardContent.journal,
-        //     title: cardContent.title
-        // }
+        //create new card object
+        const newCard: CardPreview = {
+            authors: cardContent.authors,
+            date: cardContent.date,
+            journal: cardContent.journal,
+            title: cardContent.title
+        }
         //
-        // axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
-        //     refreshCards();
-        // }).catch( (error) => console.info(error));
-        // handleClose();
+        axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
+            dispatch(cardsSlice.actions.addCard({card: newCard}))
+        }).catch( (error) => console.info(error));
+        handleClose();
     }
 
     return (

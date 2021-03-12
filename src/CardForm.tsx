@@ -35,8 +35,7 @@ const CardForm = ({handleClose} : NewCardFormProps) => {
             _id: "" // will be overwritten by POST request
         }
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
-            console.info("id, ", response.data.id)
-            dispatch(cardsSlice.actions.addCard({card: newCard}))
+            dispatch(cardsSlice.actions.addCard({card: {...newCard, _id: response.data.id} } ))
         }).catch( (error) => console.info(error));
         handleClose();
     }

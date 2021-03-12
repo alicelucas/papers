@@ -24,7 +24,9 @@ export const cardsSlice = createSlice({
 
         },
         removeCard: (state, action: PayloadAction<{id: string}>) => {
-            // state.title = action.payload.title
+            state.cards = state.cards.filter( (card) => {
+                return (card._id !== action.payload.id)
+            })
         }
     }
 })

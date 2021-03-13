@@ -4,12 +4,14 @@ import {CardPreview} from "../types/CardPreview";
 
 // Define a type for the slice state
 interface CardsState {
-    cards: Array<CardPreview>
+    cards: Array<CardPreview>,
+    selected: string
 }
 
 // Define the initial state using that type
 const initialState: CardsState = {
-    cards: []
+    cards: [],
+    selected: ""
 }
 
 export const cardsSlice = createSlice({
@@ -27,6 +29,9 @@ export const cardsSlice = createSlice({
             state.cards = state.cards.filter( (card) => {
                 return (card._id !== action.payload.id)
             })
+        },
+        setSelectedCard: (state, action: PayloadAction<{id : string}>) => {
+            state.selected = action.payload.id;
         }
     }
 })
@@ -35,8 +40,13 @@ export const { addCard, editCard, removeCard } = cardsSlice.actions
 
 
 // @ts-ignore
-export const selectCards = (state: RootState) => {
+export const cardsSelector = (state: RootState) => {
     return state.cards.cards
+}
+export const selectedCardSelector = (state: RootState) => {
+    return state.cards.cards.filter( (card) => {
+        return (card._id === state.cards.selected)
+    })[0];
 }
 
 // // Other code such as selectors can use the imported `RootState` type

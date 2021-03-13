@@ -5,6 +5,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import {SectionAccordion} from "./SectionAccordion";
 import {CardPreview} from "./types/CardPreview";
+import {Section} from "./types/Section";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -54,10 +55,10 @@ export default function CardAccordion( {card} : CardAccordionPropsType) {
                     <Typography className={classes.heading}>{[ [card.title, card.authors].join("\n"), "\n", [card.journal, card.date].join(", ") ].join("")}</Typography>
                 </AccordionSummary>
             </Accordion>
-            <SectionAccordion content={card.sections?.why} title={"Why is this work important?"}/>
-            <SectionAccordion content={card.sections?.what} title={"What do they propose?"}/>
-            <SectionAccordion content={card.sections?.how} title={"How does it work?"}/>
-            <SectionAccordion content={card.sections?.results} title={"What are the results?"}/>
+            <SectionAccordion section={Section.Why} title={"Why is this work important?"}/>
+            <SectionAccordion section={Section.What} title={"What do they propose?"}/>
+            <SectionAccordion section={Section.How}  title={"How does it work?"}/>
+            <SectionAccordion section={Section.Results} title={"What are the results?"}/>
         </div>
     );
 }

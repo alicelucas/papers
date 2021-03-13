@@ -8,6 +8,6 @@ export type CardPreview = {
         why: string,
         what: string,
         how: string,
-        results?: string,
+        results: string,
     }
 };

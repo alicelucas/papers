@@ -34,7 +34,8 @@ export default function CardPreview({card}: CardPreviewsProps) {
     const [openCardAccordionDialog, setOpenCardAccordionDialog] = React.useState<boolean>(false)
 
     const onClick = () => {
-        setOpenCardAccordionDialog(true)
+        setOpenCardAccordionDialog(true);
+        dispatch(cardsSlice.actions.setSelectedCard({id: card._id}))
     }
 
     const handleCardAccordionDialogClose = () => {

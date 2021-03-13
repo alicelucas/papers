@@ -6,10 +6,10 @@ import AddCardButton from "./AddCardButton";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {CardPreview} from "./types/CardPreview";
 import {useDispatch, useSelector} from "react-redux";
-import {cardsSlice, selectCards} from "./store/slice";
+import {cardsSlice, cardsSelector} from "./store/slice";
 
 function App() {
-    const initialCards = useSelector(selectCards);
+    const initialCards = useSelector(cardsSelector);
 
     const dispatch = useDispatch();
 

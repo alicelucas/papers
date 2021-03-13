@@ -8,6 +8,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import React, {useState} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {EditSectionAccordion} from "./EditSectionAccordion";
+import {Section} from "./types/Section";
+import {useSelector} from "react-redux";
+import {selectedCardSelector} from "./store/slice";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -25,16 +28,20 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type SectionAccordionPropsType = {
-    title: string,
-    content?: string
+    section: Section,
+    title: string
 }
 
-export const SectionAccordion = ( {title, content}: SectionAccordionPropsType) => {
+export const SectionAccordion = ( {section, title}: SectionAccordionPropsType) => {
     const classes = useStyles();
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
     const switchMode = () => {setIsEdit(!isEdit)}
+
+    const card = useSelector(selectedCardSelector);
+
+    const content = "" //FIXME
 
 
     return (
@@ -58,7 +65,7 @@ export const SectionAccordion = ( {title, content}: SectionAccordionPropsType) =
                     </IconButton>
                 </React.Fragment>
                   )}
-                {isEdit && <EditSectionAccordion content={content} switchMode={switchMode}/> }
+                {isEdit && <EditSectionAccordion content={content} id={card._id} switchMode={switchMode}/> }
             </AccordionDetails>
         </Accordion>
     )

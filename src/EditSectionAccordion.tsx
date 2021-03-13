@@ -16,17 +16,19 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type EditSectionAccordionProps = {
-    content?: string,
+    content: string,
+    id: string,
     switchMode: () => void;
 }
 
-export const EditSectionAccordion = ( { content, switchMode } : EditSectionAccordionProps) => {
+export const EditSectionAccordion = ( { content, id, switchMode } : EditSectionAccordionProps) => {
     const classes = useStyles();
 
     // const dispatch = useDispatch();
     // dispatch(titleSlice.actions.update( ({title: "An updated tittle"})))
 
     const handleSaveClick = () => {
+        console.info(id)
         // const updatedCard = {
         //
         // }

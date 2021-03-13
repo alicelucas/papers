@@ -17,23 +17,26 @@ type NewCardFormProps = {
 const CardForm = ({handleClose} : NewCardFormProps) => {
     const classes = useStyles();
 
-    const [cardContent, setCardContent] = useState<{title: string, authors: string, date: string, journal: string}>({title: "", authors: "", date: "", journal: ""})
+    const [newCard, setNewCard] = useState<CardPreview>({title: "", authors: "", date: "", journal: "", _id: "",
+        sections: {
+            why: "",
+            what: "",
+            how: "",
+            results: "",
+        }});
 
     const dispatch = useDispatch();
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setCardContent({...cardContent, [event.target.name]: event.target.value})
+        if (event.target.name === "what" || event.target.name === "why" || event.target.name === "how" || event.target.name === "results") {
+            const newSections = {...newCard.sections, [event.target.name]: event.target.value};
+            setNewCard({...newCard, sections: newSections});
+        } else {
+            setNewCard({...newCard, [event.target.name]: event.target.value})
+        }
     }
 
     const handleAddCard = async () => {
-        //create new card object
-        const newCard: CardPreview = {
-            authors: cardContent.authors,
-            date: cardContent.date,
-            journal: cardContent.journal,
-            title: cardContent.title,
-            _id: "" // will be overwritten by POST request
-        }
         axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
             dispatch(cardsSlice.actions.addCard({card: {...newCard, _id: response.data.id} } ))
         }).catch( (error) => console.info(error));
@@ -54,7 +57,19 @@ const CardForm = ({handleClose} : NewCardFormProps) => {
                         <TextField fullWidth id="standard-basic" label="Title" name="title" onChange={handleTextChange}/>
                     </div>
                     <div>
-                        <TextField fullWidth id="standard-basic" label="Authors" onChange={handleTextChange}  name="authors" multiline rows={4}/>
+                        <TextField fullWidth id="standard-basic" label="Authors" onChange={handleTextChange}  name="authors"/>
+                    </div>
+                    <div>
+                        <TextField fullWidth id="standard-basic" label="Why is this work important?" onChange={handleTextChange}  name="why" multiline rows={4}/>
+                    </div>
+                    <div>
+                        <TextField fullWidth id="standard-basic" label="What do they propose?" onChange={handleTextChange}  name="what" multiline rows={4}/>
+                    </div>
+                    <div>
+                        <TextField fullWidth id="standard-basic" label="How does it work?" onChange={handleTextChange}  name="how" multiline rows={4}/>
+                    </div>
+                    <div>
+                        <TextField fullWidth id="standard-basic" label="What are the results" onChange={handleTextChange}  name="results" multiline rows={4}/>
                     </div>
                 </form>
                 <Box paddingTop={1}>

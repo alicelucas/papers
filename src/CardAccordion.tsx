@@ -55,10 +55,10 @@ export default function CardAccordion( {card} : CardAccordionPropsType) {
                     <Typography className={classes.heading}>{[ [card.title, card.authors].join("\n"), "\n", [card.journal, card.date].join(", ") ].join("")}</Typography>
                 </AccordionSummary>
             </Accordion>
-            <SectionAccordion section={Section.Why} title={"Why is this work important?"}/>
-            <SectionAccordion section={Section.What} title={"What do they propose?"}/>
-            <SectionAccordion section={Section.How}  title={"How does it work?"}/>
-            <SectionAccordion section={Section.Results} title={"What are the results?"}/>
+            <SectionAccordion section={Section.Why}/>
+            <SectionAccordion section={Section.What} />
+            <SectionAccordion section={Section.How}  />
+            <SectionAccordion section={Section.Results} />
         </div>
     );
 }

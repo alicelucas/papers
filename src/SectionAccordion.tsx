@@ -28,11 +28,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type SectionAccordionPropsType = {
-    section: Section,
-    title: string
+    section: Section
 }
 
-export const SectionAccordion = ( {section, title}: SectionAccordionPropsType) => {
+export const SectionAccordion = ( {section}: SectionAccordionPropsType) => {
     const classes = useStyles();
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -41,8 +40,28 @@ export const SectionAccordion = ( {section, title}: SectionAccordionPropsType) =
 
     const card = useSelector(selectedCardSelector);
 
-    const content = "" //FIXME
+    let content = "", title = "";
 
+    switch(section) {
+        case Section.Why:
+            content = card.sections.why;
+            title = "Why is this work important?";
+            break;
+        case Section.What:
+            content = card.sections.what;
+            title = "What do they propose?";
+            break;
+        case Section.How:
+            content = card.sections.how;
+            title = "How does it work?";
+            break;
+        case Section.Results:
+            content = card.sections.results;
+            title = "What are the results?";
+            break;
+        default:
+            break;
+    }
 
     return (
         <Accordion>

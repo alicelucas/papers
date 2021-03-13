@@ -11,6 +11,7 @@ import {EditSectionAccordion} from "./EditSectionAccordion";
 import {Section} from "./types/Section";
 import {useSelector} from "react-redux";
 import {selectedCardSelector} from "./store/slice";
+import {SectionAccordionDetails} from "./SectionAccordionDetails";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,29 +35,19 @@ type SectionAccordionPropsType = {
 export const SectionAccordion = ( {section}: SectionAccordionPropsType) => {
     const classes = useStyles();
 
-    const [isEdit, setIsEdit] = useState<boolean>(false);
-
-    const switchMode = () => {setIsEdit(!isEdit)}
-
-    const card = useSelector(selectedCardSelector);
-
-    let content = "", title = "";
+    let title = "";
 
     switch(section) {
         case Section.Why:
-            content = card.sections.why;
             title = "Why is this work important?";
             break;
         case Section.What:
-            content = card.sections.what;
             title = "What do they propose?";
             break;
         case Section.How:
-            content = card.sections.how;
             title = "How does it work?";
             break;
         case Section.Results:
-            content = card.sections.results;
             title = "What are the results?";
             break;
         default:
@@ -73,19 +64,8 @@ export const SectionAccordion = ( {section}: SectionAccordionPropsType) => {
                 <Typography className={classes.heading}>{title}</Typography>
             </AccordionSummary>
 
-            <AccordionDetails>
-                {!isEdit &&
-                (<React.Fragment>
-                    <Typography className={classes.text}>
-                        {content}
-                    </Typography>
-                    <IconButton onClick={switchMode}>
-                        <EditIcon />
-                    </IconButton>
-                </React.Fragment>
-                  )}
-                {isEdit && <EditSectionAccordion content={content} id={card._id} switchMode={switchMode}/> }
-            </AccordionDetails>
+            <SectionAccordionDetails section={section}/>
+
         </Accordion>
     )
 }

@@ -2,15 +2,9 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import React, {useState} from "react";
+import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {EditSectionAccordion} from "./EditSectionAccordion";
 import {Section} from "./types/Section";
-import {useSelector} from "react-redux";
-import {selectedCardSelector} from "./store/slice";
 import {SectionAccordionDetails} from "./SectionAccordionDetails";
 
 const useStyles = makeStyles((theme: Theme) =>

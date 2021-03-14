@@ -3,9 +3,9 @@ import {createStyles, makeStyles, Theme} from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
-import {SectionAccordion} from "./SectionAccordion";
-import {CardPreview} from "./types/CardPreview";
-import {Section} from "./types/Section";
+import {SectionAccordion} from "../SectionAccordion/SectionAccordion";
+import {CardPreview} from "../../types/CardPreview";
+import {Section} from "../../types/Section";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

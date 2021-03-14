@@ -5,9 +5,9 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import {EditSectionAccordion} from "./EditSectionAccordion";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Section} from "./types/Section";
+import {Section} from "../../types/Section";
 import {useSelector} from "react-redux";
-import {selectedCardSelector} from "./store/slice";
+import {selectedCardSelector} from "../../store/slice";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

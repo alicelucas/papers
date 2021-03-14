@@ -4,7 +4,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Section} from "./types/Section";
+import {Section} from "../../types/Section";
 import {SectionAccordionDetails} from "./SectionAccordionDetails";
 
 const useStyles = makeStyles((theme: Theme) =>

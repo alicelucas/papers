@@ -2,7 +2,7 @@ import {Dialog} from "@material-ui/core";
 import React from "react";
 import CardAccordion from "./CardAccordion";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {CardPreview} from "./types/CardPreview";
+import {CardPreview} from "../../types/CardPreview";
 
 const useStyles = makeStyles({
     dialog: {

@@ -4,14 +4,14 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import useStyles from "./Card.css";
+import useStyles from "../../Card.css";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-import {RemoveCardButton} from "./RemoveCardButton";
-import {CardAccordionDialog} from "./CardAccordionDialog";
-import {CardPreview as CardPreviewType} from "./types/CardPreview";
+import {RemoveCardButton} from "../Buttons/RemoveCardButton";
+import {CardAccordionDialog} from "../CardAccordion/CardAccordionDialog";
+import {CardPreview as CardPreviewType} from "../../types/CardPreview";
 import {useDispatch} from "react-redux";
-import {cardsSlice} from "./store/slice";
+import {cardsSlice} from "../../store/slice";
 
 type CardPreviewsProps = {
     card: CardPreviewType

@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
-import CardsGrid from "./CardsGrid";
-import AddCardButton from "./AddCardButton";
+import CardsGrid from "./components/Main/CardsGrid";
+import AddCardButton from "./components/Buttons/AddCardButton";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {CardPreview} from "./types/CardPreview";
 import {useDispatch, useSelector} from "react-redux";

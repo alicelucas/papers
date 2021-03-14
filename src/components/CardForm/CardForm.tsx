@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import {CardContent} from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
-import useStyles from "./Card.css";
+import useStyles from "../../Card.css";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import {CardPreview} from "./types/CardPreview";
+import {CardPreview} from "../../types/CardPreview";
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {cardsSlice} from "./store/slice";
+import {cardsSlice} from "../../store/slice";
 
 type NewCardFormProps = {
     handleClose: () => void;

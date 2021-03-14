@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import {RemoveCardButton} from "../Buttons/RemoveCardButton";
 import {CardAccordionDialog} from "../CardAccordion/CardAccordionDialog";
-import {CardPreview as CardPreviewType} from "../../types/CardPreview";
+import {Card as CardPreviewType} from "../../types/Card";
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "../../store/slice";
 

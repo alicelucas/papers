@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from "./store"
-import {CardPreview} from "../types/CardPreview";
+import {Card} from "../types/Card";
 
 // Define a type for the slice state
 interface CardsState {
-    cards: Array<CardPreview>,
+    cards: Array<Card>,
     selected: string
 }
 
@@ -19,10 +19,10 @@ export const cardsSlice = createSlice({
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
-        addCard: (state, action: PayloadAction<{card: CardPreview}>) => {
+        addCard: (state, action: PayloadAction<{card: Card}>) => {
             state.cards.push(action.payload.card);
         },
-        editCard: (state, action: PayloadAction<{card: CardPreview}>) => {
+        editCard: (state, action: PayloadAction<{card: Card}>) => {
 
         },
         removeCard: (state, action: PayloadAction<{id: string}>) => {

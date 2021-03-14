@@ -4,7 +4,7 @@ import {Container} from "@material-ui/core";
 import CardsGrid from "./components/Main/CardsGrid";
 import AddCardButton from "./components/Buttons/AddCardButton";
 import axios, {AxiosError, AxiosResponse} from "axios";
-import {CardPreview} from "./types/CardPreview";
+import {Card} from "./types/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, cardsSelector} from "./store/slice";
 
@@ -15,7 +15,7 @@ function App() {
 
     const fetchAndUpdateCards = () => {
         axios.get("http://127.0.0.1:8000").then( (response: AxiosResponse) => {
-            response.data.forEach( (card: CardPreview) => {dispatch(cardsSlice.actions.addCard({card: card}))})
+            response.data.forEach( (card: Card) => {dispatch(cardsSlice.actions.addCard({card: card}))})
         })
             .catch( (error: AxiosError) => {console.log(error)})
     }

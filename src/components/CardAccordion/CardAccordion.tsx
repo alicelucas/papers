@@ -4,7 +4,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import {SectionAccordion} from "../SectionAccordion/SectionAccordion";
-import {CardPreview} from "../../types/CardPreview";
+import {Card} from "../../types/Card";
 import {Section} from "../../types/Section";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type CardAccordionPropsType = {
-  card: CardPreview
+  card: Card
 }
 
 export default function CardAccordion( {card} : CardAccordionPropsType) {

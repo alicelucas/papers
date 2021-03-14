@@ -2,7 +2,7 @@ import {Dialog} from "@material-ui/core";
 import React from "react";
 import CardAccordion from "./CardAccordion";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {CardPreview} from "../../types/CardPreview";
+import {Card} from "../../types/Card";
 
 const useStyles = makeStyles({
     dialog: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
 });
 
 type CardAccordionDialogProps = {
-    card: CardPreview,
+    card: Card,
     handleClose: () => void;
     open: boolean
 }

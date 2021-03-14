@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import useStyles from "../../Card.css";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
-import {CardPreview} from "../../types/CardPreview";
+import {Card as CardType} from "../../types/Card";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "../../store/slice";
@@ -17,7 +17,7 @@ type NewCardFormProps = {
 const CardForm = ({handleClose} : NewCardFormProps) => {
     const classes = useStyles();
 
-    const [newCard, setNewCard] = useState<CardPreview>({title: "", authors: "", date: "", journal: "", _id: "",
+    const [newCard, setNewCard] = useState<CardType>({title: "", authors: "", date: "", journal: "", _id: "",
         sections: {
             why: "",
             what: "",

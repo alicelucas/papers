@@ -1,4 +1,4 @@
-export type CardPreview = {
+export type Card = {
     _id: string
     authors: string,
     date: string,

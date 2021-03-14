@@ -9,7 +9,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import {SavedSectionAccordion} from "./SavedSectionAccordion";
 import {EditSectionAccordion} from "./EditSectionAccordion";
 import {useDispatch, useSelector} from "react-redux";
-import {selectedCardSelector, selectedSectionSelector} from "../../store/slice";
+import {selectedCardSelector, selectedSectionContentSelector} from "../../store/slice";
 import {sectionTitles} from "../../types/SectionTitles";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -35,13 +35,11 @@ type SectionAccordionPropsType = {
 export const SectionAccordion = ( {onClick, title} : SectionAccordionPropsType) => {
     const classes = useStyles();
 
-    const content = useSelector(selectedSectionSelector);
+    const content = useSelector(selectedSectionContentSelector);
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
     const onSwitch = () => {setIsEdit(!isEdit)}
-
-    const card = useSelector(selectedCardSelector);
 
     return (
         <Accordion onClick={onClick}>
@@ -55,7 +53,7 @@ export const SectionAccordion = ( {onClick, title} : SectionAccordionPropsType) 
 
             <AccordionDetails>
                 {!isEdit && <SavedSectionAccordion content={content} onSwitch={onSwitch}/>}
-                {isEdit && <EditSectionAccordion content={content} id={card._id} onSwitch={onSwitch}/> }
+                {isEdit && <EditSectionAccordion content={content} onSwitch={onSwitch}/> }
             </AccordionDetails>
 
         </Accordion>

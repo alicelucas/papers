@@ -54,11 +54,11 @@ export const selectedCardSelector = (state: RootState) => {
         return (card._id === state.cards.selectedCard)
     })[0];
 }
-export const sectionSelector = (state: RootState) => {
+export const selectedSectionSelector = (state: RootState) => {
     return state.cards.selectedSection;
 }
 
-export const selectedSectionSelector = (state: RootState) => {
+export const selectedSectionContentSelector = (state: RootState) => {
     const selectedCard = state.cards.cards.filter( (card) => {
         return (card._id === state.cards.selectedCard)
     })[0]

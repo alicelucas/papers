@@ -32,23 +32,6 @@ export default function CardAccordion( {card} : CardAccordionPropsType) {
 
     const dispatch  = useDispatch();
 
-    // const handleEditCard = async (newSection) => {
-    //     const newCard: CardPreview = {
-    //
-    //     }
-        // create new card object
-        // const newCard: CardPreview = {
-        //     authors: cardContent.authors,
-        //     date: cardContent.date,
-        //     journal: cardContent.journal,
-        //     title: cardContent.title
-        // }
-        //
-        // axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
-        //     refreshCards();
-        // }).catch( (error) => console.info(error));
-
-    // }
     const onSectionClick = ( section: Section) => {
         dispatch(cardsSlice.actions.setSelectedSection( {section: section }))
     }

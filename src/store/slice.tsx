@@ -33,39 +33,24 @@ export const cardsSlice = createSlice({
                     return (card._id !== action.payload.id)
                 })
             },
+            replaceSelectedCard: (state, action: PayloadAction<{ card: Card}>) => {
+                state.cards = state.cards.map( (card) => {
+                    if (card._id !== state.selectedCard) return card;
+                    else return action.payload.card;
+                })
+
+            },
             setSelectedCard: (state, action: PayloadAction<{ id: string }>) => {
                 state.selectedCard = action.payload.id;
             },
             setSelectedSection: (state, action: PayloadAction<{ section: Section }>) => {
                 state.selectedSection = action.payload.section;
-            },
-            replaceSelectedSection: (state, action: PayloadAction<{ content: string }>) => {
-                state.cards.forEach( (card) => {
-                        if (card._id !== state.selectedCard) return;
-                        switch (state.selectedSection) {
-                            case Section.Why:
-                                card.sections.why = action.payload.content;
-                                break;
-                            case Section.What:
-                                card.sections.what = action.payload.content;
-                                break;
-                            case Section.How:
-                                card.sections.how = action.payload.content;
-                                break;
-                            case Section.Results:
-                                card.sections.results = action.payload.content;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                )
             }
         }
     }
 )
 
-export const { addCard, editCard, removeCard } = cardsSlice.actions
+export const { addCard, editCard, removeCard, replaceSelectedCard, setSelectedCard, setSelectedSection } = cardsSlice.actions
 
 
 // @ts-ignore

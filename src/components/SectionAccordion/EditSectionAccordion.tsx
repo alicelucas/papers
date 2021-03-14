@@ -11,6 +11,9 @@ import {
     selectedSectionSelector
 } from "../../store/slice";
 import {Card} from "../../types/Card";
+import axios from "axios";
+import {PayloadAction} from "@reduxjs/toolkit";
+import {Section} from "../../types/Section";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -38,35 +41,31 @@ export const EditSectionAccordion = ( { content, onSwitch } : EditSectionAccordi
 
     const [edittedContent, setEdittedContent] = useState<string>(content);
 
-    // const handleEditCard = async (newSection) => {
-    //     const newCard: CardPreview = {
-    //
-    //     }
-    // create new card object
-    // const newCard: CardPreview = {
-    //     authors: cardContent.authors,
-    //     date: cardContent.date,
-    //     journal: cardContent.journal,
-    //     title: cardContent.title
-    // }
-    //
-    // axios.post("http://127.0.0.1:8000/addCard", newCard).then( (response) => {
-    //     refreshCards();
-    // }).catch( (error) => console.info(error));
-
-    // }
+    const replaceSection = () => {
+        switch (selectedSection) {
+            case Section.Why:
+                return {...selectedCard.sections, why: edittedContent };
+            case Section.What:
+                return {...selectedCard.sections, what: edittedContent };
+            case Section.How:
+                return {...selectedCard.sections, how: edittedContent };
+            case Section.Results:
+                return {...selectedCard.sections, results: edittedContent };
+            default:
+                return selectedCard.sections;
+        }
+    }
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
         setEdittedContent(event.target.value)
     }
 
     const handleSaveClick = () => {
-        // const selectedContent = selectedCard.sections;
-        console.info(edittedContent);
-        dispatch(cardsSlice.actions.replaceSelectedSection({content: edittedContent}))
-
-        // console.info(selectedCard._id)
-        // console.info(selectedSection)
+        const updatedSections = replaceSection();
+        const updatedCard = {...selectedCard, sections: updatedSections};
+        axios.post("http://127.0.0.1:8000/replaceCard", updatedCard).then( (response) => {
+            dispatch(cardsSlice.actions.replaceSelectedCard({card: updatedCard}));
+        });
         onSwitch();
     }
 

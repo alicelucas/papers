@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
 type EditSectionAccordionProps = {
     content: string,
     id: string,
-    switchMode: () => void;
+    onSwitch: () => void;
 }
 
-export const EditSectionAccordion = ( { content, id, switchMode } : EditSectionAccordionProps) => {
+export const EditSectionAccordion = ( { content, id, onSwitch } : EditSectionAccordionProps) => {
     const classes = useStyles();
 
     // const dispatch = useDispatch();
@@ -29,10 +29,7 @@ export const EditSectionAccordion = ( { content, id, switchMode } : EditSectionA
 
     const handleSaveClick = () => {
         console.info(id)
-        // const updatedCard = {
-        //
-        // }
-        switchMode();
+        onSwitch();
     }
 
     return (

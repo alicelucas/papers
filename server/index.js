@@ -39,7 +39,19 @@ app.post("/addCard", (req, res) => {
   }).catch((err) => {
     return res.sendStatus(400);
   });
-})
+});
+
+app.post( "/replaceCard", (req, res) => {
+  Cards.findOneAndUpdate( {
+    _id: req.body._id
+  }, {sections: req.body.sections}, (err) => {
+    if (err) console.info(err);
+  } ).then( () => {
+    return res.sendStatus(200);
+  }).catch( () => {
+    return res.sendStatus(400);
+  })
+});
 
 app.delete("/removeCard/:id", (req, res) => {
   Cards.findByIdAndDelete(req.params.id, (err, card) => {
@@ -53,7 +65,7 @@ app.delete("/removeCard/:id", (req, res) => {
         console.info(err);
         return res.sendStatus(400);
       });
-})
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)

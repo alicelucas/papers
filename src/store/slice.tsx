@@ -18,29 +18,52 @@ const initialState: CardsState = {
 }
 
 export const cardsSlice = createSlice({
-    name: 'cards',
-    // `createSlice` will infer the state type from the `initialState` argument
-    initialState,
-    reducers: {
-        addCard: (state, action: PayloadAction<{card: Card}>) => {
-            state.cards.push(action.payload.card);
-        },
-        editCard: (state, action: PayloadAction<{card: Card}>) => {
+        name: 'cards',
+        // `createSlice` will infer the state type from the `initialState` argument
+        initialState,
+        reducers: {
+            addCard: (state, action: PayloadAction<{ card: Card }>) => {
+                state.cards.push(action.payload.card);
+            },
+            editCard: (state, action: PayloadAction<{ card: Card }>) => {
 
-        },
-        removeCard: (state, action: PayloadAction<{id: string}>) => {
-            state.cards = state.cards.filter( (card) => {
-                return (card._id !== action.payload.id)
-            })
-        },
-        setSelectedCard: (state, action: PayloadAction<{id : string}>) => {
-            state.selectedCard = action.payload.id;
-        },
-        setSelectedSection: (state, action: PayloadAction<{section: Section}>) => {
-            state.selectedSection = action.payload.section;
+            },
+            removeCard: (state, action: PayloadAction<{ id: string }>) => {
+                state.cards = state.cards.filter((card) => {
+                    return (card._id !== action.payload.id)
+                })
+            },
+            setSelectedCard: (state, action: PayloadAction<{ id: string }>) => {
+                state.selectedCard = action.payload.id;
+            },
+            setSelectedSection: (state, action: PayloadAction<{ section: Section }>) => {
+                state.selectedSection = action.payload.section;
+            },
+            replaceSelectedSection: (state, action: PayloadAction<{ content: string }>) => {
+                state.cards.forEach( (card) => {
+                        if (card._id !== state.selectedCard) return;
+                        switch (state.selectedSection) {
+                            case Section.Why:
+                                card.sections.why = action.payload.content;
+                                break;
+                            case Section.What:
+                                card.sections.what = action.payload.content;
+                                break;
+                            case Section.How:
+                                card.sections.how = action.payload.content;
+                                break;
+                            case Section.Results:
+                                card.sections.results = action.payload.content;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                )
+            }
         }
     }
-})
+)
 
 export const { addCard, editCard, removeCard } = cardsSlice.actions
 

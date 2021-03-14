@@ -3,8 +3,13 @@ import {TextField} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
-import {useSelector} from "react-redux";
-import {selectedCardSelector, selectedSectionContentSelector, selectedSectionSelector} from "../../store/slice";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    cardsSlice,
+    selectedCardSelector,
+    selectedSectionContentSelector,
+    selectedSectionSelector
+} from "../../store/slice";
 import {Card} from "../../types/Card";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,6 +30,8 @@ type EditSectionAccordionProps = {
 
 export const EditSectionAccordion = ( { content, onSwitch } : EditSectionAccordionProps) => {
     const classes = useStyles();
+
+    const dispatch = useDispatch();
 
     const selectedCard = useSelector(selectedCardSelector);
     const selectedSection = useSelector(selectedSectionSelector);
@@ -56,6 +63,8 @@ export const EditSectionAccordion = ( { content, onSwitch } : EditSectionAccordi
     const handleSaveClick = () => {
         // const selectedContent = selectedCard.sections;
         console.info(edittedContent);
+        dispatch(cardsSlice.actions.replaceSelectedSection({content: edittedContent}))
+
         // console.info(selectedCard._id)
         // console.info(selectedSection)
         onSwitch();

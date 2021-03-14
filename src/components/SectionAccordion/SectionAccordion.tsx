@@ -4,13 +4,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 import React, {useState} from "react";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import {Section} from "../../types/Section";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import {SavedSectionAccordion} from "./SavedSectionAccordion";
 import {EditSectionAccordion} from "./EditSectionAccordion";
-import {useDispatch, useSelector} from "react-redux";
-import {selectedCardSelector, selectedSectionContentSelector} from "../../store/slice";
-import {sectionTitles} from "../../types/SectionTitles";
+import {useSelector} from "react-redux";
+import {selectedSectionContentSelector} from "../../store/slice";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

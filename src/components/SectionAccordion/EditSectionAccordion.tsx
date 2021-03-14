@@ -4,15 +4,8 @@ import IconButton from "@material-ui/core/IconButton";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
 import {useDispatch, useSelector} from "react-redux";
-import {
-    cardsSlice,
-    selectedCardSelector,
-    selectedSectionContentSelector,
-    selectedSectionSelector
-} from "../../store/slice";
-import {Card} from "../../types/Card";
+import {cardsSlice, selectedCardSelector, selectedSectionSelector} from "../../store/slice";
 import axios from "axios";
-import {PayloadAction} from "@reduxjs/toolkit";
 import {Section} from "../../types/Section";
 
 const useStyles = makeStyles((theme: Theme) =>

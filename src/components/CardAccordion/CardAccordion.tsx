@@ -64,9 +64,9 @@ export default function CardAccordion( {card} : CardAccordionPropsType) {
                 </AccordionSummary>
             </Accordion>
             <SectionAccordion onClick={() => {onSectionClick(Section.Why)}} title={sectionTitles.Why}/>
-            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}}  title={sectionTitles.What}/>
-            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}}  title={sectionTitles.How} />
-            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}}  title={sectionTitles.Results}/>
+            <SectionAccordion onClick={() => {onSectionClick(Section.What)}}  title={sectionTitles.What}/>
+            <SectionAccordion onClick={() => {onSectionClick(Section.How)}}  title={sectionTitles.How} />
+            <SectionAccordion onClick={() => {onSectionClick(Section.Results)}}  title={sectionTitles.Results}/>
         </div>
     );
 }

@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import {SectionAccordion} from "../SectionAccordion/SectionAccordion";
 import {Card} from "../../types/Card";
 import {Section} from "../../types/Section";
+import {useDispatch} from "react-redux";
+import {cardsSlice} from "../../store/slice";
+import {sectionTitles} from "../../types/SectionTitles";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,6 +30,8 @@ type CardAccordionPropsType = {
 export default function CardAccordion( {card} : CardAccordionPropsType) {
     const classes = useStyles();
 
+    const dispatch  = useDispatch();
+
     // const handleEditCard = async (newSection) => {
     //     const newCard: CardPreview = {
     //
@@ -44,6 +49,9 @@ export default function CardAccordion( {card} : CardAccordionPropsType) {
         // }).catch( (error) => console.info(error));
 
     // }
+    const onSectionClick = ( section: Section) => {
+        dispatch(cardsSlice.actions.setSelectedSection( {section: section }))
+    }
 
     return (
         <div className={classes.root}>
@@ -55,10 +63,10 @@ export default function CardAccordion( {card} : CardAccordionPropsType) {
                     <Typography className={classes.heading}>{[ [card.title, card.authors].join("\n"), "\n", [card.journal, card.date].join(", ") ].join("")}</Typography>
                 </AccordionSummary>
             </Accordion>
-            <SectionAccordion section={Section.Why}/>
-            <SectionAccordion section={Section.What} />
-            <SectionAccordion section={Section.How}  />
-            <SectionAccordion section={Section.Results} />
+            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}} title={sectionTitles.Why}/>
+            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}}  title={sectionTitles.What}/>
+            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}}  title={sectionTitles.How} />
+            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}}  title={sectionTitles.Results}/>
         </div>
     );
 }

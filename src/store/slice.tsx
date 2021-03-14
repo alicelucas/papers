@@ -1,17 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from "./store"
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {RootState} from "./store"
 import {Card} from "../types/Card";
+import {Section} from "../types/Section";
 
 // Define a type for the slice state
 interface CardsState {
     cards: Array<Card>,
-    selected: string
+    selectedCard: string,
+    selectedSection: Section,
 }
 
 // Define the initial state using that type
 const initialState: CardsState = {
     cards: [],
-    selected: ""
+    selectedCard: "",
+    selectedSection: Section.Why
 }
 
 export const cardsSlice = createSlice({
@@ -31,7 +34,10 @@ export const cardsSlice = createSlice({
             })
         },
         setSelectedCard: (state, action: PayloadAction<{id : string}>) => {
-            state.selected = action.payload.id;
+            state.selectedCard = action.payload.id;
+        },
+        setSelectedSection: (state, action: PayloadAction<{section: Section}>) => {
+            state.selectedSection = action.payload.section;
         }
     }
 })
@@ -45,8 +51,29 @@ export const cardsSelector = (state: RootState) => {
 }
 export const selectedCardSelector = (state: RootState) => {
     return state.cards.cards.filter( (card) => {
-        return (card._id === state.cards.selected)
+        return (card._id === state.cards.selectedCard)
     })[0];
+}
+export const sectionSelector = (state: RootState) => {
+    return state.cards.selectedSection;
+}
+
+export const selectedSectionSelector = (state: RootState) => {
+    const selectedCard = state.cards.cards.filter( (card) => {
+        return (card._id === state.cards.selectedCard)
+    })[0]
+    switch(state.cards.selectedSection) {
+        case Section.Why:
+            return selectedCard.sections.why;
+        case Section.What:
+            return selectedCard.sections.what;
+        case Section.How:
+            return selectedCard.sections.how;
+        case Section.Results:
+            return selectedCard.sections.results;
+        default:
+            return "";
+    }
 }
 
 // // Other code such as selectors can use the imported `RootState` type

@@ -8,8 +8,9 @@ import {Section} from "../../types/Section";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import {SavedSectionAccordion} from "./SavedSectionAccordion";
 import {EditSectionAccordion} from "./EditSectionAccordion";
-import {useSelector} from "react-redux";
-import {selectedCardSelector} from "../../store/slice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectedCardSelector, selectedSectionSelector} from "../../store/slice";
+import {sectionTitles} from "../../types/SectionTitles";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,11 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type SectionAccordionPropsType = {
-    section: Section
+    onClick: () => void,
+    title: string
 }
 
-export const SectionAccordion = ( {section}: SectionAccordionPropsType) => {
+export const SectionAccordion = ( {onClick, title} : SectionAccordionPropsType) => {
     const classes = useStyles();
+
+    const content = useSelector(selectedSectionSelector);
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -39,31 +43,8 @@ export const SectionAccordion = ( {section}: SectionAccordionPropsType) => {
 
     const card = useSelector(selectedCardSelector);
 
-    let content = "", title = "";
-
-    switch(section) {
-        case Section.Why:
-            content = card.sections.why;
-            title = "Why is this work important?";
-            break;
-        case Section.What:
-            content = card.sections.what;
-            title = "What do they propose?";
-            break;
-        case Section.How:
-            content = card.sections.how;
-            title = "How does it work?";
-            break;
-        case Section.Results:
-            content = card.sections.results;
-            title = "What are the results?";
-            break;
-        default:
-            break;
-    }
-
     return (
-        <Accordion>
+        <Accordion onClick={onClick}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"

@@ -27,7 +27,7 @@ function App() {
       <Container maxWidth="lg">
           <CardsGrid/>
           <AddCardButton/>
-          {/*<OutlinedCard/>*/}
+          <OutlinedCard/>
       </Container>
   );
 }

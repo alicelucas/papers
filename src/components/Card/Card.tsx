@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {CardHeader} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -11,6 +10,14 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 const useStyles = makeStyles({
+    action: {
+      justifyContent: "space-between"
+    },
+    body: {
+      marginLeft: 20,
+        marginRight: 20,
+        whiteSpace: 'pre-line'
+    },
     header: {
       backgroundColor: "#6573c3"
     },
@@ -19,6 +26,8 @@ const useStyles = makeStyles({
     },
     icon: {
         color: "#6573c3",
+        marginRight: "10px",
+        marginLeft: "10px"
     },
     title: {
         fontSize: 14,
@@ -36,18 +45,26 @@ export default function OutlinedCard() {
 
     return (
         <Card className={classes.root} variant="outlined">
-            <CardHeader className={classes.header} title={"Title"} subheader={"Authors here"}/>
+            <CardHeader className={classes.header} title={"Title"} subheader={"Authors here and journal and date"}/>
             <CardContent>
                 <Typography className={classes.pos} variant="h6" component="h2">
                     Why is this work important?
                 </Typography>
-                <Typography variant="body1" component="p">
-                    It is important because...
+                <Typography align={"justify"} className={classes.body} >
+                    The contrastive learning idea (of making representations of an image agree with each other)
+                    is not new; it dates back to a Becker & Hintor paper in 1992. But previously proposed contrastive
+                    learning requires specialized architecture or a memory bank. \n
+
+                    This new framework removes the need
+                    for that. They spell out the necessary elements for having a successful simple contrastive learning
+                    procedure.
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.action}>
                 <IconButton className={classes.icon}>
                     <ArrowBackIcon fontSize={"large"}/>
+                </IconButton>
+                <IconButton className={classes.icon}>
                     <ArrowForwardIcon fontSize={"large"}/>
                 </IconButton>
             </CardActions>

@@ -16,12 +16,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type SavedSectionAccordionProps = {
-    content: string
+    content: string;
+    isEdit: boolean;
     onSwitch: () => void;
 }
 
-export const SavedSectionAccordion = ({content, onSwitch} : SavedSectionAccordionProps) => {
+export const SavedSectionAccordion = ({content, isEdit, onSwitch} : SavedSectionAccordionProps) => {
     const classes = useStyles();
+
+    if (isEdit) return <React.Fragment/>;
+
 
     return (<React.Fragment>
             <Typography className={classes.text}>

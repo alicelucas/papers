@@ -21,10 +21,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type EditSectionAccordionProps = {
     content: string,
+    isEdit: boolean,
     onSwitch: () => void;
 }
 
-export const EditSectionAccordion = ( { content, onSwitch } : EditSectionAccordionProps) => {
+export const EditSectionAccordion = ( { content, isEdit, onSwitch } : EditSectionAccordionProps) => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
@@ -33,6 +34,8 @@ export const EditSectionAccordion = ( { content, onSwitch } : EditSectionAccordi
     const selectedSection = useSelector(selectedSectionSelector);
 
     const [edittedContent, setEdittedContent] = useState<string>(content);
+
+    if (!isEdit) return <React.Fragment/>;
 
     const replaceSection = () => {
         switch (selectedSection) {

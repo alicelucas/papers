@@ -50,8 +50,8 @@ export const SectionAccordion = ( {onClick, title} : SectionAccordionPropsType) 
             </AccordionSummary>
 
             <AccordionDetails>
-                {!isEdit && <SavedSectionAccordion content={content} onSwitch={onSwitch}/>}
-                {isEdit && <EditSectionAccordion content={content} onSwitch={onSwitch}/> }
+                <SavedSectionAccordion content={content} isEdit={isEdit} onSwitch={onSwitch}/>
+                <EditSectionAccordion content={content} isEdit={isEdit} onSwitch={onSwitch}/>
             </AccordionDetails>
 
         </Accordion>

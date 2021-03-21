@@ -5,6 +5,8 @@ import CardPreview from "../CardPreview/CardPreview";
 import * as _ from "lodash"
 import {Card as CardPreviewType} from "../../types/Card";
 import * as uuid from "uuid";
+import {useSelector} from "react-redux";
+import {cardsSelector} from "../../store/slice";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,13 +19,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-type PaperGridProps = {
-    cards: Array<CardPreviewType>
-}
-
-const CardsGrid = ({cards} : PaperGridProps) => {
+const CardsGrid = () => {
 
     const classes = useStyles();
+
+    const cards = useSelector(cardsSelector);
 
     const cardsPerRow = 3; // number of cards you'd like to see in a row
 

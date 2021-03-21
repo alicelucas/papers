@@ -9,8 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, cardsSelector} from "./store/slice";
 
 function App() {
-    const initialCards = useSelector(cardsSelector);
-
     const dispatch = useDispatch();
 
     const fetchAndUpdateCards = () => {
@@ -26,7 +24,7 @@ function App() {
 
     return (
       <Container maxWidth="lg">
-          <CardsGrid cards={initialCards}/>
+          <CardsGrid/>
           <AddCardButton/>
       </Container>
   );

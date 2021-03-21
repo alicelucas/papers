@@ -10,8 +10,8 @@ import axios from "axios";
 import {RemoveCardButton} from "../Buttons/RemoveCardButton";
 import {CardAccordionDialog} from "../CardAccordion/CardAccordionDialog";
 import {Card as CardPreviewType} from "../../types/Card";
-import {useDispatch} from "react-redux";
-import {cardsSlice} from "../../store/slice";
+import {useDispatch, useSelector} from "react-redux";
+import {cardsSlice, updatedCardContentSelector} from "../../store/slice";
 
 type CardPreviewsProps = {
     card: CardPreviewType
@@ -21,6 +21,8 @@ export default function CardPreview({card}: CardPreviewsProps) {
     const classes = useStyles();
 
     const dispatch = useDispatch();
+
+    const updatedCard = useSelector(updatedCardContentSelector);
 
     const handleRemoveCard = () => {
         const url = "http://127.0.0.1:8000/removeCard/".concat(card._id)
@@ -39,9 +41,12 @@ export default function CardPreview({card}: CardPreviewsProps) {
     }
 
     const handleCardAccordionDialogClose = () => {
-        setOpenCardAccordionDialog(false)
+        setOpenCardAccordionDialog(false);
+        if (!updatedCard) return;
+        axios.post("http://127.0.0.1:8000/replaceCard", updatedCard).then( (response) => {
+            dispatch(cardsSlice.actions.replaceSelectedCard({card: updatedCard}));
+        });
     }
-
 
     return (
         <Grid key={card._id} item xs={4}>

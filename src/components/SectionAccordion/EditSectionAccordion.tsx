@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, selectedCardSelector, selectedSectionSelector} from "../../store/slice";
 import axios from "axios";
 import {Section} from "../../types/Section";
+import {Card} from "../../types/Card";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -58,10 +59,8 @@ export const EditSectionAccordion = ( { content, isEdit, onSwitch } : EditSectio
 
     const handleSaveClick = () => {
         const updatedSections = replaceSection();
-        const updatedCard = {...selectedCard, sections: updatedSections};
-        axios.post("http://127.0.0.1:8000/replaceCard", updatedCard).then( (response) => {
-            dispatch(cardsSlice.actions.replaceSelectedCard({card: updatedCard}));
-        });
+        const updatedCard: Card = {...selectedCard, sections: updatedSections};
+        dispatch(cardsSlice.actions.setUpdatedCard({updatedCard: updatedCard}));
         onSwitch();
     }
 

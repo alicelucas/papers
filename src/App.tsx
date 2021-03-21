@@ -5,6 +5,7 @@ import CardsGrid from "./components/Main/CardsGrid";
 import AddCardButton from "./components/Buttons/AddCardButton";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
+import OutlinedCard from "./components/Card/Card"
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, cardsSelector} from "./store/slice";
 
@@ -26,6 +27,7 @@ function App() {
       <Container maxWidth="lg">
           <CardsGrid/>
           <AddCardButton/>
+          {/*<OutlinedCard/>*/}
       </Container>
   );
 }

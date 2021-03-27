@@ -1,6 +1,5 @@
-import {Container, Dialog} from "@material-ui/core";
+import {Dialog} from "@material-ui/core";
 import React from "react";
-import CardAccordion from "./CardAccordion";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Card} from "../../types/Card";
 import OutlinedCard from "../Card/Card";

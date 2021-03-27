@@ -17,15 +17,24 @@ import {
 } from "../../store/slice";
 import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles({
-    action: {
+    arrows: {
       justifyContent: "space-between"
     },
     body: {
       marginLeft: 20,
         marginRight: 20,
         whiteSpace: 'pre-line'
+    },
+    edit: {
+        float: 'right',
+        marginRight: 20
+    },
+    editIcon: {
+        float: 'right',
+        color: "#6573c3",
     },
     header: {
       backgroundColor: "#6573c3"
@@ -79,7 +88,7 @@ export default function OutlinedCard() {
     return (
         <Card className={classes.root} variant="outlined">
             <CardHeader className={classes.header} title={selectedCard.title} subheader={[selectedCard.authors, selectedCard.journal, selectedCard.date].join(" ")}/>
-            <CardActions className={classes.action}>
+            <CardActions className={classes.arrows}>
                 <IconButton className={classes.icon} onClick={onPreviousSectionClick}>
                     <ArrowBackIcon fontSize={"large"}/>
                 </IconButton>
@@ -95,6 +104,9 @@ export default function OutlinedCard() {
                     {selectedContent}
                 </Typography>
             </CardContent>
+            <CardActions className={classes.edit} >
+                <EditIcon className={classes.editIcon}/>
+            </CardActions>
         </Card>
     );
 }

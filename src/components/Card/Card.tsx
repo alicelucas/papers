@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -32,7 +32,8 @@ const useStyles = makeStyles({
     },
     root: {
         minWidth: 275,
-        minHeight: 500,
+        minHeight: 350,
+        overflow: 'auto'
     },
     icon: {
         color: "#6573c3",
@@ -43,7 +44,7 @@ const useStyles = makeStyles({
         fontSize: 14,
     },
     pos: {
-        marginTop: 6,
+        marginTop: -70,
         marginBottom: 24,
         flexGrow: 1,
         textAlign: 'center',
@@ -78,14 +79,6 @@ export default function OutlinedCard() {
     return (
         <Card className={classes.root} variant="outlined">
             <CardHeader className={classes.header} title={selectedCard.title} subheader={[selectedCard.authors, selectedCard.journal, selectedCard.date].join(" ")}/>
-            <CardContent>
-                <Typography className={classes.pos} variant="h6" component="h2">
-                    {sectionTitles[selectedSection]}
-                </Typography>
-                <Typography align={"justify"} className={classes.body} >
-                    {selectedContent}
-                </Typography>
-            </CardContent>
             <CardActions className={classes.action}>
                 <IconButton className={classes.icon} onClick={onPreviousSectionClick}>
                     <ArrowBackIcon fontSize={"large"}/>
@@ -94,6 +87,14 @@ export default function OutlinedCard() {
                     <ArrowForwardIcon fontSize={"large"}/>
                 </IconButton>
             </CardActions>
+            <CardContent>
+                <Typography className={classes.pos} variant="h6" component="h2">
+                    {sectionTitles[selectedSection]}
+                </Typography>
+                <Typography align={"justify"} className={classes.body} >
+                    {selectedContent}
+                </Typography>
+            </CardContent>
         </Card>
     );
 }

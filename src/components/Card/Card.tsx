@@ -9,7 +9,12 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import {useDispatch, useSelector} from "react-redux";
-import {cardsSlice, selectedCardSelector, selectedSectionContentSelector} from "../../store/slice";
+import {
+    cardsSlice,
+    selectedCardSelector,
+    selectedSectionContentSelector,
+    selectedSectionSelector
+} from "../../store/slice";
 import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
 
@@ -49,27 +54,23 @@ export default function OutlinedCard() {
 
     const selectedCard = useSelector(selectedCardSelector);
     const selectedContent = useSelector(selectedSectionContentSelector);
-
-    const [sectionIdx, setSectionIdx] = useState<Section>(Section.Why);
+    const selectedSection = useSelector(selectedSectionSelector)
 
     const dispatch = useDispatch();
 
     if (!selectedCard || !selectedContent) return <React.Fragment/>;
 
     const onNextSectionClick = () => {
-        if (sectionIdx + 1 === 4) return;
+        if (selectedSection + 1 === 4) return;
         else {
-            dispatch(cardsSlice.actions.setSelectedSection({section: (sectionIdx + 1) as Section}));
-            setSectionIdx(sectionIdx + 1);
-
+            dispatch(cardsSlice.actions.setSelectedSection({section: (selectedSection + 1) as Section}));
         }
     };
 
     const onPreviousSectionClick = () => {
-        if (sectionIdx - 1 === -1) return;
+        if (selectedSection - 1 === -1) return;
         else {
-            dispatch(cardsSlice.actions.setSelectedSection({section: (sectionIdx - 1) as Section}))
-            setSectionIdx(sectionIdx - 1);
+            dispatch(cardsSlice.actions.setSelectedSection({section: (selectedSection - 1) as Section}))
         }
     };
 
@@ -78,7 +79,7 @@ export default function OutlinedCard() {
             <CardHeader className={classes.header} title={selectedCard.title} subheader={[selectedCard.authors, selectedCard.journal, selectedCard.date].join(" ")}/>
             <CardContent>
                 <Typography className={classes.pos} variant="h6" component="h2">
-                    {sectionTitles[sectionIdx]}
+                    {sectionTitles[selectedSection]}
                 </Typography>
                 <Typography align={"justify"} className={classes.body} >
                     {selectedContent}

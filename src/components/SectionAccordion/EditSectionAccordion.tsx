@@ -5,7 +5,6 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import CheckIcon from '@material-ui/icons/Check';
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, selectedCardSelector, selectedSectionSelector} from "../../store/slice";
-import axios from "axios";
 import {Section} from "../../types/Section";
 import {Card} from "../../types/Card";
 

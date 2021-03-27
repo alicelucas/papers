@@ -36,7 +36,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
 
     const [openCardAccordionDialog, setOpenCardAccordionDialog] = React.useState<boolean>(false)
 
-    const onClick = () => {
+    const onLearnMoreClick = () => {
         setOpenCardAccordionDialog(true);
         dispatch(cardsSlice.actions.setSelectedCard({id: card._id}))
         dispatch(cardsSlice.actions.setSelectedSection({section: Section.Why}))
@@ -65,7 +65,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button onClick={onClick} size="small">Learn More</Button>
+                    <Button onClick={onLearnMoreClick} size="small">Learn More</Button>
                     <CardAccordionDialog card={card} handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog}/>
                     <RemoveCardButton handleRemoveCard={handleRemoveCard}/>
                 </CardActions>

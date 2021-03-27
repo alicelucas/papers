@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     },
     edit: {
         float: 'right',
-        marginRight: 20
+        marginRight: 10
     },
     editIcon: {
         float: 'right',
@@ -105,7 +105,9 @@ export default function OutlinedCard() {
                 </Typography>
             </CardContent>
             <CardActions className={classes.edit} >
-                <EditIcon className={classes.editIcon}/>
+                <IconButton>
+                    <EditIcon className={classes.editIcon}/>
+                </IconButton>
             </CardActions>
         </Card>
     );

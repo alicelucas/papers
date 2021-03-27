@@ -8,7 +8,7 @@ import {Card} from "../../types/Card";
 import {Section} from "../../types/Section";
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "../../store/slice";
-import {sectionTitles} from "../../types/SectionTitles";
+import sectionTitles from "../../types/SectionTitles";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -46,10 +46,10 @@ export default function CardAccordion( {card} : CardAccordionPropsType) {
                     <Typography className={classes.heading}>{[ [card.title, card.authors].join("\n"), "\n", [card.journal, card.date].join(", ") ].join("")}</Typography>
                 </AccordionSummary>
             </Accordion>
-            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}} title={sectionTitles.Why}/>
-            <SectionAccordion onClick={() => {onSectionClick(Section.What)}}  title={sectionTitles.What}/>
-            <SectionAccordion onClick={() => {onSectionClick(Section.How)}}  title={sectionTitles.How} />
-            <SectionAccordion onClick={() => {onSectionClick(Section.Results)}}  title={sectionTitles.Results}/>
+            <SectionAccordion onClick={() => {onSectionClick(Section.Why)}} title={sectionTitles[0]}/>
+            <SectionAccordion onClick={() => {onSectionClick(Section.What)}}  title={sectionTitles[1]}/>
+            <SectionAccordion onClick={() => {onSectionClick(Section.How)}}  title={sectionTitles[2]} />
+            <SectionAccordion onClick={() => {onSectionClick(Section.Results)}}  title={sectionTitles[3]}/>
         </div>
     );
 }

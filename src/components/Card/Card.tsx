@@ -1,5 +1,5 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useState} from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -8,6 +8,10 @@ import {CardHeader} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import {useSelector} from "react-redux";
+import {selectedCardSelector} from "../../store/slice";
+import {Section} from "../../types/Section";
+import sectionTitles from "../../types/SectionTitles";
 
 const useStyles = makeStyles({
     action: {
@@ -43,28 +47,41 @@ const useStyles = makeStyles({
 export default function OutlinedCard() {
     const classes = useStyles();
 
+    const selectedCard = useSelector(selectedCardSelector);
+
+    const [sectionIdx, setSectionIdx] = useState<Section>(Section.Why);
+
+    if (!selectedCard) return <React.Fragment/>;
+
+    const onNextSectionClick = () => {
+        if (sectionIdx + 1 === 4) return;
+        else setSectionIdx(sectionIdx + 1);
+    };
+
+    const onPreviousSectionClick = () => {
+        if (sectionIdx - 1 === -1) return;
+        else setSectionIdx(sectionIdx - 1);
+    };
+
+
+
+
     return (
         <Card className={classes.root} variant="outlined">
-            <CardHeader className={classes.header} title={"Title"} subheader={"Authors here and journal and date"}/>
+            <CardHeader className={classes.header} title={selectedCard.title} subheader={[selectedCard.authors, selectedCard.journal, selectedCard.date].join(" ")}/>
             <CardContent>
                 <Typography className={classes.pos} variant="h6" component="h2">
-                    Why is this work important?
+                    {sectionTitles[sectionIdx]}
                 </Typography>
                 <Typography align={"justify"} className={classes.body} >
-                    The contrastive learning idea (of making representations of an image agree with each other)
-                    is not new; it dates back to a Becker & Hintor paper in 1992. But previously proposed contrastive
-                    learning requires specialized architecture or a memory bank. \n
-
-                    This new framework removes the need
-                    for that. They spell out the necessary elements for having a successful simple contrastive learning
-                    procedure.
+                    {selectedCard.sections.why}
                 </Typography>
             </CardContent>
             <CardActions className={classes.action}>
-                <IconButton className={classes.icon}>
+                <IconButton className={classes.icon} onClick={onPreviousSectionClick}>
                     <ArrowBackIcon fontSize={"large"}/>
                 </IconButton>
-                <IconButton className={classes.icon}>
+                <IconButton className={classes.icon} onClick={onNextSectionClick}>
                     <ArrowForwardIcon fontSize={"large"}/>
                 </IconButton>
             </CardActions>

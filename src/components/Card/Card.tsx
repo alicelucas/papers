@@ -8,8 +8,8 @@ import {CardHeader} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {useSelector} from "react-redux";
-import {selectedCardSelector} from "../../store/slice";
+import {useDispatch, useSelector} from "react-redux";
+import {cardsSlice, selectedCardSelector, selectedSectionContentSelector} from "../../store/slice";
 import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
 
@@ -48,23 +48,30 @@ export default function OutlinedCard() {
     const classes = useStyles();
 
     const selectedCard = useSelector(selectedCardSelector);
+    const selectedContent = useSelector(selectedSectionContentSelector);
 
     const [sectionIdx, setSectionIdx] = useState<Section>(Section.Why);
 
-    if (!selectedCard) return <React.Fragment/>;
+    const dispatch = useDispatch();
+
+    if (!selectedCard || !selectedContent) return <React.Fragment/>;
 
     const onNextSectionClick = () => {
         if (sectionIdx + 1 === 4) return;
-        else setSectionIdx(sectionIdx + 1);
+        else {
+            dispatch(cardsSlice.actions.setSelectedSection({section: (sectionIdx + 1) as Section}));
+            setSectionIdx(sectionIdx + 1);
+
+        }
     };
 
     const onPreviousSectionClick = () => {
         if (sectionIdx - 1 === -1) return;
-        else setSectionIdx(sectionIdx - 1);
+        else {
+            dispatch(cardsSlice.actions.setSelectedSection({section: (sectionIdx - 1) as Section}))
+            setSectionIdx(sectionIdx - 1);
+        }
     };
-
-
-
 
     return (
         <Card className={classes.root} variant="outlined">
@@ -74,7 +81,7 @@ export default function OutlinedCard() {
                     {sectionTitles[sectionIdx]}
                 </Typography>
                 <Typography align={"justify"} className={classes.body} >
-                    {selectedCard.sections.why}
+                    {selectedContent}
                 </Typography>
             </CardContent>
             <CardActions className={classes.action}>

@@ -75,6 +75,7 @@ export const selectedSectionContentSelector = (state: RootState) => {
     const selectedCard = state.cards.cards.filter( (card) => {
         return (card._id === state.cards.selectedCard)
     })[0]
+    if (!selectedCard) return "";
     switch(state.cards.selectedSection) {
         case Section.Why:
             return selectedCard.sections.why;

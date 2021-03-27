@@ -5,7 +5,6 @@ import CardsGrid from "./components/Main/CardsGrid";
 import AddCardButton from "./components/Buttons/AddCardButton";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
-import OutlinedCard from "./components/Card/Card"
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "./store/slice";
 

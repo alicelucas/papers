@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     },
     root: {
         minWidth: 275,
+        minHeight: 500,
     },
     icon: {
         color: "#6573c3",

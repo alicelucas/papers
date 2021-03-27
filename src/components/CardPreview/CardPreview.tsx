@@ -12,6 +12,7 @@ import {CardAccordionDialog} from "../CardAccordion/CardAccordionDialog";
 import {Card as CardPreviewType} from "../../types/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, updatedCardContentSelector} from "../../store/slice";
+import {Section} from "../../types/Section";
 
 type CardPreviewsProps = {
     card: CardPreviewType
@@ -38,6 +39,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
     const onClick = () => {
         setOpenCardAccordionDialog(true);
         dispatch(cardsSlice.actions.setSelectedCard({id: card._id}))
+        dispatch(cardsSlice.actions.setSelectedSection({section: Section.Why}))
     }
 
     const handleCardAccordionDialogClose = () => {

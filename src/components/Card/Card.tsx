@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -19,7 +19,6 @@ import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
 import EditIcon from '@material-ui/icons/Edit';
 import {Card as CardType} from "../../types/Card";
-import axios from "axios";
 
 const useStyles = makeStyles({
     arrows: {

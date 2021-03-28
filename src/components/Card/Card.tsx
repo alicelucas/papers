@@ -81,6 +81,8 @@ export default function OutlinedCard() {
 
     const [edittedContent, setEdittedContent] = useState<string>(selectedContent);
 
+    const [content, setContent] = useState<Array<string>>(Object.values(selectedCard.sections))
+
     const onEditClick = () => {
         if (!isEdit) {
             setEdittedContent(selectedContent)
@@ -145,7 +147,7 @@ export default function OutlinedCard() {
                     {sectionTitles[selectedSection]}
                 </Typography>
                 {!isEdit && (<Typography align={"justify"} className={classes.body} >
-                    {selectedContent}
+                    {content[selectedSection]}
                 </Typography>)}
                 { (isEdit) && ( <div className={classes.text}>
                     <TextField inputProps={{ style: { textAlign: 'justify', lineHeight: 1.5 }}} defaultValue={edittedContent} fullWidth onChange={onTextChange} multiline={true} variant={"outlined"}/>

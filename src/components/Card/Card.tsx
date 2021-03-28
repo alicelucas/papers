@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import {CardHeader} from "@material-ui/core";
+import {CardHeader, TextField} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -51,6 +51,9 @@ const useStyles = makeStyles({
         marginRight: "10px",
         marginLeft: "10px"
     },
+    text: {
+        // padding: "28 px",
+    },
     title: {
         fontSize: 14,
     },
@@ -71,6 +74,15 @@ export default function OutlinedCard() {
 
     const dispatch = useDispatch();
 
+    const [isEdit, setIsEdit] = useState<boolean>(false);
+
+    const onEditClick = () => {
+        setEdittedContent(selectedContent)
+        setIsEdit(!isEdit)
+    }
+
+    const [edittedContent, setEdittedContent] = useState<string>(selectedContent);
+
     if (!selectedCard || !selectedContent) return <React.Fragment/>;
 
     const onNextSectionClick = () => {
@@ -87,6 +99,7 @@ export default function OutlinedCard() {
         }
     };
 
+
     return (
         <Card className={classes.root} variant="outlined">
             <CardHeader className={classes.header} title={selectedCard.title} subheader={[selectedCard.authors, selectedCard.journal, selectedCard.date].join(" ")}/>
@@ -102,12 +115,16 @@ export default function OutlinedCard() {
                 <Typography className={classes.pos} variant="h6" component="h2">
                     {sectionTitles[selectedSection]}
                 </Typography>
-                <Typography align={"justify"} className={classes.body} >
+                {!isEdit && (<Typography align={"justify"} className={classes.body} >
                     {selectedContent}
-                </Typography>
+                </Typography>)}
+                {isEdit && ( <div className={classes.text}>
+                    <TextField inputProps={{ style: { textAlign: 'justify', lineHeight: 1.5 }}} defaultValue={edittedContent} fullWidth onChange={()=>{}} multiline={true} variant={"outlined"}/>
+                </div>)}
+
             </CardContent>
             <CardActions className={classes.edit} >
-                <IconButton>
+                <IconButton  onClick={onEditClick}>
                     <EditIcon className={classes.editIcon}/>
                 </IconButton>
             </CardActions>

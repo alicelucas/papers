@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import useStyles from "../../Card.css";
+import useStyles from "./CardPreview.css"
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import {CardAccordionDialog} from "../CardAccordion/CardAccordionDialog";

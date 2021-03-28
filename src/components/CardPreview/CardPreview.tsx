@@ -54,14 +54,14 @@ export default function CardPreview({card}: CardPreviewsProps) {
                 <Card className={classes.root} onClick={onCardClick}>
                     <CardActionArea className={classes.media}>
                         <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                {[card.journal, card.date].join(", ")}
-                            </Typography>
-                            <Typography variant="h6" component="h2">
+                            <Typography className={classes.title} variant="h6" component="h2">
                                 {card.title}
                             </Typography>
-                            <Typography className={classes.pos} color="textSecondary">
+                            <Typography className={classes.authors} color="textSecondary">
                                 {card.authors}
+                            </Typography>
+                            <Typography className={classes.info} color="textSecondary" gutterBottom>
+                                {[card.journal, card.date].join(", ")}
                             </Typography>
                         </CardContent>
                     </CardActionArea>

@@ -5,12 +5,13 @@ import Typography from '@material-ui/core/Typography';
 import useStyles from "./CardPreview.css"
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-import {CardAccordionDialog} from "../CardAccordion/CardAccordionDialog";
 import {Card as CardPreviewType} from "../../types/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, updatedCardContentSelector} from "../../store/slice";
 import {Section} from "../../types/Section";
 import {CardActionArea} from "@material-ui/core";
+import OutlinedCard from "../Card/Card"
+import Dialog from "@material-ui/core/Dialog";
 
 type CardPreviewsProps = {
     card: CardPreviewType
@@ -32,16 +33,16 @@ export default function CardPreview({card}: CardPreviewsProps) {
         )
     }
 
-    const [openCardAccordionDialog, setOpenCardAccordionDialog] = React.useState<boolean>(false)
+    const [openCardDialog, setOpenCardDialog] = React.useState<boolean>(false)
 
     const onCardClick = () => {
-        setOpenCardAccordionDialog(true);
+        setOpenCardDialog(true);
         dispatch(cardsSlice.actions.setSelectedCard({id: card._id}))
         dispatch(cardsSlice.actions.setSelectedSection({section: Section.Why}))
     }
 
-    const handleCardAccordionDialogClose = () => {
-        setOpenCardAccordionDialog(false);
+    const onDialogClose = () => {
+        setOpenCardDialog(false);
         if (!updatedCard) return;
         axios.post("http://127.0.0.1:8000/replaceCard", updatedCard).then( (response) => {
             dispatch(cardsSlice.actions.replaceSelectedCard({card: updatedCard}));
@@ -68,7 +69,10 @@ export default function CardPreview({card}: CardPreviewsProps) {
                     {/*<RemoveCardButton handleRemoveCard={handleRemoveCard}/>*/}
                 </Card>
             </Grid>
-            <CardAccordionDialog card={card} handleClose={handleCardAccordionDialogClose} open={openCardAccordionDialog}/>
+            <Dialog className={classes.dialog} fullWidth={true} maxWidth="lg" onClose={onDialogClose} open={openCardDialog}>
+                <OutlinedCard/>
+            </Dialog >
+
         </React.Fragment>
 
 

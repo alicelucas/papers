@@ -5,6 +5,10 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 350,
         height: 200
     },
+    dialog: {
+        position: 'absolute',
+            top: "100px"
+    },
     media: {
         // height: 200,
     },

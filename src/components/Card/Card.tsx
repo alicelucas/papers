@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     edit: {
         float: 'right',
         position: 'relative',
-        top: 80,
+        top: 10,
         marginRight: 10
     },
     editIcon: {

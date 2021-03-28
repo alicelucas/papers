@@ -18,6 +18,8 @@ import {
 import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
 import EditIcon from '@material-ui/icons/Edit';
+import {Card as CardType} from "../../types/Card";
+import axios from "axios";
 
 const useStyles = makeStyles({
     arrows: {
@@ -76,12 +78,38 @@ export default function OutlinedCard() {
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
+    const [edittedContent, setEdittedContent] = useState<string>(selectedContent);
+
     const onEditClick = () => {
-        setEdittedContent(selectedContent)
-        setIsEdit(!isEdit)
+        if (!isEdit) {
+            setEdittedContent(selectedContent)
+        }
+        else {
+            const updatedSections = replaceSection();
+            const updatedCard: CardType = {...selectedCard, sections: updatedSections};
+            dispatch(cardsSlice.actions.setUpdatedCard({updatedCard: updatedCard}));
+        }
+        setIsEdit(!isEdit);
     }
 
-    const [edittedContent, setEdittedContent] = useState<string>(selectedContent);
+    const onTextChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
+        setEdittedContent(event.target.value);
+    }
+
+    const replaceSection = () => {
+        switch (selectedSection) {
+            case Section.Why:
+                return {...selectedCard.sections, why: edittedContent };
+            case Section.What:
+                return {...selectedCard.sections, what: edittedContent };
+            case Section.How:
+                return {...selectedCard.sections, how: edittedContent };
+            case Section.Results:
+                return {...selectedCard.sections, results: edittedContent };
+            default:
+                return selectedCard.sections;
+        }
+    }
 
     if (!selectedCard || !selectedContent) return <React.Fragment/>;
 
@@ -119,7 +147,7 @@ export default function OutlinedCard() {
                     {selectedContent}
                 </Typography>)}
                 {isEdit && ( <div className={classes.text}>
-                    <TextField inputProps={{ style: { textAlign: 'justify', lineHeight: 1.5 }}} defaultValue={edittedContent} fullWidth onChange={()=>{}} multiline={true} variant={"outlined"}/>
+                    <TextField inputProps={{ style: { textAlign: 'justify', lineHeight: 1.5 }}} defaultValue={edittedContent} fullWidth onChange={onTextChange} multiline={true} variant={"outlined"}/>
                 </div>)}
 
             </CardContent>

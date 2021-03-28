@@ -60,16 +60,16 @@ const CardForm = ({handleClose} : NewCardFormProps) => {
                         <TextField fullWidth label="Date" name="date" variant="filled"  onChange={handleTextChange}/>
                     </div>
                     <div className={classes.textField}>
-                        <TextField fullWidth label="Why is this work important?" variant="filled"  onChange={handleTextChange}  name="why" multiline rows={4}/>
+                        <TextField fullWidth label="Why is this work important?" variant="filled"  onChange={handleTextChange}  name="why" multiline/>
                     </div>
                     <div className={classes.textField}>
-                        <TextField fullWidth label="What do they propose?" variant="filled"  onChange={handleTextChange}  name="what" multiline rows={4}/>
+                        <TextField fullWidth label="What do they propose?" variant="filled"  onChange={handleTextChange}  name="what" multiline/>
                     </div>
                     <div className={classes.textField}>
-                        <TextField fullWidth label="How does it work?" variant="filled"  onChange={handleTextChange}  name="how" multiline rows={4}/>
+                        <TextField fullWidth label="How does it work?" variant="filled"  onChange={handleTextChange}  name="how" multiline/>
                     </div>
                     <div className={classes.textField}>
-                        <TextField fullWidth label="What are the results?" variant="filled"  onChange={handleTextChange}  name="results" multiline rows={4}/>
+                        <TextField fullWidth label="What are the results?" variant="filled"  onChange={handleTextChange}  name="results" multiline />
                     </div>
                 </form>
                 <Box paddingTop={1}>

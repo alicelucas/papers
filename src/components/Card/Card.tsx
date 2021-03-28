@@ -79,8 +79,6 @@ export default function OutlinedCard() {
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
-    const [saved, setSaved] = useState<boolean>(false);
-
     const [edittedContent, setEdittedContent] = useState<string>(selectedContent);
 
     const onEditClick = () => {
@@ -97,7 +95,6 @@ export default function OutlinedCard() {
 
     const onTextChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
         setEdittedContent(event.target.value);
-        setSaved(true)
     }
 
     const replaceSection = () => {
@@ -122,7 +119,6 @@ export default function OutlinedCard() {
         else {
             dispatch(cardsSlice.actions.setSelectedSection({section: (selectedSection + 1) as Section}));
         }
-        setSaved(false);
     };
 
     const onPreviousSectionClick = () => {
@@ -130,7 +126,6 @@ export default function OutlinedCard() {
         else {
             dispatch(cardsSlice.actions.setSelectedSection({section: (selectedSection - 1) as Section}))
         }
-        setSaved(false);
     };
 
 
@@ -149,11 +144,8 @@ export default function OutlinedCard() {
                 <Typography className={classes.pos} variant="h6" component="h2">
                     {sectionTitles[selectedSection]}
                 </Typography>
-                {!isEdit && !saved && (<Typography align={"justify"} className={classes.body} >
+                {!isEdit && (<Typography align={"justify"} className={classes.body} >
                     {selectedContent}
-                </Typography>)}
-                {!isEdit && saved && (<Typography align={"justify"} className={classes.body} >
-                    {edittedContent}
                 </Typography>)}
                 { (isEdit) && ( <div className={classes.text}>
                     <TextField inputProps={{ style: { textAlign: 'justify', lineHeight: 1.5 }}} defaultValue={edittedContent} fullWidth onChange={onTextChange} multiline={true} variant={"outlined"}/>

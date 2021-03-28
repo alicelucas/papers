@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {CardContent} from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
-import useStyles from "../../Card.css";
+import useStyles from "./CardForm.css";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import {Card as CardType} from "../../types/Card";
@@ -47,29 +47,29 @@ const CardForm = ({handleClose} : NewCardFormProps) => {
         <Card className={classes.root}>
             <CardContent>
                 <form noValidate autoComplete="off">
-                    <div>
-                        <TextField fullWidth id="standard-basic" label="Journal" name="journal" onChange={handleTextChange}/>
+                    <div className={classes.textField}>
+                        <TextField fullWidth label="Journal" name="journal" variant="filled" onChange={handleTextChange}/>
                     </div>
-                    <div>
-                        <TextField fullWidth id="standard-basic" label="Date" name="date" onChange={handleTextChange}/>
+                    <div className={classes.textField}>
+                        <TextField fullWidth label="Date" name="date" variant="filled"  onChange={handleTextChange}/>
                     </div>
-                    <div>
-                        <TextField fullWidth id="standard-basic" label="Title" name="title" onChange={handleTextChange}/>
+                    <div className={classes.textField}>
+                        <TextField fullWidth label="Title" name="title" variant="filled"  onChange={handleTextChange}/>
                     </div>
-                    <div>
-                        <TextField fullWidth id="standard-basic" label="Authors" onChange={handleTextChange}  name="authors"/>
+                    <div className={classes.textField}>
+                        <TextField fullWidth label="Authors"  variant="filled" onChange={handleTextChange}  name="authors"/>
                     </div>
-                    <div>
-                        <TextField fullWidth id="standard-basic" label="Why is this work important?" onChange={handleTextChange}  name="why" multiline rows={4}/>
+                    <div className={classes.textField}>
+                        <TextField fullWidth label="Why is this work important?" variant="filled"  onChange={handleTextChange}  name="why" multiline rows={4}/>
                     </div>
-                    <div>
-                        <TextField fullWidth id="standard-basic" label="What do they propose?" onChange={handleTextChange}  name="what" multiline rows={4}/>
+                    <div className={classes.textField}>
+                        <TextField fullWidth label="What do they propose?" variant="filled"  onChange={handleTextChange}  name="what" multiline rows={4}/>
                     </div>
-                    <div>
-                        <TextField fullWidth id="standard-basic" label="How does it work?" onChange={handleTextChange}  name="how" multiline rows={4}/>
+                    <div className={classes.textField}>
+                        <TextField fullWidth label="How does it work?" variant="filled"  onChange={handleTextChange}  name="how" multiline rows={4}/>
                     </div>
-                    <div>
-                        <TextField fullWidth id="standard-basic" label="What are the results" onChange={handleTextChange}  name="results" multiline rows={4}/>
+                    <div className={classes.textField}>
+                        <TextField fullWidth label="What are the results" variant="filled"  onChange={handleTextChange}  name="results" multiline rows={4}/>
                     </div>
                 </form>
                 <Box paddingTop={1}>

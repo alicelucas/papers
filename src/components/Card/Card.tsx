@@ -96,6 +96,11 @@ export default function OutlinedCard() {
     }
 
     const onTextChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
+        const updated = content.map( (section, idx) => {
+            if (idx === selectedSection) return event.target.value;
+            else return section
+        });
+        setContent(updated)
         setEdittedContent(event.target.value);
     }
 

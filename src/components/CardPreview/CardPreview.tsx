@@ -69,7 +69,9 @@ export default function CardPreview({card}: CardPreviewsProps) {
                     {/*<RemoveCardButton handleRemoveCard={handleRemoveCard}/>*/}
                 </Card>
             </Grid>
-            <Dialog className={classes.dialog} fullWidth={true} maxWidth="lg" onClose={onDialogClose} open={openCardDialog}>
+            <Dialog  classes={{
+                paper: classes.dialog
+            }} fullWidth={true} maxWidth="lg" onClose={onDialogClose} open={openCardDialog}>
                 <OutlinedCard/>
             </Dialog >
 

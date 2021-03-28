@@ -46,7 +46,8 @@ const useStyles = makeStyles({
     root: {
         minWidth: 275,
         minHeight: 350,
-        overflow: 'auto'
+        overflow: 'auto',
+
     },
     icon: {
         color: "#6573c3",

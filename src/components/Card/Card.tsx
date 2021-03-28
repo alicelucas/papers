@@ -78,13 +78,13 @@ export default function OutlinedCard() {
 
     const [isEdit, setIsEdit] = useState<boolean>(false);
 
-    const [edittedContent, setEdittedContent] = useState<string>(selectedContent);
-
     const [content, setContent] = useState<Array<string>>(Object.values(selectedCard.sections))
+
+    const [edittedContent, setEdittedContent] = useState<string>(content[selectedSection]);
 
     const onEditClick = () => {
         if (!isEdit) {
-            setEdittedContent(selectedContent)
+            setEdittedContent(content[selectedSection])
         }
         else {
             const updatedSections = replaceSection();

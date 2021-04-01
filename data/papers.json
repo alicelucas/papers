@@ -163,4 +163,19 @@
     "results": "They test their method on the Cityscapes Instance Segmentation benchmark. This is a difficult dataset because objects are often included, and there usually are dozens of instances in a single image. \n\nThey significantly outperform the other methods that they compare to. "
   },
   "__v": 0
+},{
+  "_id": {
+    "$oid": "606613eac8b4c721cc1f28f6"
+  },
+  "title": "Deep Feedback Inverse Problem Solver",
+  "authors": "",
+  "date": "",
+  "journal": "",
+  "sections": {
+    "why": "There exists a family of problems called inverse problems, which are difficult to solve: given an observation, the objective is to recover the original input to the forward problem.\n\nThere exists two main approaches for solving inverse problems: analytical-based approaches, in which human knowledge is uses to regularize or constrain the solution and formulate an optimization problem; and deep-learning based approach, where the objective is to learn a mapping from the observation to the source. \n\nAnalytical-based approaches can be difficult to design, usually require many iterations to converge, and are sensitive to initialization. Deep Learning-based approaches often produce results that are not realistic or incompatible with the real observations. ",
+    "what": "",
+    "how": "",
+    "results": ""
+  },
+  "__v": 0
 }]

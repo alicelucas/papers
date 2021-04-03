@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import {CardHeader, TextField} from "@material-ui/core";
+import {CardHeader} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
@@ -17,8 +17,6 @@ import {
 } from "../../store/slice";
 import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
-import EditIcon from '@material-ui/icons/Edit';
-import {Card as CardType} from "../../types/Card";
 
 const useStyles = makeStyles({
     arrows: {
@@ -76,47 +74,7 @@ export default function OutlinedCard() {
 
     const dispatch = useDispatch();
 
-    const [isEdit, setIsEdit] = useState<boolean>(false);
-
-    const [content, setContent] = useState<Array<string>>(Object.values(selectedCard.sections))
-
-    const [edittedContent, setEdittedContent] = useState<string>(content[selectedSection]);
-
-    const onEditClick = () => {
-        if (!isEdit) {
-            setEdittedContent(content[selectedSection])
-        }
-        else {
-            const updatedSections = replaceSection();
-            const updatedCard: CardType = {...selectedCard, sections: updatedSections};
-            dispatch(cardsSlice.actions.setUpdatedCard({updatedCard: updatedCard}));
-        }
-        setIsEdit(!isEdit);
-    }
-
-    const onTextChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
-        const updated = content.map( (section, idx) => {
-            if (idx === selectedSection) return event.target.value;
-            else return section
-        });
-        setContent(updated)
-        setEdittedContent(event.target.value);
-    }
-
-    const replaceSection = () => {
-        switch (selectedSection) {
-            case Section.Why:
-                return {...selectedCard.sections, why: edittedContent };
-            case Section.What:
-                return {...selectedCard.sections, what: edittedContent };
-            case Section.How:
-                return {...selectedCard.sections, how: edittedContent };
-            case Section.Results:
-                return {...selectedCard.sections, results: edittedContent };
-            default:
-                return selectedCard.sections;
-        }
-    }
+    const content = Object.values(selectedCard.sections)
 
     if (!selectedCard || !selectedContent) return <React.Fragment/>;
 
@@ -150,19 +108,10 @@ export default function OutlinedCard() {
                 <Typography className={classes.pos} variant="h6" component="h2">
                     {sectionTitles[selectedSection]}
                 </Typography>
-                {!isEdit && (<Typography align={"justify"} className={classes.body} >
+                <Typography align={"justify"} className={classes.body} >
                     {content[selectedSection]}
-                </Typography>)}
-                { (isEdit) && ( <div className={classes.text}>
-                    <TextField inputProps={{ style: { textAlign: 'justify', lineHeight: 1.5 }}} defaultValue={edittedContent} fullWidth onChange={onTextChange} multiline={true} variant={"outlined"}/>
-                </div>)}
-
+                </Typography>
             </CardContent>
-            <CardActions className={classes.edit} >
-                <IconButton  onClick={onEditClick}>
-                    <EditIcon className={classes.editIcon}/>
-                </IconButton>
-            </CardActions>
         </Card>
     );
 }

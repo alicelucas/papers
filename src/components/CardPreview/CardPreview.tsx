@@ -61,11 +61,12 @@ export default function CardPreview({card}: CardPreviewsProps) {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                    <Box>
-                        <Button variant="contained" color="secondary">
+                    <CardActionArea>
+                        <Button className={classes.labels} size="small" variant="outlined" color="secondary">
                             {card.labels[0]}
                         </Button>
-                    </Box>
+                    </CardActionArea>
+
                 </Card>
             </Grid>
             <Dialog  classes={{

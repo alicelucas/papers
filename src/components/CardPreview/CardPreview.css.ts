@@ -3,7 +3,8 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 350,
-        height: 200
+        height: "100%",
+        // height: 200
     },
     dialog: {
         position: 'absolute',
@@ -11,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
     },
     media: {
         // height: 200,
+    },
+    labels: {
+        position: "relative",
+        bottom: "2px"
     },
     bullet: {
         display: 'inline-block',

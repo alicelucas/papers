@@ -55,7 +55,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function OutlinedCard() {
+export default function CardDialog() {
     const classes = useStyles();
 
     const selectedCard = useSelector(selectedCardSelector);
@@ -85,7 +85,7 @@ export default function OutlinedCard() {
 
     return (
         <Card className={classes.root} variant="outlined">
-            <CardHeader className={classes.header} title={selectedCard.title} subheader={[selectedCard.authors, selectedCard.journal, selectedCard.date].join(" ")}/>
+            <CardHeader align="center" className={classes.header} title={selectedCard.title} subheader={[selectedCard.authors, selectedCard.journal, selectedCard.date].join(" ")}/>
             <CardActions className={classes.arrows}>
                 <IconButton className={classes.icon} onClick={onPreviousSectionClick}>
                     <ArrowBackIcon fontSize={"large"}/>

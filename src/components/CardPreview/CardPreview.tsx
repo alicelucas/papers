@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, updatedCardContentSelector} from "../../store/slice";
 import {Section} from "../../types/Section";
 import {CardActionArea} from "@material-ui/core";
-import OutlinedCard from "../Card/Card"
+import CardDialog from "../Card/Card"
 import Dialog from "@material-ui/core/Dialog";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
@@ -78,7 +78,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
             <Dialog  classes={{
                 paper: classes.dialog
             }} fullWidth={true} maxWidth="lg" onClose={onDialogClose} open={openCardDialog}>
-                <OutlinedCard/>
+                <CardDialog/>
             </Dialog >
 
         </React.Fragment>

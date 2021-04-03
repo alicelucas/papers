@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     dialog: {
         position: 'absolute',
-            top: "200px"
+        top: "150px"
     },
     media: {
         // height: 200,

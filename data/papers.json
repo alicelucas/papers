@@ -12,7 +12,12 @@
     "what": "They choose to formulate the object detection problem as a set prediction problem. \n\nNote that they are not the first to approach the object detection problem as a set prediction problem. There exist methods where RNNs do that, but these methods are auto-regressive. This work here uses parallel decoding. (They make use of the recent work of parallel decoding with transformers)\n\nFurthermore, and that’s where there is the most novelty: they use an encoder-decoder transformer architecture with parallel decoding to model the inference. ",
     "how": "It’s a set prediction problem, so the target is going to be a set of size N, containing tuples of the (class, bounding box) of the instances in that image, and everything else in that set will be the “no object” label. This “no object” label can be seen as a way to pad the set. The architecture will be such that it outputs a set of that same size N. Again, the architecture is able to predict the “no object” label. The important thing to understand is that the target prediction is a set of N instances (most of them will correspond to “no object”), and the proposed prediction is a set of N instances as well.\n\nThe biggest challenge when formulating things as a set prediction problem is to match the prediction of the network to an instance in the target set. The way this is achieved here is with a “bipartite matching loss”. It uses the outputted classes and bounding box locations to try to match each prediction instance to another instance in the target set. Note that this results in a one-to-one matching, so we can be sure that multiple predicted bounding boxes will not be mapped to the same instance in the target set. That’s why NMS is not needed in this workflow. \n\nOnce the predictions are matched to the target instances, we use a Hungarian loss to actually train the neural network. This loss is very intuitive and similar to simple classification loss used in object detection. There is an extra novelty that they use a generalized IOU loss on the bounding box loss component, which helps making the loss a bit more scale invariant. \n\nThe user of a transformer architecture is the key distinguishing feature of their paper. Figure 2 in their paper shows the following:\n- An initial CNN, named “backbone” CNN is going to extract features from the initial image. There is going to be more channels and a smaller spatial extent. Then this feature map of size C x h x w is going to be flattened into a further compressed vector of size d x (hw). That’s the sequence that’s going to be fed at the input of the encoder. In some sense, each “time step” corresponds to a pixel in the image (with a feature vector representation of size d).\n- The encoder part of the transformer takes in this image sequence, in addition to positional encoding information. This is necessary because all information about position has been lost when we flattened the image and feed that to the encoder. The encoder then is going to output feature representations of those images. At this point, the encoder should have learned to focus on specific parts of the image to extract different instances.\n- The decoder part of the transformer is going to look at the extracted features from the encoder and output a set of bounding boxes. The decoder architecture also takes in “object queries”. It is necessary to input object queries to the decoder: to output N things, we need to input N things to it. These are learned during training. When combining information from feature maps from the object query, and feature maps from the encoder, then we can obtain bounding boxes.",
     "results": "The most interesting part of this paper is their section on visualizing the attention of the encoder and decoder networks.\n\nThey show that the encoder pays attention to the different instances in the image. Note that it does really well as separating close / overlapping instances. \n\nThe decoder clearly pays attention to the extremities of the object. It seems that it learns from the feature representation given by the encoder, and understands that extremities is what matters, and predicts a bounding box from that. \n\nAs a result of training, each “slot” (box) in the decoder becomes responsible for looking at a specific area of the image. This is shown in Figure 7. It seems like each slot is responsible for predicting a bounding box at a specific region of the image. \n\nIn terms of performance w.r.t RCNN and its different flavors, they show that they perform similarly (better for predicting large boxes, a bit worse for predicting small boxes). \n\nFinally, they show that they can easily apply their DETR model to the task of panoptic segmentation. All that is needed is a “mask head” (a CNN) to be appended to the features outputted by the decoder. The resulting network can be trained for panoptic segmentation (jointly, or not). They do very well. "
-  }
+  },
+  "labels": [
+    "Object detection",
+    "Transformers",
+    ""
+  ]
 },{
   "_id": {
     "$oid": "603e6c9ba603d992335c9318"
@@ -27,7 +32,12 @@
     "what": "SimCLR algorithm is composed of three steps: (1) transformation, (2) representation, (3) projection. The latter two steps are done by a neural network. The projection neural network is typically one or two linear (or non-linear) layer.\n",
     "how": "In this contrastive learning setup, an image is transformed in two different ways. These two resulting data points are called a “positive pair”. Each will be inputted to the same neural network (composed of a representation network and a projection head network) that will extract a feature vector for each of them. \n\nWe want the extracted representations of two transformed images to agree with each other.   The contrastive learning task will have a loss function that is going to maximize the “agreement” between these two feature vectors. \n\nWith these representations, we can then use these for linear classification. Or we can use the obtained network as an initial point for fine-tuning or transfer learning procedures.\n\nThe authors try out many different conditions, including different combinations of data augmentations, different architectures, and loss functions. \n\nThe end goal of experimenting with these different conditions is to determine which one leads to the best representations for a subsequent supervised learning task. They use a “linear evaluation protocol” which is going to train a classifier directly on these extracted representations, from the different settings. The better the final performance on the classification task, the better the representation is thought to be.",
     "results": "Learning representations in the unsupervised setting benefit from:\n- Composing augmentations, particularly the combination of random cropping and random color distortion. Unsupervised learning benefits more from this than supervised counterparts.\n- Augmentations can replace the design of complex architectures as previously done in contrastive learning.  For example, random cropping of  an image can easily provide adjacent viewers and global/local views for the object in that image. \n- Increasing depth and width. Unsupervised learning benefits more from this than supervised counterparts.\n- Adding a projection head improves the representation learned. If it’s a non-linear projection it’s better. However note that the representation used for the downstream task should be that of the layer before the projection head, not the one after (See Section 4.2). \n- The contrastive training loss that resulted in the best performance is the NT-Xent loss (Normalized, Temperature-scaled cross entropy loss). They find that the use of l2 normalization and temperature scaling is crucial for the resulting representation.\n- Training longer and larger batch sizes leads to better representations as well. That is because the network ends up seeing more negative examples, which facilitates convergence.\n- Compared with state-of-the-art (other methods for learning representations): they consistently outperform them for the linear evaluation mode and in the semi-supervised mode (in which the model is fine-tuned over few data points in ImageNet). "
-  }
+  },
+  "labels": [
+    "Contrastive learning",
+    "Unsupervised learning",
+    ""
+  ]
 },{
   "_id": {
     "$oid": "603e6ce1a603d992335c9319"
@@ -42,7 +52,11 @@
     "what": "Their search for the perfect model for real-time prediction is done by looking in-depth into all of the existing architectural and training design features that have been introduced in the literature, and shown to have a positive effect on the accuracy of the model. \n\nThey define the architecture as composed of individual components: a backbone, a neck, and a head. How each of these components can have a different number and different types of layers. \n\nThe training design mechanisms are classified into two different types of groups, the “Bag of freebies,” and the “Bag of specials.”  “Bag of freebies” lead to better accuracy with no increase in inference cost. These include data augmentation, special example mining, or better loss functions. “Bag of specials” leads to better accuracy, but may come with an inference cost increase. These include special attention modules, feature integration mechanisms, or the design of activation functions. \n",
     "how": "They are going to (1) study the different existing architectural components, and (2) experiment with the different tools obtained from bag of freebies and bag of specials. \n\nIn addition to listing all of the BoF/BoS and experimenting with them, they (1) introduce new data augmentation methods and and (2) they change existing design methods such that they lead to more efficient training and detection (See Section 3.3). The resulting architecture and BoF/BoS selections are shown in the left column of Page 7. \n\nAll of their different combinations are tested by using ImageNet’s (ILSVRC) dataset and the COCO test dataset. For all of their experiments, they only use one GPU for training.\n",
     "results": "They choose CSPDarkNet53 as their backbone. For the neck, they find that SPP (Spatial Pyramid Pooling) blocks and a PANet aggregation neck works best. Finally, their head, responsible for the detection, is chosen to be YOLOv3. Their resulting model is named YOLOv4.  \n\nTheir resulting YOLOv4 becomes the fastest and most accurate detector proposed in the literature.\n\nNote that they provide a link to their GitHub repo which includes a lot of documentation. \n"
-  }
+  },
+  "labels": [
+    "Object detection",
+    "Image classification"
+  ]
 },{
   "_id": {
     "$oid": "603e6d51a603d992335c931a"
@@ -57,7 +71,12 @@
     "what": "The learning problem is reconstructive. Given an input image, the network’s task is going to reconstruct the input image. Note that this network is faced with an inverse problem: given the observed input image, the objective is to recover the underlying parameters that make its 3D structure. \n\nAn additional guidance principle in their work is that of symmetry. They assume that many object categories have, at least in principle, a symmetric structure. This assumption will be incorporated in the overall loss function. \n",
     "how": "The input is the 2D image, and the output are the four parameters (depth, albedo, viewpoint and lighting). This corresponds to a 3D internal representation, from which a 3D image can be rendered.\n\nThe symmetry is learned via two mechanisms:\n- Once we have the outputs (albedo, light, depth, viewpoint) of the individual neural networks, It is possible to render a symmetric reconstruction by flipping, across the vertical axis, the albedo and depth maps. Symmetry is then learned by enforcing that this reconstructed symmetric image, once projected back to 2D, is equal to the input image. \n- Also, they augment the model to reason about potential lack of symmetry in objects, by having it predict a probability map of whether a given pixel has a symmetric counterpart in the image. This probability map is used when computing the loss term.\n\nThe learning objective is reconstructive: the model is trained to reconstruct the input image. It learns to decompose the input image into a (depth, albedo, viewpoint and lighting) parameters, and input these to a renderer that outputs a 3D image. The loss component is going to apply a projection to the resulting 3D image and enforce that it matches the input image. \nThere are two loss terms in the overall loss: the reconstructive loss that enforces that the image from the predicted parameters is equal to the input image, and a loss that enforces that the image from the symmetrically predicted parameters is equal to the input image. \n",
     "results": "\nThey test their methods on human face datasets, cat face dataset, and synthetic cars datasets.\nAs a result of training, the resulting autoencoder internally decomposes the image into albedo, depth, illumination and viewpoint, without direct supervision for any of these factors. \n\nTheir evaluation metrics use the ground truth depth maps that they have in their dataset. Given the depth maps predicted by their model, they can compute the “scale-invariant depth error” (SIDE) metric as an evaluation metric. In addition, they use the “Mean Angle Deviation”, again computed from the depth maps.\n\nThey can also do a qualitative comparison with SOTA by just comparing the quality of the 3D reconstructions, see for example Figure 7.\n\nVia ablation studies, they show that symmetry and illumination are crucial cues to have the model converge to a good reconstruction. \n\nTheir model even outperforms a 3D reconstruction method that uses 2D keypoint supervision as additional input (whereas they only use the single viewpoint input image). "
-  }
+  },
+  "labels": [
+    "3D reconstruction",
+    "Unsupervised learning",
+    "Auto-encoders"
+  ]
 },{
   "_id": {
     "$oid": "604ce20c36c8bc367058f276"
@@ -72,7 +91,12 @@
     "how": "Each forward pass provides a new set of keys for the current mini-batch. In addition, we still keep the previous encoded K keys in the queue as additional negative examples when computing loss and gradients. The gradient of the query network f_q utilizes all of the negative samples that are in the queue. To update the keys network f_k, though, we do not use backpropagation as things would become intractable — think of all the keys that are in the queue, each of them coming from that f_k, it is too many gradients. But we still want to update the keys f_k network, otherwise it becomes quickly out-of-date (as in the case of memory bank contrastive learning) and we might as well be comparing apples and oranges during training. To do so, they use a simple momentum update, which uses the weights of the queries network that are regularly updated by backprop. (See Equation 2). \n\nAt the end of a forward pass, the current representations of that mini-batch are enqueued in the dictionary, the oldest is dequeued.\n\nTheir method can be seen as an enhanced procedure for contrastive methods that use memory bank. Like the memory-bank-based methods, they keep a representation of all samples in the data (to some extent). By using the momentum update rule, and regularly enqueuing and dequeuing keys, they update the encoder network that results in the representations of those samples stored in the queue, on the long term. \n\n",
     "results": "Under the linear classification protocol, they even do better than contrastive methods that use memory banks, which keep a representation of ALL samples in the dataset. \n\nThey show that they have a good tradeoff between number of parameters and accuracy. Even their encoders with a relatively small number of parameters lead to good results (see Table 1).\n\nThey use their methods to do feature transferring for image classification, and object detection tasks. The trained encoder is the backbone for that object detection task. It is fine-tuned on the ground-truth labels that we have. Note that in Section 4.2, they write about how the distribution of features resulting from contrastive loss learning are not the same as features typically obtained from supervised learning — thus the typical hyperparameters used to train the same backbones on supervised tasks would be different. They decide to keep the same hyperparameters, but instead normalize the unsupervised features learned. \n"
   },
-  "__v": 0
+  "__v": 0,
+  "labels": [
+    "Unsupervised learning",
+    "Contrastive learning",
+    ""
+  ]
 },{
   "_id": {
     "$oid": "604ce4ea36c8bc367058f27a"
@@ -87,7 +111,14 @@
     "how": "The TissueNet dataset was gathered using a supervised crowdsourcing, human-in-the-loop pipeline. This approach consists of multiple phases. In Phase 1, an expert annotates a small number of cells (~80), which are then used to train a preliminary model. In phase 2, given the output of the preliminary model, crowdsourced annotations (non-experts) make corrections. The corrected annotations are inspected by experts, and then added to the training dataset which is then used again to train the preliminary omdel. This continues with the model being re-trained with this new dataset, corrections are made again, verified by experts, etc. At the third phase, the model can generate predictions without any human supervision. This approach results in a huge dataset compared to what is already published: more than 1 million annotations.\n\nDeepCell Label is their platform for performing these annotations in the loop.\n\nThe Mesmer model is based on the PanopticNet architecture. Instead of the traditional two semantic heads for PanopticNet, their Mesmer has four semantic heads: two for nuclear segmentation, two for cell segmentation. They share the common ResNet backbone and FPN. \n\nThe input to Mesmer has two channels: a nuclear image (e.g., DAPI), and a membrane/cytoplasm image (e.g. CD45). The output of Mesmer is the boundary prediction and centroid predictions for every nucleus and cell. This is fed to the watershed algorithm for the final instance segmentation mask. \n",
     "results": "Compared with other deep learning models for tissue segmentation (e.g. FeatureNet, CellPose), they find that their model is faster and more accurate. Especially when compared with CellPose, which involves a lot of post-processing.\n\nThe model predictions are good across a range of tissue types. Errors were unbiased: errors were both on cells that were large, and small. They found that their generalist model (Mesmer) was competitive with specialist models, those that were trained on a specific tissue data type. \n\nHuman-level performance on cell segmentation. \n\nThey apply their Mesmer models on two research applications: (1) Quantifying cell morphology change during human pregnancy, (2) Segmentation for accurate downstream analysis of tissue imaging data. \n"
   },
-  "__v": 0
+  "__v": 0,
+  "labels": [
+    "Cell segmentation",
+    "Bioimage analysis",
+    "Instance segmentation",
+    "Crowdsourcing",
+    ""
+  ]
 },{
   "_id": {
     "$oid": "605609babb0c5c8013d1b19c"
@@ -102,7 +133,11 @@
     "how": "The main contribution is in changing the predictive task of the DNN and using vector field representations of the images as the ground-truth labels. The neural network does not learn the segmentation task, but instead learns to predict a flow field by outputting (1) the horizontal gradient of the image, (2) the vertical gradient of the image, (3) the probability which indicates if a given pixel is part of a cell. Supposedly this should allow the network to extract a more robust representation of cells. \n\nGiven this predicted flow field, we can lead each pixel of a cell towards the center of that cell. For each pixel, they run a dynamical system starting at that pixel location and follow the spatial derivative specified by the horizontal and vertical maps. \n\nTo obtain the training data (the flow maps), a heat diffusion simulation is applied on each masks obtained by experts. \n\nThe neural network is based on the UNet architecture. They train the neural network on a diverse set of images. Note that it’s a relatively small dataset (616 images) — contrast that with TissueNet.\n\nThey obtain 3D segmentation by running CellPose on XY, XZ, and YZ slice to then form a 3D vector flow field. Then they apply the dynamic system as usual, and obtain a 3D segmentation mask. \n\n",
     "results": "To compare the CellPose framework, they train the StarDist and Mask-RCNN models on their specialized and generalized data. In both the generalized and specialized settings, the CellPose consistently outperforms these two models. \n\nNote that their framework involves very time-consuming post-processing. To predict the mask from the flow field, for example, they do 200 iterations for each pixel in the image. Furthermore, their “test time enhancements” (see page 10) adds more computational time to the framework. \n"
   },
-  "__v": 0
+  "__v": 0,
+  "labels": [
+    "Cell segmentation",
+    "Bioimage anlysis"
+  ]
 },{
   "_id": {
     "$oid": "605636aabb0c5c8013d1b19e"
@@ -117,7 +152,12 @@
     "how": "The task becomes the following: each instance is its own class. In some sense we now have a “supervised” classification problem. If there are 1.2 million images in ImageNet, then we train the neural network on 1.2 million classes. The network learns a representation that is a vector with 128 elements only. \n\nThe probability that a given feature vector corresponds to class i (instance i) is given by the softmax equation, which is based on the inner product between the feature vector and the vector representation of instance i (see Equation 2). Note that the classic softmax formulation involves an inner product between the weights vector and the vector representation of the instance, making the learned model dependent on the classes assumed at the time of training. In the non-parametric case in Equation 2, the probability any new feature vector belonging to a specific instance can be computed. \n\nThe obvious problem is that this is computationally intractable (to say the least). They use two tricks to alleviate these computational concerns: \n— The first trick is to approximate the full softmax with Noise Contrastive Estimation. NCE is not a new method — it has been used before in the literature to reduce computation, but they apply it to their problem. NCE reduces computational complexity from O(n) to O(1) per sample. A second they tricky \n- The second trick is to use proximal regularization methods to stabilize learning process. Their regularization enforces that the representation of a specific feature at time t - 1 is not too different from the new computed one at the current inference pass at time t. \n\nAt each step of the training, a forward pass is computed and a new representation for instance i is obtained. The representation of that instance in the memory bank is updated. The loss and gradients are computed (matching each instance in the batch to its corresponding instance class), and the network parameters are updated to produce a better representation at the next step. The batch size used during training is 256 (but the class vector is 1.2 millions).\n\nThe resulting memory bank is not as large as one might think. Since they set the features of images to 128, the memory bank in the end is only 600 MB.",
     "results": "They test their representation in two different settings: (1) Linear SVM on intermediate features of their network, from conv1 to conv5 and (2) KNN on the output features (size 128). In this second test case, they first compute its feature representation with the neural network, and then compare it against the embeddings of all the images in the memory bank, using the cosine similarity function. The top k nearest neighbors are used to make the decision via weighted voting. \n\nThey show that their learned features does not work well in the linear classification setting, when a SVM is trained to do a classification directly on these features. This is expected, as the learned features do not correspond to semantic features. Hence the SVM is not working on a linearly separable space where classes have been separated from one another. It makes sense that KNN would be much more appropriate for this application (and convenient as there are only 128 features). Under the KNN test setting, their method outperforms the other unsupervised methods. \n\nSemi-supervisd setting is when we first learn from a large unlabelled data (as they did) and they use a small amount of labeled data to fine-tune the model. They train only on a small amount of data of ImageNet, from 1% to 20%. They compare their methods against other pre-training methods called “Split-brain” and “Colorization”. They consitently outperform both of them. \n\nFinally, they apply their learned features in the Object Detection setting, initializing the backbone networks with their learned weights and fine-tuning these for the object detection task. They compete well with the other unsupervised methods who have also finetuned on Object Detection tasks. If choosing ResNet-50 as their backbone, they outperform the other unsupervised methods. "
   },
-  "__v": 0
+  "__v": 0,
+  "labels": [
+    "Unsupervised learning",
+    "Supervised learning",
+    "Memory bank"
+  ]
 },{
   "_id": {
     "$oid": "605f4a8f802cf683982d6798"
@@ -132,7 +172,13 @@
     "how": "Their proposed pipeline is the following. First, they do unsupervised learning on ImageNet or on the medical data using the classical contrastive learning approach, SimCLR. This approach uses data augmentation to generate positive pairs. Each image is augmented twice using either random crop, color distortion, or Gaussian blur. The representation obtained from a ResNet-like architecture is fed to a non-linear projection head, and the resulting representation goes to a contrastive loss based on cosine similarity.\n\nNext, if possible, they continue the unsupervised learning phase with multi-instance contrastive learning (MICLe) for additional self-supervised training on the medical data. In this case, the positive pairs are naturally obtained by having taken a given pathology from different viewing angles, lighting conditions, or different body parts.\n\nThird, with these representations, fine-tune your ResNet-like architecture on the few labels that are available for this medical classification task. ",
     "results": "They find that best results are obtained when both the ImageNet and the task-specific medical image dataset are used, rather than one or the other individually.\n\nFurthermore, they find that using MICLe instead of SimCLR consistency improves the resulting model performance.\n\nInterestingly, they show that doing supervised classification pre-training on the labeled ImageNet does not improve the performance as well as unsupervised pre-training does. It may be that the representations learned are too task-specific and do not generalize well. \n\nFinally, self-supervised models are most robust to domain shifts after having fine-tuned on a specific domain. This is in contrast with using a supervised pre-training approach on ImageNet, which does not do well under domain shifts. In additional, they show that using self-supervised pretraining instead of supervised pre-training results in needing less labels during the finetuning stage. "
   },
-  "__v": 0
+  "__v": 0,
+  "labels": [
+    "Unsupervised learning",
+    "Supervised learning",
+    "Fine-tuning",
+    ""
+  ]
 },{
   "_id": {
     "$oid": "6064de55500bd84dbbc5d57d"
@@ -147,7 +193,13 @@
     "how": "Stardist’s architecture is a light-weight neural network based on U-Net. \n\nThe task of the network is to predict for each pixel: (1) the distance between that pixel and the nearest background pixel, which can be seen as a probability of belonging to an instance, and (2) the distance to the object boundary along each of the n predefined radial directions. \n\nA binary cross-entropy loss function is used to predict the object probabilities, and a MAE loss for predicting the radial distances. \n\nThey apply NMS to only retain polygons in a certain region with the highest object probabilities. They only consider polygons associated with pixels above a certain object probability threshold. \n",
     "results": "They compare their results with a UNet trained for a simple semantic classification task. They test on synthetic datasets of cells and nuclei, and on nuclei dataset from DSB 2018. On the real dataset of DSB 2018, StarDist outperforms all methods. StarDist does particularly well at not merging cells or not missing cells. This is supposedly due to the use of a star-convex polygon which creates less problems when using NMS.\n\nI wish they had provided a comparison of using their method with the same method, but with the only difference being the prediction of a bounding box instead of a star polygon shape. It’s difficult to know here what is the effect of predicting star-convex shapes. They do compare with Mask-RCNN, but they use the open-source implementation of it, so the comparison may not be valid.\n\nTwo of their test datasets are synthetic, which is a bit of a disappointment for seeing the performance on cell data. A real cell test dataset should be used. "
   },
-  "__v": 0
+  "__v": 0,
+  "labels": [
+    "Object detection",
+    "Cell segmentation",
+    "Bioimage analysis",
+    ""
+  ]
 },{
   "_id": {
     "$oid": "6064e29e500bd84dbbc5d57f"
@@ -162,20 +214,28 @@
     "how": "They aid the network by defining an intermediate task: have the network predict a “distance transform”, which tells us for each pixel how far it is from its instance’s boundary. This is performed with a group of layers named “DirectionNet” This is then passed to the next layers of the network, “Watershed Transform Net”, that predict the energy of the watershed transform. \n\nDirectionNet is pre-trained to estimate the direction of descent of the energy at each pixel. This results in a 2-channel unit vector map, where each pixel has a unit vector pointing to a specific direction. \n\nThis direction map is then fed to Watershed Transform Net, which outputs a discretized watershed transform map with 16 possible energy values. The higher the energy value at a given pixel, the more the pixel is located at the interior of the instance. Low energy values are for pixels near the boundary of the instance. With a single level cut on the energy map, they can obtain the segmented instances. \n\nThis idea of using an energy map reminds of StarDist’s approach in predicting for each pixel, a distance to its instance boundary. \n\nThe input to the network is the image AND its semantic segmentation map. Note that this is an extra requirement that can be seen as a limitation. \n\nEach sub-network is pre-trained independently, and then the whole system is fine-tuned. ",
     "results": "They test their method on the Cityscapes Instance Segmentation benchmark. This is a difficult dataset because objects are often included, and there usually are dozens of instances in a single image. \n\nThey significantly outperform the other methods that they compare to. "
   },
-  "__v": 0
+  "__v": 0,
+  "labels": [
+    "Image segmentation",
+    "Instance segmentation"
+  ]
 },{
   "_id": {
     "$oid": "606613eac8b4c721cc1f28f6"
   },
   "title": "Deep Feedback Inverse Problem Solver",
-  "authors": "",
-  "date": "",
-  "journal": "",
+  "authors": "Ma, W. C., Wang, S., Gu, J., Manivasagam, S., Torralba, A., & Urtasun, R.",
+  "date": "2020",
+  "journal": "In European Conference on Computer Vision (pp. 229-246). Springer, Cham.",
   "sections": {
     "why": "There exists a family of problems called inverse problems, which are difficult to solve: given an observation, the objective is to recover the original input to the forward problem.\n\nThere exists two main approaches for solving inverse problems: analytical-based approaches, in which human knowledge is uses to regularize or constrain the solution and formulate an optimization problem; and deep-learning based approach, where the objective is to learn a mapping from the observation to the source. \n\nAnalytical-based approaches can be difficult to design, usually require many iterations to converge, and are sensitive to initialization. Deep Learning-based approaches often produce results that are not realistic or incompatible with the real observations. ",
-    "what": "",
-    "how": "",
-    "results": ""
+    "what": "When solving the inverse problem analytically, there generally is a feedback mechanism during the algorithm that checks that we satisfy f(x*) = y, where x* is the predicted unknown, f() is the feedback mechanism, and and y is the observation. We want to include such a feedback mechanism in Deep Learning-based methods, which often ignore this knowledge of the feedback mechanism. ",
+    "how": "test",
+    "results": "test"
   },
-  "__v": 0
+  "__v": 0,
+  "labels": [
+    "Inverse problems",
+    ""
+  ]
 }]

@@ -27,16 +27,6 @@ const useStyles = makeStyles({
         marginRight: 20,
         whiteSpace: 'pre-line'
     },
-    edit: {
-        float: 'right',
-        position: 'relative',
-        top: 10,
-        marginRight: 10
-    },
-    editIcon: {
-        float: 'right',
-        color: "#6573c3",
-    },
     header: {
       backgroundColor: "#6573c3"
     },

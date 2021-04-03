@@ -47,25 +47,27 @@ export default function CardPreview({card}: CardPreviewsProps) {
     return (
         <React.Fragment>
             <Grid key={card._id} item xs={4}>
-                <Card className={classes.root} >
-                    <CardActionArea className={classes.media} onClick={onCardClick}>
-                        <CardContent>
-                            <Typography className={classes.title} variant="h6" component="h2">
-                                {card.title}
-                            </Typography>
-                            <Typography className={classes.authors} color="textSecondary">
-                                {card.authors}
-                            </Typography>
-                            <Typography className={classes.info} color="textSecondary" gutterBottom>
-                                {[card.journal, card.date].join(", ")}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <Button className={classes.labels} size="small" variant="outlined" color="secondary">
-                        {card.labels[0]}
-                    </Button>
+                <Container className={classes.container}>
+                    <Card className={classes.root} >
+                        <CardActionArea className={classes.media} onClick={onCardClick}>
+                            <CardContent>
+                                <Typography className={classes.title} variant="h6" component="h2">
+                                    {card.title}
+                                </Typography>
+                                <Typography className={classes.authors} color="textSecondary">
+                                    {card.authors}
+                                </Typography>
+                                <Typography className={classes.info} color="textSecondary" gutterBottom>
+                                    {[card.journal, card.date].join(", ")}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <Button className={classes.labels} size="small" variant="outlined" color="secondary">
+                            {card.labels[0]}
+                        </Button>
 
-                </Card>
+                    </Card>
+                </Container>
             </Grid>
             <Dialog  classes={{
                 paper: classes.dialog

@@ -2,8 +2,11 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minWidth: 350,
+        minWidth: 400,
         height: "100%",
+    },
+    container: {
+        height: "100%"
     },
     dialog: {
         position: 'absolute',

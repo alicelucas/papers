@@ -12,6 +12,10 @@ import {Section} from "../../types/Section";
 import {CardActionArea} from "@material-ui/core";
 import OutlinedCard from "../Card/Card"
 import Dialog from "@material-ui/core/Dialog";
+import Container from "@material-ui/core/Container";
+import Box from "@material-ui/core/Box";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 
 type CardPreviewsProps = {
     card: CardPreviewType
@@ -57,7 +61,11 @@ export default function CardPreview({card}: CardPreviewsProps) {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                    {/*<RemoveCardButton handleRemoveCard={handleRemoveCard}/>*/}
+                    <Box>
+                        <Button variant="contained" color="secondary">
+                            {card.labels[0]}
+                        </Button>
+                    </Box>
                 </Card>
             </Grid>
             <Dialog  classes={{

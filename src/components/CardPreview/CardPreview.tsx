@@ -49,19 +49,6 @@ export default function CardPreview({card}: CardPreviewsProps) {
             <Grid key={card._id} item xs={4}>
                 <Container className={classes.container}>
                     <Card className={classes.root} >
-                        <CardActionArea className={classes.media} onClick={onCardClick}>
-                            <CardContent>
-                                <Typography className={classes.title} variant="h6" component="h2">
-                                    {card.title}
-                                </Typography>
-                                <Typography className={classes.authors} color="textSecondary">
-                                    {card.authors}
-                                </Typography>
-                                <Typography className={classes.info} color="textSecondary" gutterBottom>
-                                    {[card.journal, card.date].join(", ")}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
                         {card.labels.map( (label: string) => {
                             if (label.length) return (
                                 <Button  key={label} className={classes.labels} size="small" variant="outlined">
@@ -69,6 +56,19 @@ export default function CardPreview({card}: CardPreviewsProps) {
                                 </Button>
                             )
                         })}
+                        <CardActionArea className={classes.media} onClick={onCardClick}>
+                            <CardContent>
+                                <Typography className={classes.title} align="center" variant="h6" component="h2">
+                                    {card.title}
+                                </Typography>
+                                <Typography className={classes.authors} align="center" color="textSecondary">
+                                    {card.authors}
+                                </Typography>
+                                <Typography className={classes.info} align="center" color="textSecondary" gutterBottom>
+                                    {[card.journal, card.date].join(", ")}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
                     </Card>
                 </Container>
             </Grid>

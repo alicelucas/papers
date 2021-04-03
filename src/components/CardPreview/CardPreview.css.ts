@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
     },
     labels: {
         position: "relative",
-        bottom: "2px"
+        bottom: "2px",
+        color: "#6573c3"
     },
     bullet: {
         display: 'inline-block',

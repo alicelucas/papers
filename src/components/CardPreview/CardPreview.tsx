@@ -64,7 +64,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
                         </CardActionArea>
                         {card.labels.map( (label: string) => {
                             if (label.length) return (
-                                <Button  key={label} className={classes.labels} size="small" variant="outlined" color="secondary">
+                                <Button  key={label} className={classes.labels} size="small" variant="outlined">
                                     {label}
                                 </Button>
                             )

@@ -28,7 +28,9 @@ const useStyles = makeStyles({
         whiteSpace: 'pre-line'
     },
     header: {
-      backgroundColor: "#6573c3"
+      backgroundColor: "#6573c3",
+        color: "white",
+        whiteSpace: 'pre-line'
     },
     root: {
         minWidth: 275,
@@ -85,7 +87,7 @@ export default function CardDialog() {
 
     return (
         <Card className={classes.root} variant="outlined">
-            <CardHeader align="center" className={classes.header} title={selectedCard.title} subheader={[selectedCard.authors, selectedCard.journal, selectedCard.date].join(" ")}/>
+            <CardHeader align="center" className={classes.header} title={selectedCard.title} subheader={<Typography>{[selectedCard.authors, "\n", selectedCard.journal, selectedCard.date].join(" ")}</Typography>}/>
             <CardActions className={classes.arrows}>
                 <IconButton className={classes.icon} onClick={onPreviousSectionClick}>
                     <ArrowBackIcon fontSize={"large"}/>

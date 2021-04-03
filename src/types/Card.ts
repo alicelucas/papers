@@ -3,6 +3,7 @@ export type Card = {
     authors: string,
     date: string,
     journal: string,
+    labels: Array<string>,
     title: string,
     sections: {
         why: string,

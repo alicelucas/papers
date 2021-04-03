@@ -62,10 +62,13 @@ export default function CardPreview({card}: CardPreviewsProps) {
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
-                        <Button className={classes.labels} size="small" variant="outlined" color="secondary">
-                            {card.labels[0]}
-                        </Button>
-
+                        {card.labels.map( (label: string) => {
+                            if (label.length) return (
+                                <Button  key={label} className={classes.labels} size="small" variant="outlined" color="secondary">
+                                    {label}
+                                </Button>
+                            )
+                        })}
                     </Card>
                 </Container>
             </Grid>

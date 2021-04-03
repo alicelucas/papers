@@ -6,7 +6,10 @@ const useStyles = makeStyles((theme) => ({
         height: "100%",
     },
     labelContainer: {
-      paddingBlock: "6px"
+      paddingBlock: "6px",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center"
     },
     container: {
         height: "100%",
@@ -22,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
     labels: {
         position: "relative",
         bottom: "2px",
-        color: "#6573c3"
+        color: "#6573c3",
+        margin: "2px"
     },
     bullet: {
         display: 'inline-block',

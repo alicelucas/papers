@@ -13,8 +13,6 @@ import {CardActionArea} from "@material-ui/core";
 import CardDialog from "../Card/Card"
 import Dialog from "@material-ui/core/Dialog";
 import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
-import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 
 type CardPreviewsProps = {
@@ -50,12 +48,15 @@ export default function CardPreview({card}: CardPreviewsProps) {
                 <Container className={classes.container}>
                     <Card variant="outlined" className={classes.root} >
                         <Container className={classes.labelContainer}>
-                            {card.labels.map( (label: string) => {
+                            {card.labels.map( (label: string, idx: number) => {
                                 if (label.length) return (
                                     <Button  key={label} className={classes.labels} size="small" variant="outlined">
                                         {label}
                                     </Button>
                                 )
+                                else {
+                                    return <React.Fragment key={idx} />
+                                }
                             })}
                         </Container>
 

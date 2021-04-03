@@ -229,13 +229,13 @@
   "journal": "In European Conference on Computer Vision (pp. 229-246). Springer, Cham.",
   "sections": {
     "why": "There exists a family of problems called inverse problems, which are difficult to solve: given an observation, the objective is to recover the original input to the forward problem.\n\nThere exists two main approaches for solving inverse problems: analytical-based approaches, in which human knowledge is uses to regularize or constrain the solution and formulate an optimization problem; and deep-learning based approach, where the objective is to learn a mapping from the observation to the source. \n\nAnalytical-based approaches can be difficult to design, usually require many iterations to converge, and are sensitive to initialization. Deep Learning-based approaches often produce results that are not realistic or incompatible with the real observations. ",
-    "what": "When solving the inverse problem analytically, there generally is a feedback mechanism during the algorithm that checks that we satisfy f(x*) = y, where x* is the predicted unknown, f() is the feedback mechanism, and and y is the observation. We want to include such a feedback mechanism in Deep Learning-based methods, which often ignore this knowledge of the feedback mechanism. ",
-    "how": "test",
-    "results": "test"
+    "what": "When solving the inverse problem analytically, there generally is a feedback mechanism during the algorithm that checks that we satisfy f(x*) = y, where x* is the predicted unknown at time t of the optimization, f() is the feedback mechanism, and and y is the observation. \n\nThe objective of this work is to use Deep Neural networks as part of the optimization algorithm. ",
+    "how": "In a traditional optimization scheme, the update rule is given by x(t+1) = x(t) + g(xt, yt, y), where g() is an update function analytically derived from the energy function defined in the optimization objective function. In this work, g() is implemented by a neural network. Thus the neural network g() can be seen as computing a residual between the previous solution x(t) and the new solution x(t+1). By having yt and y as its input, the neural network can compute how well the currently predicted solution x matches the known forward model, and output a residual based on that. \n\nIn some sense, the neural network learns how to conduct an iterative update over the current solution, based on the known forward process and the current observation and the “ground-truth” observation.\n\nTo make this clear, the authors are not using the neural network as a direct mapping from y to x and are instead still using traditional analytical techniques. The main difference is that the update function g(), usually derived by hand, is implemented and learned by a deep neural network. \n",
+    "results": "They apply their methods to three applications: pose estimation, illumination estimation and inverse kinematics. Comparing their approach with a method that does not use DL to implement the feedback update, they do better. For pose estimation, their method seems to be more robust to extreme poses. "
   },
   "__v": 0,
   "labels": [
     "Inverse problems",
-    ""
+    "Iterative optimization"
   ]
 }]

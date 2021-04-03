@@ -24,15 +24,6 @@ export default function CardPreview({card}: CardPreviewsProps) {
 
     const updatedCard = useSelector(updatedCardContentSelector);
 
-    const handleRemoveCard = () => {
-        const url = "http://127.0.0.1:8000/removeCard/".concat(card._id)
-        axios.delete(url).then(
-            (response) => {
-                dispatch(cardsSlice.actions.removeCard({id: card._id} ))
-            }
-        )
-    }
-
     const [openCardDialog, setOpenCardDialog] = React.useState<boolean>(false)
 
     const onCardClick = () => {

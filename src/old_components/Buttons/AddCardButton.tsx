@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button";
 import React from "react";
 import {Dialog} from "@material-ui/core";
-import CardForm from "../CardForm/CardForm";
+// import CardForm from "../CardForm/CardForm";
 
 
 const AddCardButton = () => {
@@ -20,7 +20,7 @@ const AddCardButton = () => {
         <React.Fragment>
             <Button variant="outlined" onClick={onClick}> Add card </Button>
             <Dialog fullWidth={true} maxWidth="lg" onClose={handleClose} open={open}>
-                <CardForm handleClose={handleClose}/>
+                {/*<CardForm handleClose={handleClose}/>*/}
             </Dialog>
         </React.Fragment>
 

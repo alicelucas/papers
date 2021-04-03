@@ -5,8 +5,12 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 400,
         height: "100%",
     },
+    labelContainer: {
+      paddingBlock: "6px"
+    },
     container: {
-        height: "100%"
+        height: "100%",
+        margin: "12px"
     },
     dialog: {
         position: 'absolute',

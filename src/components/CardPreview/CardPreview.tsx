@@ -48,14 +48,17 @@ export default function CardPreview({card}: CardPreviewsProps) {
         <React.Fragment>
             <Grid key={card._id} item xs={4}>
                 <Container className={classes.container}>
-                    <Card className={classes.root} >
-                        {card.labels.map( (label: string) => {
-                            if (label.length) return (
-                                <Button  key={label} className={classes.labels} size="small" variant="outlined">
-                                    {label}
-                                </Button>
-                            )
-                        })}
+                    <Card variant="outlined" className={classes.root} >
+                        <Container className={classes.labelContainer}>
+                            {card.labels.map( (label: string) => {
+                                if (label.length) return (
+                                    <Button  key={label} className={classes.labels} size="small" variant="outlined">
+                                        {label}
+                                    </Button>
+                                )
+                            })}
+                        </Container>
+
                         <CardActionArea className={classes.media} onClick={onCardClick}>
                             <CardContent>
                                 <Typography className={classes.title} align="center" variant="h6" component="h2">

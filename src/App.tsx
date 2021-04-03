@@ -25,7 +25,6 @@ function App() {
     return (
       <Container maxWidth="lg">
           <CardsGrid/>
-          <AddCardButton/>
       </Container>
   );
 }

@@ -4,7 +4,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 350,
         height: "100%",
-        // height: 200
     },
     dialog: {
         position: 'absolute',

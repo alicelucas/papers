@@ -47,8 +47,8 @@ export default function CardPreview({card}: CardPreviewsProps) {
     return (
         <React.Fragment>
             <Grid key={card._id} item xs={4}>
-                <Card className={classes.root} onClick={onCardClick}>
-                    <CardActionArea className={classes.media}>
+                <Card className={classes.root} >
+                    <CardActionArea className={classes.media} onClick={onCardClick}>
                         <CardContent>
                             <Typography className={classes.title} variant="h6" component="h2">
                                 {card.title}
@@ -61,11 +61,9 @@ export default function CardPreview({card}: CardPreviewsProps) {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                    <CardActionArea>
-                        <Button className={classes.labels} size="small" variant="outlined" color="secondary">
-                            {card.labels[0]}
-                        </Button>
-                    </CardActionArea>
+                    <Button className={classes.labels} size="small" variant="outlined" color="secondary">
+                        {card.labels[0]}
+                    </Button>
 
                 </Card>
             </Grid>

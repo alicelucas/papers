@@ -6,6 +6,7 @@ import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "./store/slice";
+import CardAppBar from "./components/AppBar/AppBar";
 
 function App() {
     const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function App() {
 
     return (
       <Container maxWidth="lg">
+          <CardAppBar/>
           <CardsGrid/>
       </Container>
   );

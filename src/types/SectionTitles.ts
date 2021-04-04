@@ -1,7 +1,7 @@
 const sectionTitles = [
     "Why is this work important?",
+    "How does this work differ from the others?",
     "What do they propose?",
-    "How does it work?",
     "What are the results?"
 ]
 

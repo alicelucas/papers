@@ -175,8 +175,9 @@
   "__v": 0,
   "labels": [
     "Unsupervised learning",
-    "Supervised learning",
+    "Semi-supervised learning",
     "Fine-tuning",
+    "Contrastive learning",
     ""
   ]
 },{
@@ -237,5 +238,25 @@
   "labels": [
     "Inverse problems",
     "Iterative optimization"
+  ]
+},{
+  "_id": {
+    "$oid": "606dd78dd25befccf8fbae9e"
+  },
+  "authors": "Kirillov, A., Girshick, R., He, K., & Dollár, P.",
+  "date": "2019",
+  "journal": "Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 6399-6408).",
+  "title": "Panoptic feature pyramid networks",
+  "sections": {
+    "why": "The current SoTA for semantic segmentation is a FCN with dilated convolutions (also called atrous convolutions), and for instance segmentation it is a Mask-RCNN with a Feature Pyramid Network (FPN) backbone. \n\nThis work addresses the task of panoptic segmentation, which is the joint task of doing instance segmentation and semantic segmentation. ",
+    "what": "In the recent COCO and Mapillary Recognition competition on panoptic segmentation, every competitive entry ended up using a separate network for each of the tasks, with no shared computation. The previous literature that has tried to unify instance and semantic segmentation models have resulted in loss of performance in either of those tasks.\n\nWe are thus in need of a single model that can do both tasks simultaneously, but still perform competitively with as SoTA on each of those tasks. \n\nThis work therefore unifies these methods at the architectural level, by designing a layer which will be shared across networks. Their resulting model is a simple architecture that matches accuracy with SoTA for both tasks. The network simultaneously generates region-based outputs and dense-pixel outputs.",
+    "how": "The proposal is to start with the Mask R-CNN with FPN backbone (SoTA in instance segmentation). On top of these FPN features, they append an instance segmentation branch and a semantic segmentation branch. They make no change at all to the FPN backbone. The changes needed to get the semantic segmentation branch are minimal. \n\nEach of these branches share the same Feature Pyramid Network (FPN) backbone. Their resulting model is named Panoptic FPN. \n\nThe FPN backbone utilizes features at different resolutions. FPN generates a pyramid of features, scaling from 1/32 to 1/4 resolutions. It has the particularity that there are the same number of channel dimensions at each level. \n\nIn the instance segmentation branch, we attach a region-based object detector like faster RCNN on each of its pyramid level, to obtain candidate bounding boxes. This is made possible with the fact that that FPN backbone has the same number of channels at each level. Then by applying a FCN layer on the resulting detected regions for binary segmentation, a segmentation map for each instance is obtained (This is essentially the approach taken by mask-RCNN). \n\nThe semantic branch is going to take in the FPN features and upsample them and transform them in several ways such that in the end we are left with several feature maps corresponding to the 1/4 resolutions. A final 1x1 convolution, upsampling, and softmax layer is generated for each pixel, providing us with the segmentation map. \n\nThe output of the Panoptic FPN is going to have (1) a single class label and (2) an instance id for each pixel in the image.\n\nTraining these two branches jointly is tricky: in this paper, they provide the necessary information regarding the loss balances, constructing mini-batches, adjusting learning rate schedules, and performing data augmentation. ",
+    "results": "They evaluate their models on COCO and Cityscapes. They perform very well on instance segmentation, since the Mask RCNN + instance segmentation branch is essentially what SoTA does already. But they also do perform very well on semantic segmentation, as it is competitive as SoTA performing dilation based FCNs (such as DeepLabV3). This is observed when the network is trained for solving the two tasks independently, and when trained for solving the two tasks at once (panoptic segmentation). The latter result is significant because that means that we get to do both tasks for half the compute. In addition, they outperform all other single-model entries in the recent COCO Panoptic Segmentation Challenge."
+  },
+  "labels": [
+    "Feature Pyramid Networks",
+    "Panoptic segmentation",
+    "Dilated convolutions",
+    "Multi-task learning"
   ]
 }]

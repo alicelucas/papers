@@ -14,15 +14,8 @@ const searchEnhancer =  reduxSearch.reduxSearch({
         cards: ['authors', 'title']
     },
     // This selector is responsible for returning each collection of searchable resources
-    resourceSelector: (resourceName: string, state: {
-        cards: Array<Card>,
-        selectedCard: string,
-        selectedSection: Section,
-        updatedCard?: Card,
-    }) => {
-        // In our example, all resources are stored in the state under a :resources Map
-        // For example "books" are stored under state.resources.books
-        return state.cards
+    resourceSelector: (resourceName: any, state: any) => {
+        return state.cards.cards
     }
 })
 

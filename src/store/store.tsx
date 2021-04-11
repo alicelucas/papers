@@ -1,9 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {cardsSlice} from "./slice";
-import {Card} from "../types/Card";
-import {Section} from "../types/Section";
+import {cardsSlice} from "./cardsSlice";
 const reduxSearch = require("redux-search");
-// ...
+
 
 const searchReducer = reduxSearch.reducer;
 

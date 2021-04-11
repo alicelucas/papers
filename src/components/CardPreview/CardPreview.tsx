@@ -7,7 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import {Card as CardPreviewType} from "../../types/Card";
 import {useDispatch, useSelector} from "react-redux";
-import {cardsSlice, updatedCardContentSelector} from "../../store/slice";
+import {cardsSlice, updatedCardContentSelector} from "../../store/cardsSlice";
 import {Section} from "../../types/Section";
 import {CardActionArea} from "@material-ui/core";
 import CardDialog from "../Card/Card"

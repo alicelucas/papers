@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Container} from "@material-ui/core";
-import CardsGrid from "./components/Main/CardsGrid";
+import Main from "./components/Main/Main";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
 import {useDispatch} from "react-redux";
-import {cardsSlice} from "./store/slice";
+import {cardsSlice} from "./store/cardsSlice";
 import CardAppBar from "./components/AppBar/AppBar";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
     return (
       <Container maxWidth="lg">
           <CardAppBar/>
-          <CardsGrid/>
+          <Main/>
       </Container>
   );
 }

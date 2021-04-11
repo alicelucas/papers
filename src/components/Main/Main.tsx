@@ -5,7 +5,7 @@ import CardPreview from "../CardPreview/CardPreview";
 import * as _ from "lodash"
 import * as uuid from "uuid";
 import {useSelector} from "react-redux";
-import {cardsSelector} from "../../store/slice";
+import {cardsSelector} from "../../store/cardsSlice";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const CardsGrid = () => {
+const Main = () => {
 
     const classes = useStyles();
 
@@ -57,4 +57,4 @@ const CardsGrid = () => {
 
 }
 
-export default CardsGrid;
+export default Main;

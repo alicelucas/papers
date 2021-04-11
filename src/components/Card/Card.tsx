@@ -14,7 +14,7 @@ import {
     selectedCardSelector,
     selectedSectionContentSelector,
     selectedSectionSelector
-} from "../../store/slice";
+} from "../../store/cardsSlice";
 import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
 

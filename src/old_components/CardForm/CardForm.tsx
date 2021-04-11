@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 import {Card as CardType} from "../../types/Card";
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {cardsSlice} from "../../store/slice";
+import {cardsSlice} from "../../store/cardsSlice";
 
 type NewCardFormProps = {
     handleClose: () => void;

@@ -268,14 +268,33 @@
   "journal": "arXiv preprint arXiv:1703.05175",
   "title": "Prototypical networks for few-shot learning",
   "sections": {
-    "why": " ",
-    "what": " ",
-    "how": "",
-    "results": " "
+    "why": " The few-shot classification problem is when a classifier must be adapted to be able to predict new classes not seen in the training set, given only a few examples of each new class.\n\nI emphasize here that typically in few-shot learning, no fine-tuning is preferable (no retraining of the classifier parameters whatsoever). The training objective is to learn a model that can output a robust representation even from just a few examples (the support set) of a new class, and use this representation for new query points. The training objective is not to provide a mapping from an input image to a class.",
+    "what": " Many current approaches for few-shot learning employ a particular approach during training: mini-batches called “episodes” are used during training, where each episode is designed to mimic the few-shot task by subsampling classes as well as data points. This is called “episodic training”.  The popular “matching networks” (Vinyals et al.) uses episodic training. This work also uses episodic training.\n\nAnother SoTA method for few-shot classification is the meta-learner LSTM. If I remember correctly, a separate optimization problem is solved for each new unseen class.\n\nThis is interesting because it means that the task learned by the neural network during training is the few-shot classification task itself. \n\nTheir work introduces prototypical networks, a new method for one shot and few shot learning that is simpler and more efficient than recent meta-learning algorithms, and achieves SoTA performance.  The key contribution is that a simple “prototype” for each is class is assumed. The prototypical network is trained to produce the embedding space in which this prototype is compute.",
+    "how": "They assume that each class has a single prototype representation. The class’s prototype is just the mean of its support set in an embedding space. The embedding space is learned by the prototypical neural networks. At test time, for a given query data point, we compute its representation in the embedding space using the trained prototypical network, and find the nearest class prototype.\n\nIn zero shot learning, a class comes with meta-data instead of labeled examples. For zero shot learning, the authors propose to learn a separate embedding of the meta-data itself. Given a new test point, we find the nearest class prototype, as in the few-shot learning case. \n\nThe training process mimics the few-shot problem, using episodes. During training, a subset of classes are sampled, and some images of that class are used as the support set to estimate a prototype (the mean of the embeddings of the support points), and other images of that class are used as the queries (classifying new, unseen example). With each gradient update, we update the embedding model f() so that it produces a better embedding space, hence a better prototype for whatever class we have at the next episode.\n\nThe key thing here is that during training, the support set is small and only a few classes are samples. Therefore the network is trained too solve the few-shot problem directly. ",
+    "results": " They find that the choice of distance is critical:  the use of Euclidean distance greatly outperforms the generally used cosine similarity distance. \n\nThey seem to outperform matching networks and Meta-learner LSTM on the miniImageNet problem and the Omniglot dataset.\n\nThey obtain SoTA performance on the CUB-200 dataset for zero-shot learning."
   },
   "labels": [
     "Few-shot learning",
     "Zero-shot learning",
-    "Prototypical networks"
+    "Episodic training"
+  ]
+},{
+  "_id": {
+    "$oid": "607996b71fe25dbe666b79f8"
+  },
+  "authors": "Chen, M., Radford, A., Child, R., Wu, J., Jun, H., Luan, D., & Sutskever, I.",
+  "date": "2020",
+  "journal": "International Conference on Machine Learning (pp. 1691-1703)",
+  "title": "Generative pretraining from pixels.",
+  "sections": {
+    "why": " The current SoTA for image-related problems with Deep Learning has focused on solving the problems in a supervised fashion, utilizing large datasets that are available out there. \n\nRecently, however, there has been interest in learning representations of images in an unsupervised methods. These learned representations can then be used for linear classification, or for fine-tuning on limited amount of labeled dataset.",
+    "what": " This paper is inspired by the success that NLP has had with unsupervised learning They borrow the GPT-2 architecture, more particularly its transformer decoder, and apply it on images instead of text modality. \n\nUnlike contrastive learning which use auxiliary tasks to learn representations, the representations are learned here using generative image modeling. They explicitly learn to model the distribution of pixels in an image.",
+    "how": "They experiment with two different pre-training objective functions. The first one is the auto-regressive objective function, which  models p(x) as the product of all conditional probabilities p(x_i | x_{1…i-1}). In essence, each pixel is predicted by looking at all the other pixels previously predicted. The second objective function is BERT’s masked training objective, which is going to ask the model to predict masked pixels given unmasked pixels. \n\nThe input to their network is a flattened sequence corresponding to the pixels of the image. The decoder transformer produces a d-dimensional embedding for each input token (pixel), and on top of that has a stack of L blocks, each of them producing intermediate embeddings of size d. Because the image is flattened, the attention layer in the decoder is responsible for leaning to identify the 2D structure. Note the difference with DETR paper: they provide positional encodings to the input. \n\nBecause of the memory requirements of the transformer decoder, it would be impossible to feed in the whole sequence of length (224 x 224 x 3). To resolve this, the authors do two things: (1) they downsample the image to a smaller size, and (2) they switch from RGB to just a 9 bit color palette. The resulting context length has either (32 x 32), (48 x 48), or (64 x 64) elements. ",
+    "results": " They design GPT models of different sizes. They train on the ImageNet ILSVRC 2012 dataset. \n\nWhen working on the linear probing task, they experiment with using features of different layers in the model (not necessarily the last one). They find that choosing middle layers have the best features for good linear probing performance, and performance decreases as we choose deeper features. Note that when fine-tuning on the classification task, they attach a classification head on the layer with the best representations ( a middle layer), not the last one. \n\nWhen fine-tuning on the CIFAR datasets, they do really well. That’s because those images have small resolution, and their model did well at learning the distribution of images of small spatial extent.\n\nThey don’t do great on fine-tuning on the ImageNet dataset.  Clearly a limitation of this setup is that because of the dense self-attention on the input, they are constrained to using low-resolution inputs. It’s difficult to learn high-quality representations in this case, and contrastive learning approaches (which are not constrained by this, since they use CNNs), will do better. "
+  },
+  "labels": [
+    "Unsupervised learning",
+    "Generative models",
+    "Transformers"
   ]
 }]

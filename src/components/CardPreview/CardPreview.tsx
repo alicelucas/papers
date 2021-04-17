@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import useStyles from "./CardPreview.css"
 import Grid from "@material-ui/core/Grid";
-import axios from "axios";
 import {Card as CardPreviewType} from "../../types/Card";
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, updatedCardContentSelector} from "../../store/cardsSlice";
@@ -24,8 +23,6 @@ export default function CardPreview({card}: CardPreviewsProps) {
 
     const dispatch = useDispatch();
 
-    const updatedCard = useSelector(updatedCardContentSelector);
-
     const [openCardDialog, setOpenCardDialog] = React.useState<boolean>(false)
 
     const onCardClick = () => {
@@ -36,10 +33,6 @@ export default function CardPreview({card}: CardPreviewsProps) {
 
     const onDialogClose = () => {
         setOpenCardDialog(false);
-        if (!updatedCard) return;
-        axios.post("http://127.0.0.1:8000/replaceCard", updatedCard).then( (response) => {
-            dispatch(cardsSlice.actions.replaceSelectedCard({card: updatedCard}));
-        });
     }
 
     return (

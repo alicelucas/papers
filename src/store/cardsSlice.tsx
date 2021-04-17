@@ -29,6 +29,9 @@ export const cardsSlice = createSlice({
             addCard: (state, action: PayloadAction<{ card: Card }>) => {
                 state.cards.push(action.payload.card);
             },
+            addVisibleCardId: (state, action: PayloadAction<{ visibleCardId: string }>) => {
+                state.visibleCardsIds.push(action.payload.visibleCardId);
+            },
             editCard: (state, action: PayloadAction<{ card: Card }>) => {
 
             },
@@ -60,7 +63,7 @@ export const cardsSlice = createSlice({
     }
 )
 
-export const { addCard, editCard, removeCard, replaceSelectedCard, setSelectedCard, setSelectedSection, setVisibleCardIds } = cardsSlice.actions
+export const { addCard, addVisibleCardId, editCard, removeCard, replaceSelectedCard, setSelectedCard, setSelectedSection, setVisibleCardIds } = cardsSlice.actions
 
 
 // @ts-ignore
@@ -97,10 +100,8 @@ export const selectedSectionContentSelector = (state: RootState) => {
 export const updatedCardContentSelector = (state: RootState) => {
     return state.cards.updatedCard;
 }
-export const visibleCardsSelector = (state: RootState) => {
-    return state.cards.cards.filter((card: Card) => {
-        return (state.cards.visibleCardsIds.includes(card._id))
-    })
+export const visibleCardsIdsSelector = (state: RootState) => {
+    return (state.cards.visibleCardsIds)
 }
 
 export default cardsSlice.reducer

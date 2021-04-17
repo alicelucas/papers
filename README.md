@@ -1,6 +1,6 @@
 # My library of papers
 
-Everytime I read a paper, I almost instantly forget what it was about the next time I look at it. I made this web app so that I can upload to a single place the summaries and comments that I have for the papers I read. 
+Everytime I read a paper, I almost always forget what it was about the next time I look at it. I made this web app so that I can upload to a single place the summaries and comments that I have for the papers I read. Looking back at a given summary helps me quickly remember what I learned the first time I read the paper. 
 
 # The four-question summary
 

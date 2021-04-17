@@ -97,9 +97,7 @@ export const selectedSectionContentSelector = (state: RootState) => {
             return "";
     }
 }
-export const updatedCardContentSelector = (state: RootState) => {
-    return state.cards.updatedCard;
-}
+
 export const visibleCardsIdsSelector = (state: RootState) => {
     return (state.cards.visibleCardsIds)
 }

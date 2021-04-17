@@ -3,9 +3,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CardPreview from "../CardPreview/CardPreview";
 import * as _ from "lodash"
-import * as uuid from "uuid";
 import {useSelector} from "react-redux";
-import {cardsSelector, visibleCardsSelector} from "../../store/cardsSlice";
+import {visibleCardsSelector} from "../../store/cardsSlice";
 
 const useStyles = makeStyles((theme) => ({
     root: {

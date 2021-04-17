@@ -9,6 +9,7 @@ interface CardsState {
     selectedCard: string,
     selectedSection: Section,
     updatedCard?: Card,
+    visibleCards: Array<string>,
 }
 
 // Define the initial state using that type
@@ -16,7 +17,8 @@ const initialState: CardsState = {
     cards: [],
     selectedCard: "",
     selectedSection: Section.Why,
-    updatedCard: undefined
+    updatedCard: undefined,
+    visibleCards: [],
 }
 
 export const cardsSlice = createSlice({
@@ -50,12 +52,15 @@ export const cardsSlice = createSlice({
             },
             setUpdatedCard: (state, action: PayloadAction<{ updatedCard: Card}>) => {
                 state.updatedCard = action.payload.updatedCard;
+            },
+            setVisibleCard: (state, action: PayloadAction<{visibleCards: Array<string>}>) => {
+                state.visibleCards = action.payload.visibleCards;
             }
         }
     }
 )
 
-export const { addCard, editCard, removeCard, replaceSelectedCard, setSelectedCard, setSelectedSection } = cardsSlice.actions
+export const { addCard, editCard, removeCard, replaceSelectedCard, setSelectedCard, setSelectedSection, setVisibleCard } = cardsSlice.actions
 
 
 // @ts-ignore
@@ -91,6 +96,9 @@ export const selectedSectionContentSelector = (state: RootState) => {
 }
 export const updatedCardContentSelector = (state: RootState) => {
     return state.cards.updatedCard;
+}
+export const visibleCardsSelector = (state: RootState) => {
+    return state.cards.visibleCards;
 }
 
 // // Other code such as selectors can use the imported `RootState` type

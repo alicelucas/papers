@@ -1,10 +1,12 @@
-import React from 'react';
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import React, {ChangeEvent} from 'react';
+import {createStyles, fade, makeStyles, Theme} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import {useSelector} from "react-redux";
+import {cardsSelector} from "../../store/cardsSlice";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -66,6 +68,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function CardAppBar() {
     const classes = useStyles();
 
+    const cards = useSelector(cardsSelector);
+
+    const handleSearch = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const query = event.target.value;
+        // const ids = _.map(cards, (card: Card) => {
+        //     return ()
+        // })
+
+    }
+
     return (
         <div className={classes.grow} >
             <AppBar style={{background: "#6573c3"}}>
@@ -84,6 +96,7 @@ export default function CardAppBar() {
                                 input: classes.inputInput,
                             }}
                             inputProps={{ 'aria-label': 'search' }}
+                            onChange={handleSearch}
                         />
                     </div>
                     <div className={classes.grow} />

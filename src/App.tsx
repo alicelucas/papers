@@ -11,20 +11,16 @@ import CardAppBar from "./components/AppBar/AppBar";
 function App() {
     const dispatch = useDispatch();
 
-    const cards = useSelector(cardsSelector);
-
     const fetchAndUpdateCards = () => {
         axios.get("http://127.0.0.1:8000").then( (response: AxiosResponse) => {
             response.data.forEach( (card: Card) => {
                 dispatch(cardsSlice.actions.addCard({card: card}))
+                dispatch(cardsSlice.actions.addVisibleCardId({visibleCardId: card._id}))
             }
             )
         })
             .catch( (error: AxiosError) => {console.log(error)})
     }
-
-    useEffect( () => {
-        dispatch(cardsSlice.actions.setVisibleCardIds({visibleCardsIds: cards.map( (card: Card) => {return card._id})}))} , [cards])
 
     useEffect( () => {
         fetchAndUpdateCards()

@@ -24,7 +24,7 @@ function App() {
     }
 
     useEffect( () => {
-        dispatch(cardsSlice.actions.setVisibleCard({visibleCards: cards.map( (card: Card) => {return card._id})}))} , [cards])
+        dispatch(cardsSlice.actions.setVisibleCardIds({visibleCardsIds: cards.map( (card: Card) => {return card._id})}))} , [cards])
 
     useEffect( () => {
         fetchAndUpdateCards()

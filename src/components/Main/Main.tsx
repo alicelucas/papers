@@ -37,7 +37,7 @@ const Main = () => {
         const rows = cardIndices.map( (cardIdxs, idx) =>
              <Grid key={idx} container item xs={12} spacing={3}>
                     { cardIdxs.map( (cardIndex: number) => {
-                        const cardIdx = cards[cardIndex]._id ? cards[cardIndex]._id : uuid.v4();
+                        const cardIdx = cards[cardIndex]._id;
                         if (!cardIdx) return <React.Fragment/>;
                         return (<CardPreview card={cards[cardIndex]} key = {cardIdx}/>) })}
                 </Grid>

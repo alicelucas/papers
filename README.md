@@ -1,8 +1,8 @@
 # My library of papers
 
-Everytime I read a paper, I almost instantly forget what it was about the next week. This web app allows me to upload summaries and comments that I have for the papers I read, in a single place. 
+Everytime I read a paper, I almost instantly forget what it was about the next time I look at it. I made this web app so that I can upload to a single place the summaries and comments that I have for the papers I read. 
 
-# A compressed summary 
+# The four-question summary
 
 After I read a paper, I like to write down the answer to four questions: 
 
@@ -11,4 +11,4 @@ After I read a paper, I like to write down the answer to four questions:
 - *How does it work?* This answer delves into some of the technical details of the paper, although it still tries to avoid the nitty-gritty and still gives the big picture idea. 
 - *What are the results?* This provides any interesting or significant results that are particularly important. Any additional comments or thoughts I have would be written as well. 
 
-I use the four questions, and their answers, whenever I need to go back to a paper to refresh my memory and what it proposes and how it does it. This web app allows me to store all of these summaries in a single place. 
+I use these four questions, and their answers, whenever I need to go back to a paper to refresh my memory and what it proposes and how it does it. This web app allows me to store all of these summaries in a single place. 

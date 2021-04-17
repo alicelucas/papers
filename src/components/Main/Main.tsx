@@ -23,16 +23,25 @@ const Main = () => {
 
     const cardIndices: Array<Array<number>> = _.chunk([...Array(cards.length).keys()], cardsPerRow);
 
+    const Rows = () => {
+        const rows = cardIndices.map( (cardIdxs, idx) =>
+            {
+                const rowCards = cardIdxs.map( (cardIdx: number) => {
+                    return( cards[cardIdx] )
+                } )
+                return (<Row key={idx} cards={rowCards}/>)
+            }
+        )
+        return <>{rows}</>
+    }
+
     return (
             <div className={classes.root}>
                 <Grid container spacing={1}>
-                    {cardIndices.map( (cardIdxs, idx) =>
-                        <Row key={idx} indices={cardIdxs}/>
-                    )}
+                    <Rows/>
                 </Grid>
             </div>
     )
-
 }
 
 export default Main;

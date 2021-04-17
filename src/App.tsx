@@ -4,8 +4,8 @@ import {Container} from "@material-ui/core";
 import Main from "./components/Main/Main";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
-import {useDispatch, useSelector} from "react-redux";
-import {cardsSelector, cardsSlice} from "./store/cardsSlice";
+import {useDispatch} from "react-redux";
+import {cardsSlice} from "./store/cardsSlice";
 import CardAppBar from "./components/AppBar/AppBar";
 
 function App() {

@@ -1,12 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import useStyles from "./CardPreview.css"
 import Grid from "@material-ui/core/Grid";
 import {Card as CardPreviewType} from "../../types/Card";
-import {useDispatch, useSelector} from "react-redux";
-import {cardsSlice, updatedCardContentSelector} from "../../store/cardsSlice";
+import {useDispatch} from "react-redux";
+import {cardsSlice} from "../../store/cardsSlice";
 import {Section} from "../../types/Section";
 import {CardActionArea} from "@material-ui/core";
 import CardDialog from "../Card/Card"

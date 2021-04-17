@@ -5,7 +5,7 @@ import CardPreview from "../CardPreview/CardPreview";
 import * as _ from "lodash"
 import * as uuid from "uuid";
 import {useSelector} from "react-redux";
-import {cardsSelector} from "../../store/cardsSlice";
+import {cardsSelector, visibleCardsSelector} from "../../store/cardsSlice";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,7 +26,8 @@ const Main = () => {
 
     const classes = useStyles();
 
-    const cards = useSelector(cardsSelector);
+    // const cards = useSelector(cardsSelector);
+    const cards = useSelector(visibleCardsSelector);
 
     const cardsPerRow = 3; // number of cards you'd like to see in a row
 

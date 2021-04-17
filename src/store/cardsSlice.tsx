@@ -98,10 +98,9 @@ export const updatedCardContentSelector = (state: RootState) => {
     return state.cards.updatedCard;
 }
 export const visibleCardsSelector = (state: RootState) => {
-    return state.cards.visibleCardsIds; //FIXME add logic to return list of cards?
+    return state.cards.cards.filter((card: Card) => {
+        return (state.cards.visibleCardsIds.includes(card._id))
+    })
 }
-
-// // Other code such as selectors can use the imported `RootState` type
-// export const selectCount = (state: RootState) => state.counter.value
 
 export default cardsSlice.reducer

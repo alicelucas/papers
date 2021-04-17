@@ -19,7 +19,7 @@ export const SearchField = () => {
         const cardsIds: Array<string> = [];
         _.forEach(cards, (card: Card) =>
         {
-            if ((card.title).toLowerCase().indexOf(query.toLowerCase()) > -1) {
+            if ((card.title).toLowerCase().indexOf(query.toLowerCase()) > -1 || (card.authors).toLowerCase().indexOf(query.toLowerCase()) > -1) {
                 cardsIds.push(card._id)
             }
         })

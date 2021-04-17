@@ -3,7 +3,7 @@ import InputBase from "@material-ui/core/InputBase";
 import React, {ChangeEvent} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSelector, cardsSlice} from "../../../store/cardsSlice";
-import {useStyles} from "../AppBar.css";
+import {useStyles} from "../AppBar/AppBar.css";
 import {Card} from "../../../types/Card";
 import * as _ from "lodash"
 

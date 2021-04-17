@@ -6,7 +6,7 @@ import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "./store/cardsSlice";
-import CardAppBar from "./components/AppBar/AppBar";
+import {CardAppBar} from "./components/AppBar/AppBar/AppBar";
 
 function App() {
     const dispatch = useDispatch();

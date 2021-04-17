@@ -2,10 +2,10 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import {SearchField} from "./SearchField/SearchField";
+import {SearchField} from "../SearchField/SearchField";
 import {useStyles} from "./AppBar.css";
 
-export default function CardAppBar() {
+export const CardAppBar = () => {
     const classes = useStyles();
 
     return (

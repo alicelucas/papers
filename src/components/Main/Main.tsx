@@ -1,6 +1,5 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import CardPreview from "../CardPreview/CardPreview";
 import * as _ from "lodash";
 import {useSelector} from "react-redux";
 import {cardsSelector, visibleCardsIdsSelector} from "../../store/cardsSlice";
@@ -22,22 +21,14 @@ const Main = () => {
         return (visibleCardsIds.includes(card._id))
     })
 
-    const FormGrid = () => {
-        const cardIndices: Array<Array<number>> = _.chunk([...Array(cards.length).keys()], cardsPerRow);
-
-        //FIXME: Material UI must be able to do this for you
-        const rows = cardIndices.map( (cardIdxs, idx) =>
-           <Row key={idx} indices={cardIdxs}/>
-
-        )
-
-        return <>{rows}</>
-    }
+    const cardIndices: Array<Array<number>> = _.chunk([...Array(cards.length).keys()], cardsPerRow);
 
     return (
             <div className={classes.root}>
                 <Grid container spacing={1}>
-                    <FormGrid/>
+                    {cardIndices.map( (cardIdxs, idx) =>
+                        <Row key={idx} indices={cardIdxs}/>
+                    )}
                 </Grid>
             </div>
     )

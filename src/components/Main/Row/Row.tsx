@@ -24,9 +24,7 @@ export const Row = ( {key, indices}: RowProps) => {
     return (
         <Grid key={key} container item xs={12} spacing={3}>
             { indices.map( (index: number) => {
-                const cardIdx = cards[index]._id;
-                if (!cardIdx) return <React.Fragment/>;
-                return (<CardPreview card={cards[index]} key = {cardIdx}/>) })}
+                return (<CardPreview card={cards[index]} key = {cards[index]._id}/>) })}
         </Grid>
     )
 }

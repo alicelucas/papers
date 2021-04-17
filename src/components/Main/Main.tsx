@@ -34,13 +34,6 @@ const Main = () => {
       return (visibleCardsIds.includes(card._id))
     })
 
-    useEffect( () => {
-        //DEBUGGING
-        if (cards.length < 15) return;
-        // console.info(cards)
-        // console.info(visibleCardsIds)
-    }, [cards, visibleCardsIds])
-
     const cardsPerRow = 3; // number of cards you'd like to see in a row
 
     const FormGrid = () => {

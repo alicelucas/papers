@@ -16,10 +16,12 @@ export const { searchAction } = searchSlice.actions;
 
 const {
     text, // search text
-    result // book ids
+    result, // book ids,
+    unfilteredResults,
+
 } = reduxSearch.getSearchSelectors({
     resourceName: 'cards',
-    resourceSelector: (resourceName: any, state: any) => state.cards.cards
+    resourceSelector: (resourceName: string, state: any) => state.cards.cards
 })
 
 export const searchSelectors = (bookIds: any, books: any, searchText: any) => ({

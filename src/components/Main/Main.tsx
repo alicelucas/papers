@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import CardPreview from "../CardPreview/CardPreview";
-import * as _ from "lodash"
-import * as uuid from "uuid";
+import * as _ from "lodash";
 import {useSelector} from "react-redux";
-import {cardsSelector, visibleCardsSelector} from "../../store/cardsSlice";
+import {cardsSelector, visibleCardsIdsSelector} from "../../store/cardsSlice";
+import {Card} from "../../types/Card";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,8 +26,13 @@ const Main = () => {
 
     const classes = useStyles();
 
-    // const cards = useSelector(cardsSelector);
-    const cards = useSelector(visibleCardsSelector);
+    const originalCards = useSelector(cardsSelector);
+
+    const visibleCardsIds = useSelector(visibleCardsIdsSelector);
+
+    const cards = _.filter(originalCards, (card: Card) => {
+      return (visibleCardsIds.includes(card._id))
+    })
 
     const cardsPerRow = 3; // number of cards you'd like to see in a row
 

@@ -297,4 +297,23 @@
     "Generative models",
     "Transformers"
   ]
+},{
+  "_id": {
+    "$oid": "607c71e5d49955ea1c0483b9"
+  },
+  "authors": "Tuggener, L., Schmidhuber, J., & Stadelmann, T.",
+  "date": "2021",
+  "journal": "arXiv preprint arXiv:2103.09108",
+  "title": "Is it Enough to Optimize CNN Architectures on ImageNet?",
+  "sections": {
+    "why": " This work establishes the prevalence of the ImageNet dataset in Deep Learning papers. When studies propose new SoTA architectures, the obtained results are based on the ImageNet dataset. But is the ImageNet dataset really appropriate to establish new baselines? Do the observed results generalize across other non-ImageNet visual datasets? This work provides an answer to this question. ",
+    "what": " They gather multiple datasets and study whether improvements seen when testing on the ImageNet models generalize to other datasets. ",
+    "how": "The datasets that they use for their study are: (1) images of concrete buildings, (2) images of reef habitats, (3) images of ImageNet, (4) dermatoscopic images, (5) images of powerlines in Turkey, (6) insects, (5) natural scene dataset, (7) Cifar10/100 dataset.  This is a very diverse set of datasets. \n\nThe architectural space that they investigate are based on a single architecture, AnyXNet, and its variants. The stem and the head are the same across all architecutres, but the body will vary. The body is made of standard residual bottlneck blocks. The body is parameterized by d the number of blocks, w the block width, b the bottleneck ratio and g the group width (this corresponds to how many parallel convolutions the total width is grouped into). The AnyXNet architecture’s design space has a total of 16 degrees of freedom, having four stages which each have four parameters (d, w, b, g).\n\nThey repeatedly sample the space to obtain a total of 500 architectures. All 500 models are trained on each dataset.  ",
+    "results": " They show scatterplots for each dataset, where a point corresponds to the test error of a sampled architecture trained on that dataset vs the test error of a sampled architecture on ImageNet. A linear correlation in the scatterplot would imply that optimizing architectures based on ImageNet performance results in improved performance on other datasets as well. The scatterplots show that for some datasets, such as insect or Cifar100, there is a positive correlation. However, for other dataset (such as powerline or the natural scenes dataset), there is a negative correlation! In such cases, it’s not recommended to optimize things based on performance on ImageNet. \n\nWith additional studies, they show that a network depth and width found to be optimal on a certain dataset will not necessarily apply to another dataset — this is something important to keep in mind when doing transfer learning tasks.\n\nAnother interesting finding is that the generalizability of performance between datasets is related to the different number of classes in each dataset. Training on the ImageNet dataset with a subset of its classes (chosen to be similar to the target dataset) instead of its 1000 classes does lead to linear correlation. This implies that  one of the issues with the ImageNet dataset is its large number of classes compared to the number of classes included in the target dataset.  Thus if doing pre-training on ImageNet, it might be helpful to vary the number of classes and only use a subset of its classes.\n"
+  },
+  "labels": [
+    "ImageNet",
+    "Transfer Learning",
+    ""
+  ]
 }]

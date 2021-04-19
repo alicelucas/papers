@@ -5,15 +5,17 @@ import {Card} from "../../../types/Card";
 
 type RowProps = {
     cards: Array<Card>
-    key: number
+    id: string
 }
 
-export const Row = ( {cards, key}: RowProps) => {
+export const Row = ( {cards, id}: RowProps) => {
 
     return (
-        <Grid key={key} container item xs={12} spacing={3}>
+        <Grid key={id} container item xs={12} spacing={3}>
             { cards.map( (card: Card) => {
-                return (<CardPreview card={card} key = {card._id}/>) })}
+                return (<React.Fragment key={card._id}>
+                    <CardPreview card={card}/>
+                </React.Fragment>) })}
         </Grid>
     )
 }

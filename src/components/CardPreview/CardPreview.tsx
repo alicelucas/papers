@@ -4,7 +4,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import useStyles from "./CardPreview.css"
 import Grid from "@material-ui/core/Grid";
-import {Card as CardPreviewType} from "../../types/Card";
+import {Card as CardType} from "../../types/Card";
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "../../store/cardsSlice";
 import {Section} from "../../types/Section";
@@ -15,7 +15,7 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 
 type CardPreviewsProps = {
-    card: CardPreviewType
+    card: CardType
 }
 
 export default function CardPreview({card}: CardPreviewsProps) {

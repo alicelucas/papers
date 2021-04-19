@@ -13,6 +13,7 @@ import CardDialog from "../Card/Card"
 import Dialog from "@material-ui/core/Dialog";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
+import {Labels} from "./Labels/Labels";
 
 type CardPreviewsProps = {
     card: CardType
@@ -40,32 +41,20 @@ export default function CardPreview({card}: CardPreviewsProps) {
             <Grid key={card._id} item xs={4}>
                 <Container className={classes.container}>
                     <Card variant="outlined" className={classes.root} >
-                        <Container className={classes.labelContainer}>
-                            {card.labels.map( (label: string, idx: number) => {
-                                if (label.length) return (
-                                    <Button  key={label} className={classes.labels} size="small" variant="outlined">
-                                        {label}
-                                    </Button>
-                                )
-                                else {
-                                    return <React.Fragment key={idx} />
-                                }
-                            })}
-                        </Container>
-
-                        <CardActionArea className={classes.media} onClick={onCardClick}>
-                            <CardContent>
-                                <Typography className={classes.title} align="center" variant="h6" component="h2">
-                                    {card.title}
-                                </Typography>
-                                <Typography className={classes.authors} align="center" color="textSecondary">
-                                    {card.authors}
-                                </Typography>
-                                <Typography className={classes.info} align="center" color="textSecondary" gutterBottom>
-                                    {[card.journal, card.date].join(", ")}
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
+                    <Labels card={card}/>
+                    <CardActionArea className={classes.media} onClick={onCardClick}>
+                        <CardContent>
+                            <Typography className={classes.title} align="center" variant="h6" component="h2">
+                                {card.title}
+                            </Typography>
+                            <Typography className={classes.authors} align="center" color="textSecondary">
+                                {card.authors}
+                            </Typography>
+                            <Typography className={classes.info} align="center" color="textSecondary" gutterBottom>
+                                {[card.journal, card.date].join(", ")}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
                     </Card>
                 </Container>
             </Grid>

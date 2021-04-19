@@ -4,17 +4,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {CardHeader} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {useDispatch, useSelector} from "react-redux";
-import {
-    cardsSlice,
-    selectedCardSelector,
-    selectedSectionContentSelector,
-    selectedSectionSelector
-} from "../../store/cardsSlice";
-import {Section} from "../../types/Section";
+import {useSelector} from "react-redux";
+import {selectedCardSelector, selectedSectionContentSelector, selectedSectionSelector} from "../../store/cardsSlice";
 import sectionTitles from "../../types/SectionTitles";
 import {useStyles} from "./Card.css";
 import {BackButton} from "./BackButton/BackButton";
@@ -26,8 +17,6 @@ export default function CardDialog() {
     const selectedCard = useSelector(selectedCardSelector);
     const selectedContent = useSelector(selectedSectionContentSelector);
     const selectedSection = useSelector(selectedSectionSelector)
-
-    const dispatch = useDispatch();
 
     const content = Object.values(selectedCard.sections)
 

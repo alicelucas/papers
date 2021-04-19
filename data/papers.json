@@ -316,4 +316,23 @@
     "Transfer Learning",
     ""
   ]
+},{
+  "_id": {
+    "$oid": "607da4fe8d6d6324c209a82d"
+  },
+  "authors": " Donahue, J., Krähenbühl, P., & Darrell, T.",
+  "date": " 2016",
+  "journal": " arXiv preprint arXiv:1605.09782",
+  "title": " Adversarial feature learning",
+  "sections": {
+    "why": " This work proposes a method for learning representation of images, in an unsupervised manner. These features can then be used for subsequent supervised classification tasks. ",
+    "what": "The proposed method for learning representations is new: it makes use of Generative Adversarial Networks and their ability to sample natural images from a small latent space. \n\nThe general hypothesis is the following: if GANs can produce an image from a small latent space, can we also train a GAN to project an image to this small latent space? Can this learned encoding be used as a feature space for subsequent supervised tasks?",
+    "how": " A traditional GAN consists of a generator network that takes in the vector z and produces an image G(z). In addition to this generator, the authors add another network, an encoder network, that will take in an image x and produce E(x), its features representation. \n\nIn this set-up, a discriminator will be trained for two tasks: (1) compare the produced image G(z) with the ground-truth images in the dataset, and (2) compare an encoded latent space vector E(x) and compare it with the original vector z. Similarly the generator and encoders’s task is to fool the discriminator. Training is done by computing gradient steps for D, G, and E for each mini-batch and updating all modules simultaneously. \n\nIn all experiments, the architecture E is based on the AlexNet network. \n\nAn alternative task for the encoder E that is explored in the paper is have a loss function that requires the resulting vector E(G(z)) to be close to the latent z. In the results section, they show that the features in an E() trained in that way also contain helpful representations but are not as efficient as what is obtained with training on E(x). \n",
+    "results": " When fine-tuning for imageNet classification, they freeze the first N layers (they experiment with 1 to 5) of the BiGAN encoder and randomly initialize all the other weights to be retrained on ImageNet labels. They show that BiGAN is competitive with the other unsupervised learning methods that use the same AlexNet architecture.\n\nWhen fine-tuning for VOC detection, and segmentation, the AlexNet model is used as initialization for a Fast-RCNN and a FCN architecture. All of the layers are retrained. They show that the features learned are competitive with other existing methods for unsupervised representation.  "
+  },
+  "labels": [
+    " Unsupervised learning",
+    " GAN",
+    ""
+  ]
 }]

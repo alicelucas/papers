@@ -12,7 +12,6 @@ import {CardActionArea} from "@material-ui/core";
 import CardDialog from "../Card/Card"
 import Dialog from "@material-ui/core/Dialog";
 import Container from "@material-ui/core/Container";
-import Button from "@material-ui/core/Button";
 import {Labels} from "./Labels/Labels";
 
 type CardPreviewsProps = {

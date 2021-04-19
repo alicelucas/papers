@@ -1,8 +1,8 @@
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 import React from "react";
-import useStyles from "./CardPreview.css";
-import {Card} from "../../types/Card";
+import useStyles from "../CardPreview.css";
+import {Card} from "../../../types/Card";
 
 type LabelsProps = {
     card: Card

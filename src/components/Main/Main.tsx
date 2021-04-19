@@ -19,25 +19,13 @@ const Main = () => {
 
     const [cards, setCards] = useState<Array<Card>>(originalCards);
 
-    const cardIndices: Array<Array<number>> = _.chunk([...Array(cards.length).keys()], cardsPerRow);
-
     useEffect( () => {
         setCards(_.filter(originalCards, (card: Card) => {
             return (visibleCardsIds.includes(card._id))
         }))
     }, [originalCards, visibleCardsIds])
 
-    const Rows = () => {
-        const rows = cardIndices.map( (cardIdxs, idx) =>
-            {
-                const rowCards = cardIdxs.map( (cardIdx: number) => {
-                    return( cards[cardIdx] )
-                } )
-                return (<Row key={idx} cards={rowCards}/>)
-            }
-        )
-        return <>{rows}</>
-    }
+    const Rows = () => <>{_.chunk(cards, cardsPerRow).map( (cards: Array<Card>, index: number) => { return (<Row key={index} cards={cards}/>)})}</>
 
     return (
             <div className={classes.root}>

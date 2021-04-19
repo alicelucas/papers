@@ -47,13 +47,13 @@ export default function CardDialog() {
 
     const BackButton = () => {
         if (selectedSection === 0) return (
-            <IconButton disabled className={classes.icon} onClick={onNextSectionClick}>
+            <IconButton disabled className={classes.icon} onClick={onPreviousSectionClick}>
                 <ArrowBackIcon fontSize={"large"}/>
             </IconButton>
         )
         else {
             return (
-                <IconButton className={classes.icon} onClick={onNextSectionClick}>
+                <IconButton className={classes.icon} onClick={onPreviousSectionClick}>
                 <ArrowBackIcon fontSize={"large"}/>
              </IconButton>)
         }

@@ -11,11 +11,15 @@ export const Labels = ( {card}: LabelsProps) => {
 
     const classes = useStyles();
 
+    const onLabelClick = (label: string) => {
+        console.info(label)
+    }
+
     return (
         <Container className={classes.labelContainer}>
             {card.labels.map( (label: string, idx: number) => {
                 if (label.length) return (
-                    <Button  key={label} className={classes.labels} size="small" variant="outlined">
+                    <Button key={label} onClick={() => onLabelClick(label)} className={classes.labels} size="small" variant="outlined">
                         {label}
                     </Button>
                 )

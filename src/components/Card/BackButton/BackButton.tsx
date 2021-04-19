@@ -13,7 +13,7 @@ export const BackButton = () => {
 
     const dispatch = useDispatch();
 
-    const selectedSection = useSelector(selectedSectionSelector)
+    const selectedSection = useSelector(selectedSectionSelector);
 
     const onPreviousSectionClick = () => {
         if (selectedSection - 1 === -1) return;

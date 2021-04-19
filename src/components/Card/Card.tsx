@@ -18,6 +18,7 @@ import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
 import {useStyles} from "./Card.css";
 import {BackButton} from "./BackButton/BackButton";
+import {ForwardButton} from "./ForwardButton/ForwardButton";
 
 export default function CardDialog() {
     const classes = useStyles();
@@ -31,27 +32,6 @@ export default function CardDialog() {
     const content = Object.values(selectedCard.sections)
 
     if (!selectedCard || !selectedContent) return <React.Fragment/>;
-
-    const onNextSectionClick = () => {
-        if (selectedSection + 1 === 4) return;
-        else {
-            dispatch(cardsSlice.actions.setSelectedSection({section: (selectedSection + 1) as Section}));
-        }
-    };
-
-    const ForwardButton = () => {
-        if (selectedSection === 3) return (
-            <IconButton disabled className={classes.icon} onClick={onNextSectionClick}>
-                <ArrowForwardIcon fontSize={"large"}/>
-            </IconButton>
-        )
-        else {
-            return (
-                <IconButton className={classes.icon} onClick={onNextSectionClick}>
-                    <ArrowForwardIcon fontSize={"large"}/>
-                </IconButton>)
-        }
-    }
 
     return (
         <Card className={classes.root} variant="outlined">

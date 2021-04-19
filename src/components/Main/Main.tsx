@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import * as _ from "lodash";
 import {useSelector} from "react-redux";
@@ -17,11 +17,15 @@ const Main = () => {
 
     const visibleCardsIds = useSelector(visibleCardsIdsSelector);
 
-    const cards = _.filter(originalCards, (card: Card) => {
-        return (visibleCardsIds.includes(card._id))
-    })
+    const [cards, setCards] = useState<Array<Card>>(originalCards);
 
     const cardIndices: Array<Array<number>> = _.chunk([...Array(cards.length).keys()], cardsPerRow);
+
+    useEffect( () => {
+        setCards(_.filter(originalCards, (card: Card) => {
+            return (visibleCardsIds.includes(card._id))
+        }))
+    }, [originalCards, visibleCardsIds])
 
     const Rows = () => {
         const rows = cardIndices.map( (cardIdxs, idx) =>

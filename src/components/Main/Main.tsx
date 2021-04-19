@@ -28,7 +28,7 @@ const Main = () => {
     return (
             <div className={classes.root}>
                 <Grid container spacing={1}>
-                    {_.chunk(cards, cardsPerRow).map( (cards: Array<Card>, index: number) => { return (<React.Fragment key={cards[0]._id}><Row id={cards[0]._id} cards={cards}/></React.Fragment>)})}
+                    {_.chunk(cards, cardsPerRow).map( (cards: Array<Card>) => { return (<React.Fragment key={cards[0]._id}><Row id={cards[0]._id} cards={cards}/></React.Fragment>)})}
                 </Grid>
             </div>
     )

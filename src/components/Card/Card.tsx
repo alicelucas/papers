@@ -45,17 +45,40 @@ export default function CardDialog() {
         }
     };
 
+    const BackButton = () => {
+        if (selectedSection === 0) return (
+            <IconButton disabled className={classes.icon} onClick={onNextSectionClick}>
+                <ArrowBackIcon fontSize={"large"}/>
+            </IconButton>
+        )
+        else {
+            return (
+                <IconButton className={classes.icon} onClick={onNextSectionClick}>
+                <ArrowBackIcon fontSize={"large"}/>
+             </IconButton>)
+        }
+    }
+
+    const ForwardButton = () => {
+        if (selectedSection === 3) return (
+            <IconButton disabled className={classes.icon} onClick={onNextSectionClick}>
+                <ArrowForwardIcon fontSize={"large"}/>
+            </IconButton>
+        )
+        else {
+            return (
+                <IconButton className={classes.icon} onClick={onNextSectionClick}>
+                    <ArrowForwardIcon fontSize={"large"}/>
+                </IconButton>)
+        }
+    }
 
     return (
         <Card className={classes.root} variant="outlined">
             <CardHeader align="center" className={classes.header} title={selectedCard.title} subheader={<Typography>{[selectedCard.authors, "\n", selectedCard.journal, selectedCard.date].join(" ")}</Typography>}/>
             <CardActions className={classes.arrows}>
-                <IconButton className={classes.icon} onClick={onPreviousSectionClick}>
-                    <ArrowBackIcon fontSize={"large"}/>
-                </IconButton>
-                <IconButton className={classes.icon} onClick={onNextSectionClick}>
-                    <ArrowForwardIcon fontSize={"large"}/>
-                </IconButton>
+                <BackButton/>
+                <ForwardButton/>
             </CardActions>
             <CardContent>
                 <Typography className={classes.pos} variant="h6" component="h2">

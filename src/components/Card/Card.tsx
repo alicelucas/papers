@@ -17,6 +17,7 @@ import {
 import {Section} from "../../types/Section";
 import sectionTitles from "../../types/SectionTitles";
 import {useStyles} from "./Card.css";
+import {BackButton} from "./BackButton/BackButton";
 
 export default function CardDialog() {
     const classes = useStyles();
@@ -37,27 +38,6 @@ export default function CardDialog() {
             dispatch(cardsSlice.actions.setSelectedSection({section: (selectedSection + 1) as Section}));
         }
     };
-
-    const onPreviousSectionClick = () => {
-        if (selectedSection - 1 === -1) return;
-        else {
-            dispatch(cardsSlice.actions.setSelectedSection({section: (selectedSection - 1) as Section}))
-        }
-    };
-
-    const BackButton = () => {
-        if (selectedSection === 0) return (
-            <IconButton disabled className={classes.icon} onClick={onPreviousSectionClick}>
-                <ArrowBackIcon fontSize={"large"}/>
-            </IconButton>
-        )
-        else {
-            return (
-                <IconButton className={classes.icon} onClick={onPreviousSectionClick}>
-                <ArrowBackIcon fontSize={"large"}/>
-             </IconButton>)
-        }
-    }
 
     const ForwardButton = () => {
         if (selectedSection === 3) return (

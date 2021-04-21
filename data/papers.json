@@ -335,4 +335,23 @@
     " GAN",
     ""
   ]
+},{
+  "_id": {
+    "$oid": "6080920cb88504cf98c5c2ad"
+  },
+  "authors": " Van Gansbeke, W., Vandenhende, S., Georgoulis, S., Proesmans, M., & Van Gool, L.",
+  "date": " 2020",
+  "journal": "In European Conference on Computer Vision (pp. 268-285) ",
+  "title": " SCAN: Learning to classify images without labels",
+  "sections": {
+    "why": " The objective of this work is to classify images without ever receiving labels. This is achieving by grouping images into semantically meaningful clusters",
+    "what": " This is different from the unsupervised + finetuning works that you have been reading, where representations learned in an unsupervised way are then fine-tuned with existing labels. ",
+    "how": " Their method is a two-step approach. First, they use a pretext task to learn feature representations of images in an unsupervised manner. Second, they use these feature representations as a prior for their clustering procedure. \n\nThe pretext task can be one of the pretext tasks already available in today’s literature, for example the task used for instance discrimination or for contrastive learning. The hypothesis here is that the similar features will be assigned to semantically similar images. \n\nThe clustering procedure starts with the mining of nearest neighbors in the space computed by the pretext task.  Each sample point and its found nearest neighbors is considered a “ground-truth” cluster. With this data, they learn a clustering function that will be able to assign each new sample to a cluster c.  \n\nThe weights learned from training with the pre-text tasks are used as initialization for their clustering training. \n\nIn addition, they employ a “fine-tuning” procedure using self-labeling. In cases where the learned clustering mapping assigns a high probability to a given cluster c given a new sample point X, it is assumed that this prediction (X, c) is correct, and is used as additional ‘ground-truth’ labels in the clustering loss. This additional self-supervised fine-tuning corrects for mistakes done in the first part of the clustering training.\n\nTheir architecture used in all experiments is standard ResNet backbone. The number of clusters here corresponds to the number of known classes.",
+    "results": "  The obtained clustering accuracy is superior to other clustering state-of-the-art. This is an interesting method to keep in mind if there are no labels available at all for classification purposes."
+  },
+  "labels": [
+    " unsupervised learning",
+    " clustering",
+    ""
+  ]
 }]

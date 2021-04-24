@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {RootState} from "./store";
 
 interface AppState {
     searchTerm: string
@@ -19,3 +20,7 @@ export const appSlice = createSlice({
 })
 
 export const { setSearchTerm } = appSlice.actions
+
+export const searchTermSelector = (state: RootState) => {
+    return state.app.searchTerm
+}

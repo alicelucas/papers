@@ -6,11 +6,14 @@ import {cardsSelector, cardsSlice} from "../../../store/cardsSlice";
 import {useStyles} from "../AppBar/AppBar.css";
 import {Card} from "../../../types/Card";
 import * as _ from "lodash"
+import {searchTermSelector} from "../../../store/appSlice";
 
 export const SearchField = () => {
     const classes = useStyles();
 
     const cards = useSelector(cardsSelector);
+
+    const searchTerm = useSelector(searchTermSelector);
 
     const dispatch = useDispatch();
 
@@ -32,6 +35,7 @@ export const SearchField = () => {
                 <SearchIcon />
             </div>
             <InputBase
+                value={searchTerm}
                 placeholder="Search…"
                 classes={{
                     root: classes.inputRoot,

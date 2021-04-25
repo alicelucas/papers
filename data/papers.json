@@ -354,4 +354,23 @@
     " clustering",
     ""
   ]
+},{
+  "_id": {
+    "$oid": "60857492b7b4acfe2c10f9fc"
+  },
+  "authors": " Caicedo, J. C., McQuin, C., Goodman, A., Singh, S., & Carpenter, A. E.",
+  "date": " 2018",
+  "journal": " In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition",
+  "title": " Weakly supervised learning of single-cell feature embeddings",
+  "sections": {
+    "why": " This work proposes a way to learn representations of single cells in microscopy image. Having such quantitative representations is important for many applications, for example in drug discovery pipelines. \n\nFor example, quickly assessing the morphological changes of cells due to a drug, by computing its representation and comparing it with representations of other images (e.g. healthy cells, or cells that also have been undergoing treatment) can accelerate drug discovery pipelines or make them more accurate. \n\nWhat needs to be clear here is that efficacy of treatment is obtained by looking at how the cells look after being treated with the treatment.",
+    "what": " Most previous papers that tackled microscopy image problems belong to the supervised setting. This paper is one of the first that propose a weakly supervised way to learn representations of cells. Because the main goal of morphological profiling is to compare treatments with each other, “ground-truth” data in profiling experiments usually corresponds to known high level associations between treatments. \n\nWe usually do not have such ground-truth data since we don’t know in advance how different treatments relate to one another. However, we do have a ground-truth signal that we can use as an auxiliary task: we know that the same treatment applied to different cells should result in the cells having similar morphologies at the end of the day. \n\nFurthermore, the authors recognize that the data is noisy and prone to bias issues (e.g. due to batch variations or imaging artifacts) and therefore explore in detail different regularization schemes. \n",
+    "how": " The authors propose to identify relationships between treatments by looking at the similarity of the morphologies of cells resulting from treating cells with those treatments. If two treatments result in a similar morphology, then it can be concluded that these treatments are related. \n\nThe authors propose a new way to learn a morphology representation. The input to the CNN is the image of a single cell. The output is the treatment label. Essentially, the CNN is trained to recognize the features produced by each treatment. This auxiliary task is what allows us to then use the learned representation for the real task, which is to associate treatments with each other. \n\nThe CNN architecture corresponds to the ResNet18 architecture. They note that they did not find significant difference when testing different ResNet or VGG models. \n\nIt is important to note that the labels are very noisy: treatments may not not even have any effect on the morphology of images, or different treatments may even have the same effect on the morphology. They regularize the training by using RNN-based regularization, where a chain of GRUs are going to look at a group of images with the same treatment label instead of a single image. A second regularization method they use is called “mixup”, where they artificially create new labels by creating linear combinations of those. The output label is the linear combination of the original labels. \n",
+    "results": " To visualize the representations, they do tSNE visuallization of these representations. They show that distinct clusters (each corresponding to a specific drug) are shown with these embeddings, which is not the case for the features obtained from CellProfiler or Inception. \n\nFurthermore, they try to do NSC classification (not-same-compound) classification using these features. They show that features from intermediate layers work better than later layers of ResNet. This is consistent with what I’ve been reading in the literature on unsupervised learning (taking the later layers is rarely a good idea).  "
+  },
+  "labels": [
+    " Unsupervised learning",
+    " Weakly supervised learning",
+    ""
+  ]
 }]

@@ -373,4 +373,23 @@
     " Weakly supervised learning",
     ""
   ]
+},{
+  "_id": {
+    "$oid": "608d8b7d765d9713eb23b78b"
+  },
+  "authors": "Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. ",
+  "date": "2018",
+  "journal": "arXiv preprint arXiv:1810.04805 ",
+  "title": " Pre-training of deep bidirectional transformers for language understanding",
+  "sections": {
+    "why": " This work proposes Bidirectional Encoder Representations from Transformers (BERT), a model that provides a representation for text. This representation is obtained in an unsupervised manner and can be used as initial features for fine-tuning a variety of NLP tasks, such as question answering on language inference. ",
+    "what": " The difference is in the proposed task that is used for this unsupervised learning, which allows for a a bidirectional flow instead of usually used left-to-right. This also means that bidirectional architectures can be used. \n\nThis is in contrast with GPT-1, for example, whose architecture relies on a left-to-right architecture where each token can only attend to previous tokens in the self-attention layers by using masking.",
+    "how": " See Figure 2 for a representation of how the input looks. Each input token is the sum of a token embedding (e.g. WordPiece vocab), a segment embedding (necessary for distinguishing sentence A  from sentence B) and a position embedding. Multiple sentences are send in as a single input token, hence the need for a segment embedding. \n\nA first proposed training task is a masked language model (MLM), which randomly masks some of the tokens from the input, with the objective to predict the words of the masked tokens.\n\nThe second pre-trained task is that of next sentence prediction. This is a binary classification problem where we ask whether a given sentence is next to the current sentence, or not. This is done to obtain a model that understands sentence relationships. \n\nBERT’s architecture is a multi-layer bidirectional Transformer encoder.  When finetuning, the appropriate inputs and outputs are given and all of BERT’s parameters are fine-tuned end-to-end. \n\nNote that BERT’s hidden state feature vector could be used as an input to a classification layer, just like in other unsupervised papers you have read. The authors test that out in Section 5.3. ",
+    "results": " Note that the BERT baseline and the OpenAI GPTs have similar capacity. BERT-baseline seems to outperform GPT-1 on many different fine-tuned tasks when looking at GLUE metrics. The BERT-large performs even better, as expected. "
+  },
+  "labels": [
+    " Unsupervised training",
+    " NLP",
+    "Transformers"
+  ]
 }]

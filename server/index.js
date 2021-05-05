@@ -15,8 +15,8 @@ app.use(bodyParser.json()); // support json encoded bodies
 
 AWS.config.update({
   region: "us-east-1",
-  accessKeyId: 'AKIAY7ZOORNZ7HKIWX5V',
-  secretAccessKey: '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',
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 var docClient = new AWS.DynamoDB.DocumentClient();
 

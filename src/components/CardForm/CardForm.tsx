@@ -33,7 +33,10 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
         if (event.target.name === "what" || event.target.name === "why" || event.target.name === "how" || event.target.name === "results") {
             const newSections = {...newCard.sections, [event.target.name]: event.target.value};
             setNewCard({...newCard, sections: newSections});
-        } else {
+        } else if (event.target.name === "labels") {
+           setNewCard({...newCard, labels: event.target.value.split(",")});
+        }
+        else {
             setNewCard({...newCard, [event.target.name]: event.target.value})
         }
     }
@@ -73,6 +76,9 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
                         </div>
                         <div className={classes.textField}>
                             <TextField fullWidth label="What are the results?" variant="filled"  onChange={handleTextChange}  name="results" multiline />
+                        </div>
+                        <div className={classes.textField}>
+                            <TextField fullWidth label="What are the labels (separate by comma)?" variant="filled"  onChange={handleTextChange}  name="labels" multiline />
                         </div>
                     </form>
                     <Box paddingTop={1}>

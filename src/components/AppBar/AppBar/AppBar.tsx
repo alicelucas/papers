@@ -14,7 +14,7 @@ export const CardAppBar = () => {
             <AppBar style={{background: "#6573c3"}}>
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Paper flashcards
+                        Paper stories
                     </Typography>
                     <SearchField/>
                     <div className={classes.grow} />

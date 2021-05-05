@@ -18,8 +18,6 @@ export default function CardDialog() {
     const selectedContent = useSelector(selectedSectionContentSelector);
     const selectedSection = useSelector(selectedSectionSelector)
 
-    const content = Object.values(selectedCard.sections)
-
     if (!selectedCard || !selectedContent) return <React.Fragment/>;
 
     return (
@@ -34,7 +32,7 @@ export default function CardDialog() {
                     {sectionTitles[selectedSection]}
                 </Typography>
                 <Typography align={"justify"} className={classes.body} >
-                    {content[selectedSection]}
+                    {selectedContent}
                 </Typography>
             </CardContent>
         </Card>

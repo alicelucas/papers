@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {SearchField} from "../SearchField/SearchField";
 import {useStyles} from "./AppBar.css";
+import {AddCardButton} from "../AddCardButton/AddCardButton";
 
 export const CardAppBar = () => {
     const classes = useStyles();
@@ -17,8 +18,7 @@ export const CardAppBar = () => {
                     </Typography>
                     <SearchField/>
                     <div className={classes.grow} />
-                    <div className={classes.grow} />
-                    <div className={classes.grow} />
+                    <AddCardButton/>
                 </Toolbar>
             </AppBar>
         </div>

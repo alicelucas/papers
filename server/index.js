@@ -24,7 +24,6 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`)
 });
 
-
 app.get('/', (req, res) => {
   docClient.scan({TableName: "papers"}, (err, data) => {
     if (err) {
@@ -38,13 +37,23 @@ app.get('/', (req, res) => {
       });
       res.send(items)
     }
+    console.info("Successfully imported items.")
   });
 });
 
-// app.post("/addCard", (req, res) => {
+app.post("/addCard", (req, res) => {
+  docClient.put({TableName: "papers", Item: req.body}, (err, data) => {
+    if (err) {
+      console.error("Unable to add item.");
+      console.error("Error JSON:", JSON.stringify(err, null, 2));
+    }
+    else {
+      console.info("Successfully added item.");
+    }
+  })
+});
 
-// });
-//
+
 // app.post( "/replaceCard", (req, res) => {
 
 // });

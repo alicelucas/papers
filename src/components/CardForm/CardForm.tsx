@@ -9,6 +9,7 @@ import Card from "@material-ui/core/Card";
 import * as uuid from "uuid"
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "../../store/cardsSlice";
+import axios from "axios";
 
 type NewCardFormProps = {
     handleClose: () => void;
@@ -40,7 +41,9 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
     const handleAddCard = () => {
         setNewCard({...newCard, _id: uuid.v4()});
         dispatch(cardsSlice.actions.addCard({card: newCard}));
-        dispatch(cardsSlice.actions.addVisibleCardId({visibleCardId: newCard._id}))
+        dispatch(cardsSlice.actions.addVisibleCardId({visibleCardId: newCard._id}));
+        axios.post("http://127.0.0.1:8000/addCard", newCard);
+        handleClose();
     }
 
     return (

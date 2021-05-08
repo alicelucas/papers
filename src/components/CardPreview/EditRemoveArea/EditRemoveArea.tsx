@@ -8,17 +8,28 @@ import {Dialog} from "@material-ui/core";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
+import {cardsSlice, selectedCardSelector} from "../../../store/cardsSlice";
+import {useDispatch, useSelector} from "react-redux";
 
-export const EditRemoveArea = () => {
+type EditRemoveAreaProps = {
+    id: string,
+}
+
+export const EditRemoveArea = ( {id }: EditRemoveAreaProps) => {
     const classes = useStyles();
 
     const [openRemoveDialogBox, setOpenRemoveDialogBox] = useState<boolean>(false);
+
+    const selectedCard = useSelector(selectedCardSelector);
+
+    const dispatch = useDispatch();
 
     const onRemoveDialogBoxClose = () => {
         setOpenRemoveDialogBox(false)
     }
 
     const onRemoveButtonClick = () => {
+        dispatch(cardsSlice.actions.setSelectedCard({id: id}))
         setOpenRemoveDialogBox(true);
     }
 
@@ -29,7 +40,7 @@ export const EditRemoveArea = () => {
         <Dialog open={openRemoveDialogBox} onClose={onRemoveDialogBoxClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Are you sure you would like to remove this card? It will be permanently deleted.
+                    Are you sure you would like to remove the paper "{selectedCard?.title}"? It will be permanently deleted.
                 </DialogContentText>
             </DialogContent>
             <DialogActions className={classes.removeDialogBox}>

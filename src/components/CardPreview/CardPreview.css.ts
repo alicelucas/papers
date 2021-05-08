@@ -51,6 +51,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 12,
         fontSize: 14,
     },
+    removeDialogBox: {
+        display: "flex",
+        justifyContent: "space-between",
+    },
     title: {
         lineHeight: 1.2,
     }

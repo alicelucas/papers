@@ -13,7 +13,7 @@ import CardDialog from "../Card/Card"
 import Dialog from "@material-ui/core/Dialog";
 import Container from "@material-ui/core/Container";
 import {Labels} from "./Labels/Labels";
-import {EditArea} from "./EditArea/EditArea";
+import {EditRemoveArea} from "./EditRemoveArea/EditRemoveArea";
 
 type CardPreviewsProps = {
     card: CardType
@@ -55,7 +55,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                        <EditArea/>
+                        <EditRemoveArea/>
                     </Card>
                 </Container>
             </Grid>

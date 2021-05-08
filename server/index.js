@@ -55,9 +55,18 @@ app.post("/addCard", (req, res) => {
 
 
 // app.post( "/replaceCard", (req, res) => {
-
 // });
 //
-// app.delete("/removeCard/:id", (req, res) => {
 
-// });
+app.delete("/removeCard/", (req, res) => {
+  var title = req.body.title;
+  docClient.delete({TableName: "papers", Key: {title: title}}, (err, data) => {
+    if (err) {
+      console.info("Unable to delete item.")
+      console.info(err)
+    }
+    else {
+      console.info("DeleteItem succeeded: ", title)
+    }
+  });
+});

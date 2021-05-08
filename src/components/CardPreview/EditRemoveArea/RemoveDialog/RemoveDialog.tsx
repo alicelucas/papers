@@ -7,6 +7,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSlice, selectedCardSelector} from "../../../../store/cardsSlice";
 import useStyles from "../../CardPreview.css";
+import axios from "axios";
 
 type RemoveDialogProps = {
     open: boolean,
@@ -21,8 +22,9 @@ export const RemoveDialog = ( {open, onClose}: RemoveDialogProps) => {
     const dispatch = useDispatch();
 
     const onRemove = () => {
+        axios.delete("http://127.0.0.1:8000/removeCard", { data: {title: selectedCard?.title} });
         dispatch(cardsSlice.actions.removeCard({id: selectedCard._id}));
-        dispatch(cardsSlice.actions.removeVisibleCardId({visibleCardId: selectedCard._id}))
+        dispatch(cardsSlice.actions.removeVisibleCardId({visibleCardId: selectedCard._id}));
         onClose();
     }
 

@@ -4,9 +4,10 @@ import Button from "@material-ui/core/Button";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import useStyles from "../CardPreview.css";
-import {cardsSlice} from "../../../store/cardsSlice";
-import {useDispatch} from "react-redux";
+import {cardsSlice, selectedCardSelector} from "../../../store/cardsSlice";
+import {useDispatch, useSelector} from "react-redux";
 import {RemoveDialog} from "./RemoveDialog/RemoveDialog";
+import axios from "axios";
 
 type EditRemoveAreaProps = {
     id: string,
@@ -21,10 +22,9 @@ export const EditRemoveArea = ( {id }: EditRemoveAreaProps) => {
         setOpenRemoveDialogBox(false)
     }
     const dispatch = useDispatch();
-
-
+    
     const onRemoveButtonClick = () => {
-        dispatch(cardsSlice.actions.setSelectedCard({id: id}))
+        dispatch(cardsSlice.actions.setSelectedCard({id: id}));
         setOpenRemoveDialogBox(true);
     }
 

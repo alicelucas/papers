@@ -10,6 +10,7 @@ import * as uuid from "uuid"
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "../../store/cardsSlice";
 import axios from "axios";
+import sectionTitles from "../../types/SectionTitles";
 
 type NewCardFormProps = {
     handleClose: () => void;
@@ -66,16 +67,16 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
                             <TextField fullWidth label="Date" name="date" variant="filled"  onChange={handleTextChange}/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label="Why is this work important?" variant="filled"  onChange={handleTextChange}  name="why" multiline/>
+                            <TextField fullWidth label={sectionTitles[0]} variant="filled"  onChange={handleTextChange}  name="why" multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label="What do they propose?" variant="filled"  onChange={handleTextChange}  name="what" multiline/>
+                            <TextField fullWidth label={sectionTitles[1]} variant="filled"  onChange={handleTextChange}  name="what" multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label="How does it work?" variant="filled"  onChange={handleTextChange}  name="how" multiline/>
+                            <TextField fullWidth label={sectionTitles[2]} variant="filled"  onChange={handleTextChange}  name="how" multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label="What are the results?" variant="filled"  onChange={handleTextChange}  name="results" multiline />
+                            <TextField fullWidth label={sectionTitles[3]} variant="filled"  onChange={handleTextChange}  name="results" multiline />
                         </div>
                         <div className={classes.textField}>
                             <TextField fullWidth label="What are the labels (separate by comma)?" variant="filled"  onChange={handleTextChange}  name="labels" multiline />

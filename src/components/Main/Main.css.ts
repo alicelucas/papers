@@ -3,7 +3,8 @@ import {makeStyles} from "@material-ui/core/styles";
 export const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        marginTop: "80px"
+        marginTop: "80px",
+        // alignContent: "stretch"
     },
     card: {
         padding: theme.spacing(1),

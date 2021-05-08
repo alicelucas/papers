@@ -3,7 +3,21 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 400,
-        height: "100%",
+        position: "relative",
+        // height: "100%",
+        textAlign: "center",
+        height: "300px",
+    },
+    editAreaContainer: {
+        position: "absolute",
+        bottom: "5px",
+        display: "flex",
+        justifyContent: "space-between",
+        paddingLeft: "0px",
+        paddingRight: "0px"
+    },
+    editIcon: {
+        color: "#6573c3"
     },
     labelContainer: {
       paddingBlock: "6px",
@@ -13,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     },
     container: {
         height: "100%",
-        margin: "12px"
+        margin: "12px",
+
     },
     dialog: {
         position: 'absolute',

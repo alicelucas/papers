@@ -18,6 +18,12 @@ export const RemoveDialog = ( {open, onClose}: RemoveDialogProps) => {
 
     const selectedCard = useSelector(selectedCardSelector);
 
+    const onRemove = () => {
+        //here dispatch to remove card
+        // and do a delete request
+        onClose();
+    }
+
     return (
         <Dialog open={open} onClose={onClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
             <DialogContent>
@@ -29,7 +35,7 @@ export const RemoveDialog = ( {open, onClose}: RemoveDialogProps) => {
                 <Button onClick={onClose} color="primary" autoFocus>
                     Cancel
                 </Button>
-                <Button onClick={onClose} color="primary">
+                <Button onClick={onRemove} color="primary">
                     Remove
                 </Button>
             </DialogActions>

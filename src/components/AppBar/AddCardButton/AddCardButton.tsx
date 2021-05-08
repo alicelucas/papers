@@ -19,7 +19,7 @@ export const AddCardButton = () => {
     }
     return (
         <React.Fragment>
-            <Button onClick={onClick} color="inherit"><Typography className={classes.title} >Add Card</Typography></Button>
+            <Button onClick={onClick} color="inherit"><Typography className={classes.title} >Add Paper</Typography></Button>
             <Dialog fullWidth={true} maxWidth="lg" onClose={onClose} open={open} >
                 <CardForm handleClose={onClose}/>
             </Dialog>

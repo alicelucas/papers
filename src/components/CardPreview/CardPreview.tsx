@@ -42,7 +42,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
                 <Container className={classes.container}>
                     <Card variant="outlined" className={classes.root} >
                     <Labels card={card}/>
-                    <CardActionArea className={classes.media} onClick={onCardClick}>
+                    <CardActionArea onClick={onCardClick}>
                         <CardContent>
                             <Typography className={classes.title} align="center" variant="h6" component="h2">
                                 {card.title}

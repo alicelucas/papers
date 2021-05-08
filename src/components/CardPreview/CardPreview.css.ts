@@ -4,9 +4,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         minWidth: 400,
         position: "relative",
-        // height: "100%",
         textAlign: "center",
-        height: "300px",
+        height: "100%",
     },
     editAreaContainer: {
         position: "absolute",
@@ -34,9 +33,6 @@ const useStyles = makeStyles((theme) => ({
         position: 'absolute',
         top: "150px"
     },
-    media: {
-        // height: 200,
-    },
     labels: {
         position: "relative",
         bottom: "2px",
@@ -50,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
     },
     info: {
         fontSize: 14,
-        // lineHeight: 1.0
     },
     authors: {
         marginTop: 12,

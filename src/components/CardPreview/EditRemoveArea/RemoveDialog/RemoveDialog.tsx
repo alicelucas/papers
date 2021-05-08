@@ -4,8 +4,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import React from "react";
-import {useSelector} from "react-redux";
-import {selectedCardSelector} from "../../../../store/cardsSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {cardsSlice, selectedCardSelector} from "../../../../store/cardsSlice";
 import useStyles from "../../CardPreview.css";
 
 type RemoveDialogProps = {
@@ -18,9 +18,11 @@ export const RemoveDialog = ( {open, onClose}: RemoveDialogProps) => {
 
     const selectedCard = useSelector(selectedCardSelector);
 
+    const dispatch = useDispatch();
+
     const onRemove = () => {
-        //here dispatch to remove card
-        // and do a delete request
+        dispatch(cardsSlice.actions.removeCard({id: selectedCard._id}));
+        dispatch(cardsSlice.actions.removeVisibleCardId({visibleCardId: selectedCard._id}))
         onClose();
     }
 

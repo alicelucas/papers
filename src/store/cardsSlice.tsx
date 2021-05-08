@@ -33,6 +33,11 @@ export const cardsSlice = createSlice({
             addVisibleCardId: (state, action: PayloadAction<{ visibleCardId: string }>) => {
                 state.visibleCardsIds.push(action.payload.visibleCardId);
             },
+            removeVisibleCardId: (state, action: PayloadAction<{ visibleCardId: string }>) => {
+                state.visibleCardsIds = state.visibleCardsIds.filter( (id: string) => {
+                    return (action.payload.visibleCardId !== id)
+                })
+            },
             editCard: (state, action: PayloadAction<{ card: Card }>) => {
 
             },

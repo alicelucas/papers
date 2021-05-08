@@ -56,7 +56,6 @@ export default function CardPreview({card}: CardPreviewsProps) {
                         </CardContent>
                     </CardActionArea>
                         <EditRemoveArea id={card._id}/>
-
                     </Card>
                 </Container>
             </Grid>

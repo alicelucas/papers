@@ -4,12 +4,9 @@ import Button from "@material-ui/core/Button";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import useStyles from "../CardPreview.css";
-import {Dialog} from "@material-ui/core";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
-import {cardsSlice, selectedCardSelector} from "../../../store/cardsSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {cardsSlice} from "../../../store/cardsSlice";
+import {useDispatch} from "react-redux";
+import {RemoveDialog} from "./RemoveDialog/RemoveDialog";
 
 type EditRemoveAreaProps = {
     id: string,
@@ -20,13 +17,11 @@ export const EditRemoveArea = ( {id }: EditRemoveAreaProps) => {
 
     const [openRemoveDialogBox, setOpenRemoveDialogBox] = useState<boolean>(false);
 
-    const selectedCard = useSelector(selectedCardSelector);
-
-    const dispatch = useDispatch();
-
     const onRemoveDialogBoxClose = () => {
         setOpenRemoveDialogBox(false)
     }
+    const dispatch = useDispatch();
+
 
     const onRemoveButtonClick = () => {
         dispatch(cardsSlice.actions.setSelectedCard({id: id}))
@@ -37,21 +32,7 @@ export const EditRemoveArea = ( {id }: EditRemoveAreaProps) => {
         <Button onClick={onRemoveButtonClick} size="small" >
             <DeleteOutlinedIcon className={classes.editIcon}/>
         </Button>
-        <Dialog open={openRemoveDialogBox} onClose={onRemoveDialogBoxClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-            <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                    Are you sure you would like to remove the paper "{selectedCard?.title}"? It will be permanently deleted.
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions className={classes.removeDialogBox}>
-                <Button onClick={onRemoveDialogBoxClose} color="primary" autoFocus>
-                    Cancel
-                </Button>
-                <Button onClick={onRemoveDialogBoxClose} color="primary">
-                    Remove
-                </Button>
-            </DialogActions>
-        </Dialog>
+        <RemoveDialog onClose={onRemoveDialogBoxClose} open={openRemoveDialogBox}/>
         <Button onClick={() =>{console.info("clicking")}} size="small" >
             <EditOutlinedIcon className={classes.editIcon}/>
         </Button>

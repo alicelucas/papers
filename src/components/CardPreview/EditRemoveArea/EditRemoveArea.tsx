@@ -7,6 +7,8 @@ import useStyles from "../CardPreview.css";
 import {cardsSlice} from "../../../store/cardsSlice";
 import {useDispatch} from "react-redux";
 import {RemoveDialog} from "./RemoveDialog/RemoveDialog";
+import Dialog from "@material-ui/core/Dialog";
+import CardForm from "../../CardForm/CardForm";
 
 type EditRemoveAreaProps = {
     id: string,
@@ -16,9 +18,15 @@ export const EditRemoveArea = ( {id }: EditRemoveAreaProps) => {
     const classes = useStyles();
 
     const [openRemoveDialogBox, setOpenRemoveDialogBox] = useState<boolean>(false);
+    const [openEditCardForm, setOpenEditCardForm] = useState<boolean>(false);
+
 
     const onRemoveDialogBoxClose = () => {
         setOpenRemoveDialogBox(false)
+    }
+
+    const onEditCardFormClose = () => {
+        setOpenEditCardForm(false)
     }
     const dispatch = useDispatch();
     
@@ -32,8 +40,11 @@ export const EditRemoveArea = ( {id }: EditRemoveAreaProps) => {
             <DeleteOutlinedIcon className={classes.editIcon}/>
         </Button>
         <RemoveDialog onClose={onRemoveDialogBoxClose} open={openRemoveDialogBox}/>
-        <Button onClick={() =>{console.info("clicking")}} size="small" >
+        <Button onClick={() => {setOpenEditCardForm(true)}} size="small" >
             <EditOutlinedIcon className={classes.editIcon}/>
         </Button>
+        <Dialog fullWidth={true} maxWidth="lg" onClose={onEditCardFormClose} open={openEditCardForm} >
+            <CardForm handleClose={onEditCardFormClose}/>
+        </Dialog>
     </Container>
 }

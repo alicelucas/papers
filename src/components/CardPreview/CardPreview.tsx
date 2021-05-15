@@ -34,6 +34,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
 
     const onDialogClose = () => {
         setOpenCardDialog(false);
+        dispatch(cardsSlice.actions.setSelectedCard({id: ""}))
     }
 
     return (

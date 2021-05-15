@@ -22,11 +22,13 @@ export const EditRemoveArea = ( {id }: EditRemoveAreaProps) => {
 
 
     const onRemoveDialogBoxClose = () => {
-        setOpenRemoveDialogBox(false)
+        setOpenRemoveDialogBox(false);
+        dispatch(cardsSlice.actions.setSelectedCard({id: ""}));
     }
 
     const onEditCardFormClose = () => {
-        setOpenEditCardForm(false)
+        setOpenEditCardForm(false);
+        dispatch(cardsSlice.actions.setSelectedCard({id: ""}));
     }
     const dispatch = useDispatch();
     
@@ -35,12 +37,17 @@ export const EditRemoveArea = ( {id }: EditRemoveAreaProps) => {
         setOpenRemoveDialogBox(true);
     }
 
+    const onEditButtonClick = () => {
+        dispatch(cardsSlice.actions.setSelectedCard({id: id}));
+        setOpenEditCardForm(true);
+    }
+
     return  <Container className={classes.editAreaContainer}>
         <Button onClick={onRemoveButtonClick} size="small" >
             <DeleteOutlinedIcon className={classes.editIcon}/>
         </Button>
         <RemoveDialog onClose={onRemoveDialogBoxClose} open={openRemoveDialogBox}/>
-        <Button onClick={() => {setOpenEditCardForm(true)}} size="small" >
+        <Button onClick={onEditButtonClick} size="small" >
             <EditOutlinedIcon className={classes.editIcon}/>
         </Button>
         <Dialog fullWidth={true} maxWidth="lg" onClose={onEditCardFormClose} open={openEditCardForm} >

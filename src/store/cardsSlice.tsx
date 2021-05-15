@@ -81,6 +81,9 @@ export const selectedCardSelector = (state: RootState) => {
         return (card._id === state.cards.selectedCard)
     })[0];
 }
+export const selectedCardIdSelector = (state: RootState) => {
+    return state.cards.selectedCard
+}
 export const selectedSectionSelector = (state: RootState) => {
     return state.cards.selectedSection;
 }

@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
       var items = [];
       // print all the cards
       data.Items.forEach(function(card) {
-        items.push({...card, _id: uuidv4()})
+        items.push({...card, _id: card.id ? card.id : uuidv4()})
       });
       res.send(items)
     }
@@ -53,29 +53,31 @@ app.post("/addCard", (req, res) => {
   })
 });
 
-// app.post("/updatedCard", (req, res) => {
-//   var title = req.body._id;
-//   const params = {
-//     TableName: "papers", Key: {title: title}, ......
-//   }
-//   docClient.update(params, (err, data) => {
-//     if (err) {
-//       console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-//     } else {
-//       console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
-//     }
-//   })
-// });
+app.post("/updateCard", (req, res) => {
+  var id = req.body._id;
+  const params = {
+    TableName: "papers", Key: {id: id}, UpdateExpression: "set title=:t", ExpressionAttributeValues:{
+      ":t":req.body.title
+    },
+  }
+  docClient.update(params, (err, data) => {
+    if (err) {
+      console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+      console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+    }
+  })
+});
 
 app.delete("/removeCard/", (req, res) => {
-  var title = req.body.title;
-  docClient.delete({TableName: "papers", Key: {title: title}}, (err, data) => {
+  var id = req.body._id;
+  docClient.delete({TableName: "papers", Key: {id: id}}, (err, data) => {
     if (err) {
       console.info("Unable to delete item.")
       console.info(err)
     }
     else {
-      console.info("DeleteItem succeeded: ", title)
+      console.info("DeleteItem succeeded: ", req.body.title)
     }
   });
 });

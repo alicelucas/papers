@@ -25,7 +25,7 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
     const selectedCard = useSelector(selectedCardSelector);
     const selectedCardId = useSelector(selectedCardIdSelector);
 
-    const [defaultField, setDefaultField] = useState<CardType>({title: "", authors: "", date: "", journal: "", _id: "", labels: [],
+    const [newCard, setNewCard] = useState<CardType>({title: "", authors: "", date: "", journal: "", _id: "", labels: [],
         sections: {
             why: "",
             what: "",
@@ -35,7 +35,7 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
 
     useEffect(() => {
         if (selectedCardId) {
-            setDefaultField({title: selectedCard.title, authors: selectedCard.authors, date: selectedCard.date, journal: selectedCard.journal, _id: selectedCard._id, labels: selectedCard.labels,
+            setNewCard({title: selectedCard.title, authors: selectedCard.authors, date: selectedCard.date, journal: selectedCard.journal, _id: selectedCard._id, labels: selectedCard.labels,
                 sections: {
                     why: selectedCard.sections.why,
                     what: selectedCard.sections.what,
@@ -45,7 +45,7 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
         }
         else {
             console.info("HEre")
-            setDefaultField({title: "", authors: "", date: "", journal: "", _id: "", labels: [],
+            setNewCard({title: "", authors: "", date: "", journal: "", _id: "", labels: [],
                 sections: {
                     why: "",
                     what: "",
@@ -55,7 +55,7 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
         }
     }, [selectedCardId])
 
-    const [newCard, setNewCard] = useState<CardType>(defaultField);
+    // const [newCard, setNewCard] = useState<CardType>(defaultField);
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "what" || event.target.name === "why" || event.target.name === "how" || event.target.name === "results") {
@@ -70,10 +70,16 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
     }
 
     const handleAddCard = () => {
-        setNewCard({...newCard, _id: uuid.v4()});
+        setNewCard({...newCard, _id: uuid.v4()}); //generate new uuid if completely new card
         dispatch(cardsSlice.actions.addCard({card: newCard}));
         dispatch(cardsSlice.actions.addVisibleCardId({visibleCardId: newCard._id}));
         axios.post("http://127.0.0.1:8000/addCard", newCard);
+        handleClose();
+    }
+
+    const handleEditCard = () => {
+        console.info(newCard)
+        axios.post("http://127.0.0.1:8000/updateCard", newCard);
         handleClose();
     }
 
@@ -84,35 +90,35 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
                 <CardContent>
                     <form noValidate autoComplete="off">
                         <div className={classes.textField}>
-                            <TextField fullWidth label="Title" name="title" variant="filled" defaultValue={defaultField.title} onChange={handleTextChange} multiline/>
+                            <TextField fullWidth label="Title" name="title" variant="filled" defaultValue={newCard.title} onChange={handleTextChange} multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label="Authors"  variant="filled"  defaultValue={defaultField.authors} onChange={handleTextChange}  name="authors" multiline/>
+                            <TextField fullWidth label="Authors"  variant="filled"  defaultValue={newCard.authors} onChange={handleTextChange}  name="authors" multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label="Journal" name="journal"  variant="filled"  defaultValue={defaultField.journal} onChange={handleTextChange} multiline/>
+                            <TextField fullWidth label="Journal" name="journal"  variant="filled"  defaultValue={newCard.journal} onChange={handleTextChange} multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label="Date" name="date" variant="filled"   defaultValue={defaultField.date} onChange={handleTextChange} multiline/>
+                            <TextField fullWidth label="Date" name="date" variant="filled"   defaultValue={newCard.date} onChange={handleTextChange} multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label={sectionTitles[0]} variant="filled"  defaultValue={defaultField.sections.why} onChange={handleTextChange}  name="why" multiline/>
+                            <TextField fullWidth label={sectionTitles[0]} variant="filled"  defaultValue={newCard.sections.why} onChange={handleTextChange}  name="why" multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label={sectionTitles[1]} variant="filled" defaultValue={defaultField.sections.what} onChange={handleTextChange}  name="what" multiline/>
+                            <TextField fullWidth label={sectionTitles[1]} variant="filled" defaultValue={newCard.sections.what} onChange={handleTextChange}  name="what" multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label={sectionTitles[2]} variant="filled"  defaultValue={defaultField.sections.how} onChange={handleTextChange}  name="how" multiline/>
+                            <TextField fullWidth label={sectionTitles[2]} variant="filled"  defaultValue={newCard.sections.how} onChange={handleTextChange}  name="how" multiline/>
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label={sectionTitles[3]} variant="filled"  defaultValue={defaultField.sections.results} onChange={handleTextChange}  name="results" multiline />
+                            <TextField fullWidth label={sectionTitles[3]} variant="filled"  defaultValue={newCard.sections.results} onChange={handleTextChange}  name="results" multiline />
                         </div>
                         <div className={classes.textField}>
-                            <TextField fullWidth label="What are the labels (separate by comma)?" variant="filled"  defaultValue={defaultField.labels} onChange={handleTextChange}  name="labels" multiline />
+                            <TextField fullWidth label="What are the labels (separate by comma)?" variant="filled"  defaultValue={newCard.labels} onChange={handleTextChange}  name="labels" multiline />
                         </div>
                     </form>
                     <Box paddingTop={1}>
-                        <Button variant="outlined" onClick={handleAddCard}>{buttonText}</Button>
+                        <Button variant="outlined" onClick={selectedCardId ? handleEditCard : handleAddCard}>{buttonText}</Button>
                     </Box>
 
                 </CardContent>

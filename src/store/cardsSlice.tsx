@@ -27,7 +27,7 @@ export const cardsSlice = createSlice({
         initialState,
         reducers: {
             addCard: (state, action: PayloadAction<{ card: Card }>) => {
-                const cardLabels = action.payload.card.labels.map( (label: string) => label.trim());
+                const cardLabels = action.payload.card.labels.filter( (label: string) => { return label }).map( (label: string) => label.trim());
                 state.cards.push( {...action.payload.card, labels: cardLabels});
             },
             addVisibleCardId: (state, action: PayloadAction<{ visibleCardId: string }>) => {

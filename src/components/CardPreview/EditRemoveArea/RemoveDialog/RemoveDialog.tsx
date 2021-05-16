@@ -22,9 +22,9 @@ export const RemoveDialog = ( {open, onClose}: RemoveDialogProps) => {
     const dispatch = useDispatch();
 
     const onRemove = () => {
-        axios.delete("http://127.0.0.1:8000/removeCard", { data: {id: selectedCard?._id} });
-        dispatch(cardsSlice.actions.removeCard({id: selectedCard._id}));
-        dispatch(cardsSlice.actions.removeVisibleCardId({visibleCardId: selectedCard._id}));
+        axios.delete("http://127.0.0.1:8000/removeCard", { data: {id: selectedCard?.id} });
+        dispatch(cardsSlice.actions.removeCard({id: selectedCard.id}));
+        dispatch(cardsSlice.actions.removeVisibleCardId({visibleCardId: selectedCard.id}));
         onClose();
     }
 

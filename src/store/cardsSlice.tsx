@@ -39,16 +39,19 @@ export const cardsSlice = createSlice({
                 })
             },
             editCard: (state, action: PayloadAction<{ card: Card }>) => {
-
+                const unedittedCards = state.cards.filter( (card: Card) => {
+                    return (card.id !== action.payload.card.id)
+                });
+                state.cards = [...unedittedCards, action.payload.card]
             },
             removeCard: (state, action: PayloadAction<{ id: string }>) => {
                 state.cards = state.cards.filter((card) => {
-                    return (card._id !== action.payload.id)
+                    return (card.id !== action.payload.id)
                 })
             },
             replaceSelectedCard: (state, action: PayloadAction<{ card: Card}>) => {
                 state.cards = state.cards.map( (card) => {
-                    if (card._id !== state.selectedCard) return card;
+                    if (card.id !== state.selectedCard) return card;
                     else return action.payload.card;
                 })
 
@@ -78,7 +81,7 @@ export const cardsSelector = (state: RootState) => {
 }
 export const selectedCardSelector = (state: RootState) => {
     return state.cards.cards.filter( (card) => {
-        return (card._id === state.cards.selectedCard)
+        return (card.id === state.cards.selectedCard)
     })[0];
 }
 export const selectedCardIdSelector = (state: RootState) => {
@@ -90,7 +93,7 @@ export const selectedSectionSelector = (state: RootState) => {
 
 export const selectedSectionContentSelector = (state: RootState) => {
     const selectedCard = state.cards.cards.filter( (card) => {
-        return (card._id === state.cards.selectedCard)
+        return (card.id === state.cards.selectedCard)
     })[0]
     if (!selectedCard) return "";
     switch(state.cards.selectedSection) {

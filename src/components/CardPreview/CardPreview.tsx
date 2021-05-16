@@ -28,7 +28,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
 
     const onCardTitleClick = () => {
         setOpenCardDialog(true);
-        dispatch(cardsSlice.actions.setSelectedCard({id: card._id}))
+        dispatch(cardsSlice.actions.setSelectedCard({id: card.id}))
         dispatch(cardsSlice.actions.setSelectedSection({section: Section.Why}))
     }
 
@@ -39,7 +39,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
 
     return (
         <React.Fragment>
-            <Grid key={card._id} item xs={4}>
+            <Grid key={card.id} item xs={4}>
                 <Container className={classes.container}>
                     <Card variant="outlined" className={classes.root} >
                     <Labels card={card}/>
@@ -56,7 +56,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                        <EditRemoveArea id={card._id}/>
+                        <EditRemoveArea id={card.id}/>
                     </Card>
                 </Container>
             </Grid>

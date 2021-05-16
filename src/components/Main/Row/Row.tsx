@@ -13,7 +13,7 @@ export const Row = ( {cards, id}: RowProps) => {
     return (
         <Grid key={id} container item xs={12} spacing={3}>
             { cards.map( (card: Card) => {
-                return (<React.Fragment key={card._id}>
+                return (<React.Fragment key={card.id}>
                     <CardPreview card={card}/>
                 </React.Fragment>) })}
         </Grid>

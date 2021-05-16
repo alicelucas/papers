@@ -21,14 +21,14 @@ const Main = () => {
 
     useEffect( () => {
         setCards(_.filter(originalCards, (card: Card) => {
-            return (visibleCardsIds.includes(card._id))
+            return (visibleCardsIds.includes(card.id))
         }))
     }, [originalCards, visibleCardsIds])
 
     return (
             <div className={classes.root}>
                 <Grid container spacing={1}>
-                    {_.chunk(cards, cardsPerRow).map( (cards: Array<Card>) => { return (<React.Fragment key={cards[0]._id}><Row id={cards[0]._id} cards={cards}/></React.Fragment>)})}
+                    {_.chunk(cards, cardsPerRow).map( (cards: Array<Card>) => { return (<React.Fragment key={cards[0].id}><Row id={cards[0].id} cards={cards}/></React.Fragment>)})}
                 </Grid>
             </div>
     )

@@ -15,7 +15,7 @@ function App() {
         axios.get("http://127.0.0.1:8000").then( (response: AxiosResponse) => {
             response.data.forEach( (card: Card) => {
                 dispatch(cardsSlice.actions.addCard({card: card}))
-                dispatch(cardsSlice.actions.addVisibleCardId({visibleCardId: card._id}))
+                dispatch(cardsSlice.actions.addVisibleCardId({visibleCardId: card.id}))
             }
             )
         })

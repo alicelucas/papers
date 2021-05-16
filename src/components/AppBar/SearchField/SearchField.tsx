@@ -29,10 +29,10 @@ export const SearchField = () => {
         _.forEach(cards, (card: Card) =>
         {
             if ((card.title).toLowerCase().indexOf(query.toLowerCase()) > -1 || (card.authors).toLowerCase().indexOf(query.toLowerCase()) > -1) {
-                cardsIds.push(card._id)
+                cardsIds.push(card.id)
             }
             if (labelIndexLocation !== -1 && labelTerm && (card.labels).map((label: string) => label.toLowerCase()).includes(labelTerm)) {
-                cardsIds.push(card._id)
+                cardsIds.push(card.id)
             }
         })
         dispatch(cardsSlice.actions.setVisibleCardIds({visibleCardsIds: cardsIds }))

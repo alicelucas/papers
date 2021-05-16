@@ -23,7 +23,7 @@ export const Labels = ( {card}: LabelsProps) => {
         const cardsIds: Array<string> = [];
         _.forEach(cards, (card: Card) =>
         {
-            if (card.labels.includes(label)) cardsIds.push(card._id)
+            if (card.labels.includes(label)) cardsIds.push(card.id)
         })
         dispatch(cardsSlice.actions.setVisibleCardIds({visibleCardsIds: cardsIds }))
         dispatch(appSlice.actions.setSearchTerm({searchTerm: `label:${label.toLowerCase()}`}))

@@ -25,7 +25,7 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
     const selectedCard = useSelector(selectedCardSelector);
     const selectedCardId = useSelector(selectedCardIdSelector);
 
-    const [newCard, setNewCard] = useState<CardType>({title: "", authors: "", date: "", journal: "", _id: "", labels: [],
+    const [newCard, setNewCard] = useState<CardType>({title: "", authors: "", date: "", journal: "", id: "", labels: [],
         sections: {
             why: "",
             what: "",
@@ -35,7 +35,7 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
 
     useEffect(() => {
         if (selectedCardId) {
-            setNewCard({title: selectedCard.title, authors: selectedCard.authors, date: selectedCard.date, journal: selectedCard.journal, _id: selectedCard._id, labels: selectedCard.labels,
+            setNewCard({title: selectedCard.title, authors: selectedCard.authors, date: selectedCard.date, journal: selectedCard.journal, id: selectedCard.id, labels: selectedCard.labels,
                 sections: {
                     why: selectedCard.sections.why,
                     what: selectedCard.sections.what,
@@ -44,7 +44,7 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
                 }})
         }
         else {
-            setNewCard({title: "", authors: "", date: "", journal: "", _id: "", labels: [],
+            setNewCard({title: "", authors: "", date: "", journal: "", id: "", labels: [],
                 sections: {
                     why: "",
                     what: "",
@@ -69,14 +69,15 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
     }
 
     const handleAddCard = () => {
-        setNewCard({...newCard, _id: uuid.v4()}); //generate new uuid if completely new card
+        setNewCard({...newCard, id: uuid.v4()}); //generate new uuid if completely new card
         dispatch(cardsSlice.actions.addCard({card: newCard}));
-        dispatch(cardsSlice.actions.addVisibleCardId({visibleCardId: newCard._id}));
-        axios.post("http://127.0.0.1:8000/addCard", newCard);
+        dispatch(cardsSlice.actions.addVisibleCardId({visibleCardId: newCard.id}));
+        axios.post("http://127.0.0.1:8000/addCard", {...newCard, id: uuid.v4()});
         handleClose();
     }
 
     const handleEditCard = () => {
+        dispatch(cardsSlice.actions.editCard({card: newCard}));
         axios.post("http://127.0.0.1:8000/updateCard", newCard);
         handleClose();
     }

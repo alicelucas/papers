@@ -44,7 +44,6 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
                 }})
         }
         else {
-            console.info("HEre")
             setNewCard({title: "", authors: "", date: "", journal: "", _id: "", labels: [],
                 sections: {
                     why: "",
@@ -78,7 +77,6 @@ export const CardForm = ({handleClose} : NewCardFormProps) => {
     }
 
     const handleEditCard = () => {
-        console.info(newCard)
         axios.post("http://127.0.0.1:8000/updateCard", newCard);
         handleClose();
     }

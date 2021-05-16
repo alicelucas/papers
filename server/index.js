@@ -70,14 +70,14 @@ app.post("/updateCard", (req, res) => {
 });
 
 app.delete("/removeCard/", (req, res) => {
-  var id = req.body._id;
+  var id = req.body.id;
   docClient.delete({TableName: "papers", Key: {id: id}}, (err, data) => {
     if (err) {
       console.info("Unable to delete item.")
       console.info(err)
     }
     else {
-      console.info("DeleteItem succeeded: ", req.body.title)
+      console.info("DeleteItem succeeded: ", id)
     }
   });
 });

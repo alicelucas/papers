@@ -54,11 +54,16 @@ app.post("/addCard", (req, res) => {
 });
 
 app.post("/updateCard", (req, res) => {
-  var id = req.body._id;
+  var id = req.body.id;
   const params = {
-    TableName: "papers", Key: {id: id}, UpdateExpression: "set title=:t", ExpressionAttributeValues:{
-      ":t":req.body.title
-    },
+    TableName: "papers", Key: {id: id}, UpdateExpression: "set title=:t, authors=:a, labels=:l, #d=:d, journal=:j, sections=:s", ExpressionAttributeValues:{
+      ":t":req.body.title,
+      ":a":req.body.authors,
+      ":d":req.body.date,
+      ":j":req.body.journal,
+      ":l": req.body.labels,
+      ":s": req.body.sections,
+    }, ExpressionAttributeNames:{"#d": "date"},
   }
   docClient.update(params, (err, data) => {
     if (err) {

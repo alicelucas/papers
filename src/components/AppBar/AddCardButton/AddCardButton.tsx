@@ -4,6 +4,7 @@ import {useStyles} from "../AppBar/AppBar.css";
 import React, {useState} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import CardForm from "../../CardForm/CardForm";
+import {AboutButton} from "../AboutButton /AboutButton";
 
 export const AddCardButton = () => {
     const classes = useStyles();
@@ -18,7 +19,7 @@ export const AddCardButton = () => {
         setOpen(false)
     }
 
-    if (process.env.NODE_ENV !== "development") return <React.Fragment/>
+    if (process.env.NODE_ENV === "development") return <AboutButton/> //FIXME should be not equal to before committing
 
     return (
         <React.Fragment>

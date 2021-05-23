@@ -2,6 +2,9 @@ import {createStyles, fade, makeStyles, Theme} from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+        aboutIcon: {
+                color: theme.palette.common.white
+        },
         appbar: {
             color:"#6573c3"
         },

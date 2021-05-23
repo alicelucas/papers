@@ -56,7 +56,7 @@ export default function CardPreview({card}: CardPreviewsProps) {
                             </Typography>
                         </CardContent>
                     </CardActionArea>
-                        <EditRemoveArea id={card.id}/>
+                        {process.env.NODE_ENV === "development" && <EditRemoveArea id={card.id}/>}
                     </Card>
                 </Container>
             </Grid>

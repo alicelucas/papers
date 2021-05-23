@@ -17,6 +17,9 @@ export const AddCardButton = () => {
     const onClose = () => {
         setOpen(false)
     }
+
+    if (process.env.NODE_ENV !== "development") return <React.Fragment/>
+
     return (
         <React.Fragment>
             <Button onClick={onClick} variant={"contained"}  color={"inherit"} style={{backgroundColor: "#6573c3"}}><Typography className={classes.title} >Add Paper</Typography></Button>

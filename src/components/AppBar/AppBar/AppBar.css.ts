@@ -8,6 +8,9 @@ export const useStyles = makeStyles((theme: Theme) =>
         grow: {
             flexGrow: 1,
         },
+        homeButton: {
+            textTransform: "none"
+        },
         menuButton: {
             marginRight: theme.spacing(2),
         },
@@ -16,6 +19,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             [theme.breakpoints.up('sm')]: {
                 display: 'block',
             },
+            color: theme.palette.common.white
         },
         search: {
             position: 'relative',

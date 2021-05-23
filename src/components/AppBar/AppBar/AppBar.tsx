@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import {SearchField} from "../SearchField/SearchField";
 import {useStyles} from "./AppBar.css";
 import {AddCardButton} from "../AddCardButton/AddCardButton";
+import {HomeButton} from "../HomeButton/HomeButton";
 
 export const CardAppBar = () => {
     const classes = useStyles();
@@ -13,9 +14,7 @@ export const CardAppBar = () => {
         <div className={classes.grow} >
             <AppBar style={{background: "#6573c3"}}>
                 <Toolbar>
-                    <Typography className={classes.title} variant="h6" noWrap>
-                        Paper stories
-                    </Typography>
+                <HomeButton/>
                     <SearchField/>
                     <div className={classes.grow} />
                     <AddCardButton/>

@@ -7,7 +7,8 @@ export const useStyles = makeStyles({
     body: {
         marginLeft: 20,
         marginRight: 20,
-        whiteSpace: 'pre-line'
+        whiteSpace: 'pre-line',
+        overflow: "auto",
     },
     header: {
         backgroundColor: "#6573c3",

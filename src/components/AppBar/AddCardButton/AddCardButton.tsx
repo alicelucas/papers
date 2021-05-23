@@ -4,7 +4,7 @@ import {useStyles} from "../AppBar/AppBar.css";
 import React, {useState} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import CardForm from "../../CardForm/CardForm";
-import {AboutButton} from "../AboutButton /AboutButton";
+import {AboutButton} from "../../About/AboutButton /AboutButton";
 
 export const AddCardButton = () => {
     const classes = useStyles();

@@ -10,7 +10,7 @@ import {CardAppBar} from "./components/AppBar/AppBar/AppBar";
 import { createMuiTheme } from '@material-ui/core/styles'
 
 
-const font = "'Lato', sans-serif";
+const font = "'Lato'";
 const muiTheme = createMuiTheme({
     typography: {
         fontFamily: font

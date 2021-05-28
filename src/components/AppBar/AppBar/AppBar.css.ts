@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme: Theme) =>
             marginLeft: 0,
             width: '100%',
             [theme.breakpoints.up('sm')]: {
-                marginLeft: theme.spacing(23),
+                marginLeft: theme.spacing(17),
                 width: "30%",
             },
         },

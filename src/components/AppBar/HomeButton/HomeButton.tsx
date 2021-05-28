@@ -26,11 +26,11 @@ export const HomeButton = () => {
 
     return (<React.Fragment>
             <Button className={classes.homeButton} onClick={onHomeButtonClick}>
-                <Typography className={classes.title} variant="h6" noWrap>
+                <Typography className={classes.title} variant="h5" noWrap>
                     Paper Stories
                 </Typography>
             </Button>
-        {cards.length > 0 && <Chip color={"primary"} className={classes.chip} label={cards.length} />}
+        {cards.length > 0 && <Chip color={"primary"} size={"medium"} className={classes.chip} label={cards.length} />}
     </React.Fragment>
       )
 }

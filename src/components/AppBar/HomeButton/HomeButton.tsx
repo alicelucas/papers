@@ -6,6 +6,7 @@ import {appSlice} from "../../../store/appSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {cardsSelector, cardsSlice} from "../../../store/cardsSlice";
 import {Card} from "../../../types/Card";
+import Chip from "@material-ui/core/Chip";
 
 export const HomeButton = () => {
     const classes = useStyles();
@@ -23,10 +24,13 @@ export const HomeButton = () => {
         dispatch(cardsSlice.actions.setVisibleCardIds({visibleCardsIds: ids}))
     }
 
-    return (<Button className={classes.homeButton} onClick={onHomeButtonClick}>
-            <Typography className={classes.title} variant="h6" noWrap>
-                Paper Stories
-            </Typography>
-    </Button>
+    return (<React.Fragment>
+            <Button className={classes.homeButton} onClick={onHomeButtonClick}>
+                <Typography className={classes.title} variant="h6" noWrap>
+                    Paper Stories
+                </Typography>
+            </Button>
+        {cards.length > 0 && <Chip color={"primary"} className={classes.chip} label={cards.length} />}
+    </React.Fragment>
       )
 }

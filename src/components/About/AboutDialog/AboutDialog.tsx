@@ -19,7 +19,7 @@ export const AboutDialog = ({ onClose, open }: AboutDialogProps) => {
         <DialogContent className={classes.paper}>
             <Grid style={{display: 'inline-block'}} container>
                 <Typography className={classes.text}>
-                    Hi there! Here's a bit of information about what this web app is for.
+                    Hi there! Here's a bit of information about why I made this web app.
                 </Typography>
                 <br/>
                 <Typography className={classes.text}>
@@ -44,7 +44,7 @@ export const AboutDialog = ({ onClose, open }: AboutDialogProps) => {
                     <Box fontStyle="italic">
                     Q3: "What do they propose?" </Box></Typography>
                 <Typography className={classes.text}>
-                    This answer delves into some of the technical details of the paper, although it still tries to avoid the nitty-gritty and still gives the big picture idea.
+                    This answer delves into some of the technical details of the paper, although it still tries to avoid the nitty-gritty and fouses on the big picture idea.
                 </Typography>
                 <br/>
                 <Typography component="div">    <Box fontStyle="italic">

@@ -8,6 +8,7 @@ export const useStyles = makeStyles((theme: Theme) =>
         appbar: {
             color:"#6573c3"
         },
+        chip: {color: "white", fontSize:"large"},
         grow: {
             flexGrow: 1,
         },

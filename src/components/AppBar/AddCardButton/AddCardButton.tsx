@@ -19,7 +19,7 @@ export const AddCardButton = () => {
         setOpen(false)
     }
 
-    if (process.env.NODE_ENV === "development") return <AboutButton/> //FIXME should be not equal to before committing
+    if (process.env.NODE_ENV === "development") return <AboutButton/> //FIXME should be not equal to before deploying
 
     return (
         <React.Fragment>

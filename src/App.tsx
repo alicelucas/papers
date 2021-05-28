@@ -1,12 +1,21 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {Container} from "@material-ui/core";
+import {Container, MuiThemeProvider} from "@material-ui/core";
 import Main from "./components/Main/Main";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {Card} from "./types/Card";
 import {useDispatch} from "react-redux";
 import {cardsSlice} from "./store/cardsSlice";
 import {CardAppBar} from "./components/AppBar/AppBar/AppBar";
+import { createMuiTheme } from '@material-ui/core/styles'
+
+
+const font = "'Lato', sans-serif";
+const muiTheme = createMuiTheme({
+    typography: {
+        fontFamily: font
+    }
+});
 
 function App() {
     const dispatch = useDispatch();
@@ -27,10 +36,12 @@ function App() {
     }, [])
 
     return (
-      <Container maxWidth="lg">
-          <CardAppBar/>
-          <Main/>
-      </Container>
+        <MuiThemeProvider theme={muiTheme}>
+            <Container maxWidth="lg">
+                <CardAppBar/>
+                <Main/>
+            </Container>
+        </MuiThemeProvider>
   );
 }
 

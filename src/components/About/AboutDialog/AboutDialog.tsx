@@ -2,10 +2,7 @@ import React from "react"
 import {Dialog} from "@material-ui/core";
 import DialogContent from "@material-ui/core/DialogContent";
 import Grid from "@material-ui/core/Grid";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
 import {useStyles} from "../About.css";
 import Box from "@material-ui/core/Box";
 

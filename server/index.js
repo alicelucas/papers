@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
-const port = process.env.EXPRESS_PORT;
+const port = 8000;
 
 app.use(cors());
 app.use(bodyParser.json()); // support json encoded bodies

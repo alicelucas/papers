@@ -4,7 +4,7 @@ import {useStyles} from "../AppBar/AppBar.css";
 import {Button} from "@material-ui/core";
 import {appSlice} from "../../../store/appSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {cardsSelector, cardsSlice} from "../../../store/cardsSlice";
+import {cardsSelector, cardsSlice, visibleCardsIdsSelector} from "../../../store/cardsSlice";
 import {Card} from "../../../types/Card";
 import Chip from "@material-ui/core/Chip";
 
@@ -13,6 +13,7 @@ export const HomeButton = () => {
 
     const dispatch = useDispatch();
 
+    const visibleCardsIds = useSelector(visibleCardsIdsSelector);
     const cards = useSelector(cardsSelector);
 
     const onHomeButtonClick = () => {
@@ -30,7 +31,7 @@ export const HomeButton = () => {
                     Paper Stories
                 </Typography>
             </Button>
-        {cards.length > 0 && <Chip color={"primary"} size={"medium"} className={classes.chip} label={cards.length} />}
+        {visibleCardsIds.length > 0 && <Chip color={"primary"} size={"medium"} className={classes.chip} label={visibleCardsIds.length} />}
     </React.Fragment>
       )
 }

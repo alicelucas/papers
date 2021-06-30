@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     dialog: {
         position: 'absolute',
-        top: "50px"
+        top: "0px"
     },
     labels: {
         position: "relative",

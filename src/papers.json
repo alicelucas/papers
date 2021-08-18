@@ -646,6 +646,49 @@
         },
         {
             "date": {
+                "S": "2019"
+            },
+            "journal": {
+                "S": "In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (pp. 113-123)"
+            },
+            "labels": {
+                "L": [
+                    {
+                        "S": "data augmentation"
+                    },
+                    {
+                        "S": " CNN"
+                    }
+                ]
+            },
+            "sections": {
+                "M": {
+                    "why": {
+                        "S": "Data augmentation is usually something that is engineered. Each scientist is going to come up with a new one for a new problem and a new dataset. It turns out that the most optimal augmentation methods for CIFAR-10 and ImageNet are not the same as the ones for MNIST. Thus they are trying to automate the process.\n"
+                    },
+                    "how": {
+                        "S": "There are two phases to their approach: first, the search phase to find the best augmentation policy. They usually choose a subset of the data to do this search phase. Then once they find the optimal policy, they train the whole training dataset under that policy. \n\n-> See Figure 1. The search algorithm is a controller RNN that is trained with the Proximal Policy Optimization algorithm. The RNN samples a strategy S. Unlike what the figure suggests, the strategy S actually consists of 5 sub-policies, where each sub-policy is two image transformation operations to be applied in sequence, and the probability of the operation happening, and the magnitude — for each of the two operation. \n-> Look at Figure 2 for an example of a sampled policy. See that each transformation has a probability of happening. Some operations won’t use the magnitude information (e.g. invert). For example the “invert” operation in column 2 never happened. The available operations on images are taken from PIL, a Python Image Library. They consider all functions from there. In addition they incorporate CutOut in the search space — this masks out square regions of the image and has shown it can result in improved training performance.\n-> Back to Figure 1. They train the child network on that policy for a certain number of epochs. Since their policy is actually 5 sub-policy (5 different possible sets of transformations), they choose one of the sub-policies to be applied for each image in a batch. It is important to note that the child network trained in Figure 1 might have a different architecture than the one we end up using to train on the whole dataset. Child models are trained for 120 epochs. It’s a big amount of epochs because they find that each sub-policy needs to be applied a certain number of times before the model benefits from it, due to the stochasticity (that’s in the Discussion). The resulting validation accuracy R is what is used as the reward to then update the controller.  \n\nAt the end of the search, they take the 5 best policies, which gives them 25 sets of operations to use for subsequent training. "
+                    },
+                    "what": {
+                        "S": "Learned augmentation is something that already has been proposed in the field. For example they mention Smart Augmentation, which uses a neural network to find optimal augmentations. They also mention GANs as tools for augmenting data. \nBut the main difference of their method is that they use methods of reinforcement learning to learn the optimal augmentation policy. Their method is inspired by all of the work that uses reinforcement learning to find optimal architectures for neural network. "
+                    },
+                    "results": {
+                        "S": "First, they benchmark AutoAugment on the typical datasets: CIFAR-10, CIFAR-100, SHVN, ImageNet. \n\n—> Look at Table 2. They perform the search for the optimal policy on a reduced CIFAR-10 dataset. Then they use that optimal policy to train networks on CIFAR-10, CIFAR-100. For the SHVN (Street View House Numbers) results, they do the AutoAugment search on a smaller sample of SHVN dataset first, and use the optimal policy to train on the whole dataset. This table shows error rates, so smaller is better. They train themselves networks of different architectures (see table) WITHOUT the data augmentation policy they found —> That’s their Baseline model. Then they train with the AutoAugment policy that was found from the search, and they also do another training experiment with just Cutout. \nThey show that it seems that when training on the reduced dataset, both for CIFAR-10 and Reduced SVHN. AutoAugment seems to have even a bigger impact (although it’s hard to compare).  BUT this reduced dataset corresponds to the dataset used for performing the search of the optimal augmentation policy, or is really fair to test on that and make conclusions from that?\n\nInteresting observations about the different optimal augmentation policies found for each dataset:\n* For the optimal augmentations found on CIFAR-10 are actually mostly operations that chance the colors of the image: equalize, autocontrast, brightness, etc. Very few geometric transformations.\n* Invert operation is very common on SHVN dataset, but never used for CIFAR-10. Geometric transformations are very common. In the text, they explain that by saying that “house numbers are often naturally sheared and skewed [..] so it is helpful to learn the invariance to such transformations via data augmentations.”\n* For ImageNet, similarly to CIFAR-10, they found that augmentations based on modifying colors were most successful. See Figure 3.\n\n-> Look at Table 3. They compare with “Inception Preprocessing”, which I believe is just a normalization of pixels, nothing fancy. The results are not that impressive, it’s not like we get such a bit jump in accuracy. It makes me think: “All this for that?”\n\n—> Section 4.3, the transferability of the dataset. I was a bit surprised by this section because I thought that the concept was to find optimal augmentations that are optimal to the dataset in question. \nWhat they do is that they use the optimal policy found on ImageNet and train networks on other datasets such as Oxford Flowers, Oxford Pets, etc. They find that the augmentation policy found on the ImageNet dataset works well at reducing the error rates for the smaller datasets. For Stanford cars, they say in the text that if you fine-tune from ImageNet then you get a 5.9% error rate, whereas they train from scratch and obtain 5.2%. "
+                    }
+                }
+            },
+            "id": {
+                "S": "a2dea9c0-bcb4-4907-99ec-8a03b55df88d"
+            },
+            "title": {
+                "S": "Autoaugment: Learning augmentation strategies from data"
+            },
+            "authors": {
+                "S": "Cubuk, E. D., Zoph, B., Mane, D., Vasudevan, V., & Le, Q. V. "
+            }
+        },
+        {
+            "date": {
                 "S": "2021"
             },
             "journal": {
@@ -1507,7 +1550,7 @@
             }
         }
     ],
-    "Count": 33,
-    "ScannedCount": 33,
+    "Count": 34,
+    "ScannedCount": 34,
     "ConsumedCapacity": null
 }

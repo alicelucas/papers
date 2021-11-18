@@ -88,6 +88,52 @@
         },
         {
             "date": {
+                "S": "2020"
+            },
+            "journal": {
+                "S": "In European Conference on Computer Vision (pp. 124-141). Springer, Cham."
+            },
+            "labels": {
+                "L": [
+                    {
+                        "S": "few-shot"
+                    },
+                    {
+                        "S": " fine-tuning"
+                    },
+                    {
+                        "S": " domain adaptation"
+                    }
+                ]
+            },
+            "sections": {
+                "M": {
+                    "why": {
+                        "S": "The authors study  whether existing few-shot methods still perform well in the case of cross-domain few-shot learning, which is when the domain of the classes used during training differs from the domain queried during training (e.g. train on ImageNet classes, and trying to generalize to classes of the X-ray domain). "
+                    },
+                    "how": {
+                        "S": "The datasets with interesting domains that they use include CropDisease, EuroSAT, ChestX datasets. They study whether few-shot models that were trained on the ImageNet model can generalize to these test datasets. \n\nThe few-shot models they study include MAML (which aims at learning good initialization parameters that can be quickly adapted to a new task, via a two-stage optimization process) and ProtoNet (which learns a metric space in which classification can be done by calculating distances to prototype representations). They also study RelationNet, which tries to learn a deep distance metric that can then compare a small number of images (using Siamese networks); or MetaOpt, which learns feature embeddings on which linear classification can be done when learning new classes.\n\nIn addition, they investigate the use of different fine-tuning methods for solving the few-shot problem at test time, studying different set-ups: (1) fixed feature extractor, (2) fine-tuning all layers, (3) fine-tuning last k layers, or (4) Transductive fine-tuning, where the stats of the query images are used during batch normalization. "
+                    },
+                    "what": {
+                        "S": "The Meta-Dataset paper does propose the use of a dataset that includes a greater diversity of images, but still the included datasets all correspond to natural images. Furthermore what is used for train is still what is asked for test. \n\nThey authors into this subject of full mismatch between train and test domains, in the few-shot setting."
+                    },
+                    "results": {
+                        "S": "* They show that state-of-the-art few-shot models are far from competitive. They seriously underperform. The SoTA models (e.g. MAML) become worse than less SoTA models (ProtoNet). Note that interestingly ProtoNet is the one that underperforms the least.\n\n* They show that accuracy of these methods correlate with whether the test domain has similarity with natural images from ImageNet. This suggests that all future research should have a dataset that is very diverse. \n\n* When there is this domain shift, fine-tuning method in this few-shot setting work better than few-shot models. \n   ** Transductive fine-tuning seems to generalize best. \n   ** When test domain is very different than train domain, it's crucial to fine-tune the lower layers as well (as expected).\n\n"
+                    }
+                }
+            },
+            "id": {
+                "S": "eb415fcc-52c6-44aa-8db7-4d799686f470"
+            },
+            "title": {
+                "S": "A broader study of cross-domain few-shot learning"
+            },
+            "authors": {
+                "S": "Guo, Y., Codella, N. C., Karlinsky, L., Codella, J. V., Smith, J. R., Saenko, K., ... & Feris, R."
+            }
+        },
+        {
+            "date": {
                 "S": "2021"
             },
             "journal": {
@@ -271,6 +317,49 @@
             },
             "authors": {
                 "S": " Caicedo, J. C., McQuin, C., Goodman, A., Singh, S., & Carpenter, A. E."
+            }
+        },
+        {
+            "date": {
+                "S": "2019"
+            },
+            "journal": {
+                "S": "In Proceedings of the IEEE/CVF International Conference on Computer Vision (pp. 9197-9206)"
+            },
+            "labels": {
+                "L": [
+                    {
+                        "S": "few-shot segmentation"
+                    },
+                    {
+                        "S": " prototypical networks"
+                    }
+                ]
+            },
+            "sections": {
+                "M": {
+                    "why": {
+                        "S": "This work addresses the topic of few-shot for segmentation. It is based on prototype works (popular for few-shot classification). "
+                    },
+                    "how": {
+                        "S": "The set-up is quite simple: given support features (from VGG), they do a masked average pooling to obtain prototype vectors for each class. They do a cosine distance on the query features to output the class at each pixel. In the end the only parameters that they are optimizing are those of the embedding network, the VGG. Everything else is non-parametric, which makes the optimization easier. \n\nThey also have this regularization step, which is the reverse direction: making sure that the predicted prototypes from the query sets result in the correct segmentations provided in the ground-truth. Section 4.3 shows that this regularization is very helpful for learning and for speeding up convergence."
+                    },
+                    "what": {
+                        "S": "Their work is different from other current works for few-shot in that their method is simpler and more intuitive, supposedly easier to optimize (for example easier than SG-One which requires the optimization of a parametric module). This work is a generalization of the few-shot prototype-based methods in classification. The only things that they are optimizing are the weights of VGG, their model for the embedding."
+                    },
+                    "results": {
+                        "S": "They train/test on the PASCAL dataset, where they use 20 categories. They also train/test on MS COCO, using 80 object classes. Each of their training runs consists of 1000 episodes. They use a cross-validation setup. When comparing with other methods (including the more sophisticated SG-One, they seem to do well)."
+                    }
+                }
+            },
+            "id": {
+                "S": "148e79c8-075c-4703-bfc7-17d6f842cffd"
+            },
+            "title": {
+                "S": "PANet: Few-shot image semantic segmentation with prototype alignment"
+            },
+            "authors": {
+                "S": "Wang, K., Liew, J. H., Zou, Y., Zhou, D., & Feng, J. "
             }
         },
         {
@@ -1014,6 +1103,49 @@
         },
         {
             "date": {
+                "S": "2019"
+            },
+            "journal": {
+                "S": "arXiv preprint arXiv:1903.03096."
+            },
+            "labels": {
+                "L": [
+                    {
+                        "S": "few-shot classification"
+                    },
+                    {
+                        "S": " meta learning"
+                    }
+                ]
+            },
+            "sections": {
+                "M": {
+                    "why": {
+                        "S": "This work addresses the case of few-shot classification but offers interesting insights. "
+                    },
+                    "how": {
+                        "S": "It’s thus better to evaluate them in a more realistic setting, for example where there is class imbalance (not all classes have the same number of examples). To this end, they (1) introduce the META-DATASET, which is a collection of multiple datasets (which includes ImageNet, Omniglot, Fungi, Describable textures, etc) which allows them to use heterogeneous training sources and (2) introduce a new episodic training/testing procedure (see details in section 3.2) which is meant to better represent real-world scenarios and then compare the different existing datasets, and (3) develop their own few-shot model, called proto-MAML."
+                    },
+                    "what": {
+                        "S": "The authors find that the datasets (ImageNet and Omniglot) typically used to compare few-shot learning methods are not ideal. They find that the different methods often perform similarly and it’s hard to really assess if one is better than another, or if one performs better in one setting vs. another setting. "
+                    },
+                    "results": {
+                        "S": "Interesting results from Experiment sections: \nQuestion: When training for a few-shot, is it better to use a single dataset or to train on multiple datasets at the same time (META-DATASET). \n->Answer: Unfortunately, no “yes or no” answer here. Some datasets benefit greatly from it, others don’t at all.\nQuestion: As we add the number of classes (“ways”) used in episodes, how is the performance affected? \n->Answer: As expected, increasing the number of classes leads to a more difficult problem -> performance decreases.\nQuestion: As we add the number of shots (number of labeled samples per class) used in episodes, how is the performance affected?\n->Answer: as expected, increasing the number of shots means making the problem easier for the network → performance increases. \nQuestion: if we use pre-training where the embedding networks of meta-learners use the k-NN baseline (see page 2) pretrained on ImageNet, does it help the performance?\n->Answer: the answer is not uniform across the dataset. Some datasets really benefit from it, others don’t. They did find that finding the right initialization procedure is crucial in some cases, especially when the optimization procedure is more difficult as in the MAML case. "
+                    }
+                }
+            },
+            "id": {
+                "S": "406dbe43-499a-4336-ab2c-42b705a11f75"
+            },
+            "title": {
+                "S": "Meta-dataset: A dataset of datasets for learning to learn from few examples"
+            },
+            "authors": {
+                "S": "Triantafillou, E., Zhu, T., Dumoulin, V., Lamblin, P., Evci, U., Xu, K., ... & Larochelle, H."
+            }
+        },
+        {
+            "date": {
                 "S": "2018"
             },
             "journal": {
@@ -1550,7 +1682,7 @@
             }
         }
     ],
-    "Count": 34,
-    "ScannedCount": 34,
+    "Count": 37,
+    "ScannedCount": 37,
     "ConsumedCapacity": null
 }

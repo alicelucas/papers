@@ -180,6 +180,52 @@
         },
         {
             "date": {
+                "S": "2021"
+            },
+            "journal": {
+                "S": "arXiv preprint arXiv:2103.00020"
+            },
+            "labels": {
+                "L": [
+                    {
+                        "S": "contrastive learning"
+                    },
+                    {
+                        "S": " pretraining"
+                    },
+                    {
+                        "S": " classification"
+                    }
+                ]
+            },
+            "sections": {
+                "M": {
+                    "why": {
+                        "S": "(Note: This is the CLIP paper. CLIP stands for Contrastive Language-Image Pre-Training).\n\nIn the past couple of years, the field of Natural Language Processing (NLP) has been revolutionized since the introduction of transformers. Based on these transformers, GPT-2 and GPT-3 are powerful and big language models introduced by OpenAI (an AI research lab) that can be directly used for many language-related applications (E.g. text summaries, sentence completion, theme identification, story creation, semantic search, etc).  One of the reasons these GPT-series models are so powerful is because they were trained on the large amount of data available on the internet (and the huge size of their model). \n\nComparing with the revolutions observed in the NLP world, we did not observe such revolutions in the computer vision world. Instead, the common approach for most Deep Learning-based approaches to computer vision task is the supervised training approach: typically we gather datasets ourselves, we train network on this data. This has some limitations, for example a network trained in a fully supervised way does not generalize well on perturbed datasets, or a dataset that’s different all together.  In addition, SoTA models are trained ore pre-trained on ImageNet, which is not the most ideal dataset for many downstream tasks.\n\nCLIP is not a GPT-equivalence for images, but it might bring us one step in that direction. "
+                    },
+                    "how": {
+                        "S": "GPT learns from the limitless amount of textual data found on the internet. But images exist on the internet too, we probably can do something with them as well! In fact on the internet, we can find a lot of images associated with sentences (think Pinterest, Twitter, Instagram, etc), and that sentence in question gives important information about what is in the image. \n\nThe CLIP model, introduced by OpenAI, is a visual model trained on these infinite amount of text/image associations found on the internet.  Similarly to GPT, it can be directly used  for other downstream computer vision tasks. Note that the CLIP model is NOT a predictive model : given an image, it does NOT predict its corresponding descriptive sentence. Rather, the network is trained to correctly associate the right images with the right text. Given a sentence, the model will output the most likely image. Given an image, the model will output the most likely sentence. The network is composed of an image encoder (ViT or CNN-based) and a text encoder (transformer-based), and each encoder outputs a vector representation. During training, the objective is to ensure that the two vector representations align well with each other. The similarity between pairs of images-texts that belong together is maximized, and minimized for all other combinations. In the end, the model learns to correctly associate which text with which image.\n\nOnce trained, CLIP can be used as a zero-shot classifier. Say we have the ImageNet dataset, then provide the sentence \"a photo of a {object}\" for each existing label -- then ask CLIP what is the most likely text given the query image. We can do this set-up for any existing classification dataset. Used this way, CLIP is actually a zero-shot classifier."
+                    },
+                    "what": {
+                        "S": "The CLIP approach is actually a combination of ideas that already existed in the literature, there is not that much novelty to the individual components of their system: they just took all of the ideas together to formulate CLIP and to show how it can be used for other applications."
+                    },
+                    "results": {
+                        "S": "They do an experiment where they use imageNet features (obtained from training a ResNet on ImageNet), and then they use the later layers of that ResNet to do linear classification on top of a new dataset of interest. They find that (1) interestingly CLIP features  actually slightly outperform the ImageNet features, on the ImageNet dataset and (2) The datasets for which CLIP does not perform well are those that are not typically found on the internet: for example EuroSAT dataset, typically people don’t post that on Instagram. CLIP performs well on data that is available, and well described,  on the internet.\n\nWe know that a ResNet model trained on ImageNet typically suffers when perturbations of the ImageNet test dataset. CLIP, on the other hand, does not suffer as much. That's because through training, it has ingested a lot of various sorts of data with rich sentences (various labels) that go with it. \n\nThey show that prompt engineering and ensembling improves performance. For example specifying “a photo of a cat” vs “cat” improves the zero-shot performance, because that’s more consistent with what we find on the internet. Giving context in the prompt also helped the model, for example on the Oxford pet dataset: “a photo of a [pet category], a type of pet.”\n\nSome limitations are: (1) CLIP does not beat state-of-the-art supervised baselines for supervised classification tasks, (2) the images and texts are taken from the internet so we should expect social biases, expect discrimination. Need to think about strategies to reduce that, (3) CLIP is not really a model that can “reason” about anything. It’s not necessarily super intelligent, it only learned to associate text with images. This works out well for tasks such as classification, but not when counting objects in an image, for example. \n"
+                    }
+                }
+            },
+            "id": {
+                "S": "3e24418a-0c6f-4d75-bb06-87a5ddca2940"
+            },
+            "title": {
+                "S": "Learning transferable visual models from natural language supervision"
+            },
+            "authors": {
+                "S": "Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., ... & Sutskever, I."
+            }
+        },
+        {
+            "date": {
                 "S": "2017"
             },
             "journal": {
@@ -1682,7 +1728,7 @@
             }
         }
     ],
-    "Count": 37,
-    "ScannedCount": 37,
+    "Count": 38,
+    "ScannedCount": 38,
     "ConsumedCapacity": null
 }
